@@ -1,0 +1,10 @@
+[book]
+authors = ["dirtmelon"]
+language = "zh-CN"
+multilingual = false
+src = "src"
+title = "Knowledge"
+
+[output.html.fold]
+enable = false
+level = 0
