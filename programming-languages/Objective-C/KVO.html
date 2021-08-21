@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>KVO - Knowledge</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Category.html"><strong aria-hidden="true">1.1.5.</strong> Category</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html"><strong aria-hidden="true">1.1.6.</strong> Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVO.html" class="active"><strong aria-hidden="true">1.1.7.</strong> KVO</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Knowledge</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="kvo"><a class="header" href="#kvo">KVO</a></h1>
+<h2 id="基础"><a class="header" href="#基础">基础</a></h2>
+<p>官方文档：</p>
+<p><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html#//apple_ref/doc/uid/10000177-BCICJDHA">Introduction to Key-Value Observing Programming Guide</a></p>
+<p>开启 KVO 需要严格遵循以下 3 个步骤：</p>
+<ol>
+<li>使用 <code>addObserver:forKeyPath:options:context:</code> 方法注册监听者；</li>
+<li>在监听类中实现 <code>observeValueForKeyPath:ofObject:change:context:</code> 方法来接收通知；</li>
+<li>当不需要接收时，需要调用 <code>removeObserver:forKeyPath:</code> 。在监听者 <code>dealloc</code> 方法中需要调用这个方法来移除监听。</li>
+</ol>
+<p>其它：</p>
+<p><code>automaticallyNotifiesObserversForKey:</code> 默认返回 <code>YES</code> ，当重写并对某个 <code>Key</code> 返回 <code>NO</code> 时，那么修改属性时就需要手动调用 <code>(void)willChangeValueForKey:(NSString *)key</code> 与 <code>-(void)didChangeValueForKey:(NSString *)key</code> 发送通知，我们也可以通过这样在 <code>Setter</code> 方法判断对象是否真的发生改变，只有真的发生改变时才发送通知。</p>
+<h2 id="kvo-详解"><a class="header" href="#kvo-详解">KVO 详解</a></h2>
+<p><a href="https://kingcos.me/posts/2019/kvo_in_ios/">iOS 中的 KVO</a></p>
+<p>这篇文章非常详细，从 <code>KVO</code> 的使用到原理都进行了说明。</p>
+<h2 id="kvc-和-kvo"><a class="header" href="#kvc-和-kvo">KVC 和 KVO</a></h2>
+<p><a href="https://objccn.io/issue-7-3/">ObjC 中国 - KVC 和 KVO</a></p>
+<p>一个需要注意的地方是，KVO 行为是同步的，并且发生与所观察的值发生变化的同样的线程上。没有队列或者 RunLoop 的处理。</p>
+<p><a href="https://github.com/objcio/issue-7-lab-color-space-explorer/blob/master/Lab%20Color%20Space%20Explorer/KeyValueObserver.m">objcio/issue-7-lab-color-space-explorer</a></p>
+<h2 id="friday-qa-about-kvo"><a class="header" href="#friday-qa-about-kvo">Friday Q&amp;A About KVO</a></h2>
+<p><a href="https://www.mikeash.com/pyblog/friday-qa-2009-01-23.html">mikeash.com: Friday Q&amp;A 2009-01-23</a></p>
+<p>Mikeash 关于 KVO 原理的文章：</p>
+<ul>
+<li>动态生成一个 <code>KVO</code> 的子类，实现了 <code>dealloc</code> ， <code>_isKVOA</code> ， <code>class</code> 方法；</li>
+<li>只会生成一个 <code>KVO</code> 子类，对所有监听的属性的设置方法都进行了替换，如果针对不同的属性监听生成不同类，就需要动态生成大量的不同的类，所以苹果选择了只生成一个类；</li>
+<li>替换了对应的方法的 <code>IMP</code> ，改用内部的 <code>NSSet...ValueAndNotify</code> ；</li>
+</ul>
+<h2 id="key-value-observing-done-right"><a class="header" href="#key-value-observing-done-right">Key-Value Observing Done Right</a></h2>
+<p><a href="https://www.mikeash.com/pyblog/key-value-observing-done-right.html">mikeash.com: Key-Value Observing Done Right</a></p>
+<p>Mikeash 先是吹捧了一下 KVO 机制，非常强大和好用，但是 API 设计非常糟糕：</p>
+<ol>
+<li><code>-addObserver:forKeyPath:options:context:</code> 不支持 <code>selector</code> 参数，对比 <code>NSNotificationCenter</code> 的设计，可谓高下立判， KVO 必须要在  <code>-observeValueForKeyPath:ofObject:change:context:</code> 中处理消息或者传递给父类；</li>
+<li>因为不支持 <code>selector</code> 参数，所以如果在相同的 <code>observer</code> 监听相同的 <code>KeyPath</code> 时，需要通过 <code>context</code> 参数来进行区分；</li>
+<li><code>-removeObserver:forKeyPath:</code> 不支持 <code>context</code> 参数， KVO 是在 iOS2.0 时增加的，后面在 iOS5.0 新增了 <code>-removeObserver:forKeyPath:context:</code> ，支持 <code>context</code> 参数。</li>
+</ol>
+<h2 id="kvo-considered-harmful"><a class="header" href="#kvo-considered-harmful">KVO Considered Harmful</a></h2>
+<p><a href="https://khanlou.com/2013/12/kvo-considered-harmful/">kvo-considered-harmful</a></p>
+<p>KVO 缺点：</p>
+<ol>
+<li>所有回调都在同一个方法中进行，稍不留意这个方法就会快速膨胀；</li>
+<li>使用字符串硬编码，如果被监听的对象修改了属性名，编译期无法察觉；</li>
+<li>要求处理父类的 KVO 流程；</li>
+<li>移除 observer 时有可能会崩溃；</li>
+<li>充斥着大量有可能会失败的操作，作者认为一个好的 API 设计应该起到使用者成功地调用他们，即使没有解释为什么要这样去调用；</li>
+<li>流程过于隐藏，没办法追踪数据改变的流程，与 delegate 模式相比， KVO 在 debug 时比较麻烦，且需要在运行时通过 <code>isKindOfClass:</code> 动态判断类型；</li>
+<li>有可能造成死循环，如果不小心在回调中修改了监听的属性，那么就会造成死循环，如果说两个属性在不同的 KVO 流程中互相修改，也会造成死循环，且难于 debug ；</li>
+<li>KVO 在某些场景下会失效，比如说 <code>__weak</code> 属性，在 <code>__weak</code> 对象被释放时， KVO 是不会去清理对应的监听，导致可能会出现野指针崩溃；</li>
+<li>KVO 是一种老旧的模式，在 Apple 平台上，我们可以通过其它方式比如说 Delegate ，Block 和明确的发布/订阅 （ <code>NSNotificationCenter</code> ）方式来解决问题，而不是使用 KVO 这种隐晦的方式。</li>
+</ol>
+<p>什么时候可以使用 KVO ：</p>
+<ol>
+<li>Apple 官方要求，比如说 <code>AVPlayer</code> ，要求通过监听 <code>status</code> 属性来获取播放器的状态；</li>
+<li>设计相关的 API 给其他开发者使用。</li>
+</ol>
+<h2 id="刨根问题-kvo-原理"><a class="header" href="#刨根问题-kvo-原理">刨根问题 KVO 原理</a></h2>
+<p><a href="https://juejin.im/post/5c22023df265da6124157a25">刨根问底KVO原理</a></p>
+<p>通过源码相关的伪代码来探究 <code>KVO</code> 的实现方式，如果需要深入了解 <code>KVO</code> 的原理，可以阅读下这篇文章。 <code>KVO</code> 的原理看起来虽然比较简单，但是实现时还是有不少坑，比如说多线程，系统的具体实现也体现了这一点，通过 <code>pthread_mutex_lock</code> 来保证线程安全。</p>
+<h2 id="kvocontroller-解析"><a class="header" href="#kvocontroller-解析">KVOController 解析</a></h2>
+<p><a href="https://github.com/draveness/analyze/blob/master/contents/KVOController/KVOController.md">draveness/analyze</a></p>
+<p><a href="https://github.com/facebookarchive/KVOController">facebookarchive/KVOController</a></p>
+<p>为了解决 <code>KVO</code> 非常难用的问题，Facebook 开源了 <code>KVOController</code> ，优点如下：</p>
+<ol>
+<li>不需要手动移除 <code>observer</code> ，这里利用了关联属性在对象释放时也会被释放的原理，在关联属性的 <code>dealloc</code> 方法中移除 <code>observer</code> ；</li>
+<li>支持使用 <code>block</code> ，减少复杂度，添加监听和处理通知的代码可以放在同一处。</li>
+</ol>
+<h2 id="基于-kvo-hook-子类的方法"><a class="header" href="#基于-kvo-hook-子类的方法">基于 KVO hook 子类的方法</a></h2>
+<p><a href="http://satanwoo.github.io/2017/11/27/KVO-Swizzle/">一种基于KVO的页面加载，渲染耗时监控方法</a></p>
+<p>在做 <code>ViewController</code> 的耗时检测时，我们需要记录各个 <code>UIViewController</code> 子类对应方法的耗时，如果只是针对 <code>UIViewController</code> 的方法进行 <code>hook</code> ，那么只能记录到 <code>UIViewController</code> 的方法耗时，无法获取子类的方法耗时。</p>
+<p>在进行 <code>KVO</code> 时 <code>runtime</code> 实际上会帮你创建一个 <code>KVO</code> 相关的子类，由此可以在初始化时进行一次 <code>KVO</code> 来生成一个新的子类，然后对这个子类方法进行耗时检测。</p>
+<p>至于为什么使用 <code>KVO</code> 的方式，下面这篇文章有进行解释，而且也给出了具体实现代码：</p>
+<p><a href="https://punmy.cn/2018/06/18/15278496835424.html">巧妙利用KVO实现精准的VC耗时检测</a></p>
+<p><a href="https://github.com/panmingyang2009/VCProfiler">panmingyang2009/VCProfiler</a></p>
+<h2 id="kvo-在不同的二进制中多个符号并存的-crash-问题"><a class="header" href="#kvo-在不同的二进制中多个符号并存的-crash-问题">KVO 在不同的二进制中多个符号并存的 Crash 问题</a></h2>
+<p><a href="http://satanwoo.github.io/2017/09/11/KVO-CRASH/">KVO在不同的二进制中多个符号并存的Crash问题</a></p>
+<p>当两个产物都有相同的类名时，比如主二进制和动态库中，这两个类都会被 realize ，都能够被正常调用。</p>
+<blockquote>
+<p>其原因在于苹果使用的是 <code>two level namespace</code> 的技术。在这种形式下，符号所在的“库”的名称也会作为符号的一部分。链接的时候， <code>staic linker</code> 会标记住在这个符号是来自于哪个库的。这样不仅大大减少了dyld搜索符号所需要的时间，也更好对后续库的更新进行了兼容。</p>
+</blockquote>
+<p>但是由于全局类表的存在，在动态创建 <code>KVO</code> 的子类时，只能产生一个。所以就导致 <code>allocate</code> 失败，从而引发 <code>register</code> 过程的 Crash 问题。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
