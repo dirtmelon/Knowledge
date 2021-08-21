@@ -3,34 +3,33 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Knowledge</title>
-        <meta name="robots" content="noindex" />
+        <title>Block - Knowledge</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -76,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html" class="active"><strong aria-hidden="true">1.1.4.</strong> Block</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -108,7 +107,7 @@
                     <h1 class="menu-title">Knowledge</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
@@ -138,354 +137,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="编程语言"><a class="header" href="#编程语言">编程语言</a></h1>
-<ul>
-<li><a href="programming-languages/./Objective-C/Objective-C.html">Objective-C</a></li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="objective-c"><a class="header" href="#objective-c">Objective-C</a></h1>
-<ul>
-<li><a href="programming-languages/Objective-C/./associated-objects.html">Associated Objects</a></li>
-<li><a href="programming-languages/Objective-C/./initialize.html">initialize</a></li>
-<li><a href="programming-languages/Objective-C/./load.html">load</a></li>
-<li><a href="programming-languages/Objective-C/./Block.html">Block</a></li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="associated-objects"><a class="header" href="#associated-objects">Associated Objects</a></h1>
-<p><a href="https://nshipster.com/associated-objects/">Associated Objects</a></p>
-<p>通过以下三个函数可以进行关联对象的相关操作：</p>
-<pre><code class="language-objectivec">void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy);
-id objc_getAssociatedObject(id object, const void *key);
-void objc_removeAssociatedObjects(id object);
-</code></pre>
-<p><code>key</code> 应该是常量的，唯一的，在 <code>setter</code> 和 <code>getter</code> 方法中可以进行访问：</p>
-<pre><code class="language-objectivec">static char kAssociatedObjectKey;
-
-objc_getAssociatedObject(self, &amp;kAssociatedObjectKey);
-</code></pre>
-<p>但是由于 <code>selector</code> 是唯一的，所以可以直接使用 <code>selector</code> ：</p>
-<p><a href="https://twitter.com/bbum/status/3609098005">https://twitter.com/bbum/status/3609098005</a></p>
-<p>不要调用 <code>objc_removeAssociatedObjects</code> 来移除关联对象，因为会移除所有关联对象。正确的做法是调用 <code>objc_setAssociatedObject</code> 方法并传入 <code>nil</code> 来清除关联。</p>
-<blockquote>
-<p>比起其他解决问题的方法，关联对象应该被视为最后的选择（事实上关联对象也不应该作为首选方法）。</p>
-</blockquote>
-<h2 id="associatedobject-解析"><a class="header" href="#associatedobject-解析">AssociatedObject 解析</a></h2>
-<p><a href="https://draveness.me/ao/">关联对象 AssociatedObject 完全解析 - 面向信仰编程</a></p>
-<ul>
-<li>关联对象其实就是 <code>ObjcAssociation</code> 对象</li>
-<li>关联对象由 <code>AssociationsManager</code> 管理并在 <code>AssociationsHashMap</code> 存储</li>
-<li>对象的指针以及其对应 <code>ObjectAssociationMap</code> 以键值对的形式存储在 <code>AssociationsHashMap</code> 中</li>
-<li><code>ObjectAssociationMap</code> 则是用于存储关联对象的数据结构</li>
-<li>每一个对象都有一个标记位 <code>has_assoc</code> 指示对象是否含有关联对象</li>
-</ul>
-<h2 id="ios-中的关联对象"><a class="header" href="#ios-中的关联对象">iOS 中的关联对象</a></h2>
-<p><a href="https://kingcos.me/posts/2019/associated_objects_in_ios/">iOS 中的关联对象</a></p>
-<p><img src="programming-languages/Objective-C/media/16295230050442.jpg" alt="" /></p>
-<h2 id="应用"><a class="header" href="#应用">应用</a></h2>
-<p><a href="https://github.com/ChenYilong/CYLDeallocBlockExecutor">ChenYilong/CYLDeallocBlockExecutor</a></p>
-<p>通过 <code>Associated Objects</code> 在对象 <code>dealloc</code> 会释放的原理，可以给对象添加一个属性，然后在这个属性 <code>dealloc</code> 时进行相关操作，可以达到对象 <code>dealloc</code> 进行对应操作的目的。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="initialize"><a class="header" href="#initialize">initialize</a></h1>
-<h2 id="官方文档"><a class="header" href="#官方文档">官方文档</a></h2>
-<p><a href="https://developer.apple.com/documentation/objectivec/nsobject/1418639-initialize">Apple Developer Documentation</a></p>
-<ol>
-<li><code>initialize</code> 会在第一次给当前类发送消息（即调用方法）时调用；</li>
-<li>先调用父类的，再调用子类的；</li>
-<li><code>initialize</code> 是线程安全的，它会在第一次给类发送消息的当前线程中运行，而其它线程尝试给类发送消息的线程则需要等待 <code>initialize</code> 执行完毕；</li>
-<li>如果子类没有实现 <code>initialize</code> 方法，则会调用父类的，所以一个 <code>initialize</code> 有可能会多次调用，我们可以通过对当前类进行判断来防止多次调用；</li>
-<li>因为 <code>initialize</code> 有阻塞机制，所以尽量不要执行复杂的初始化方法，不然有可能会造成死锁；</li>
-<li>每个类的 <code>initialize</code> 方法只会调用一次，如果需要分类和类的初始化方法都执行，可以使用 <code>load</code> 方法。</li>
-</ol>
-<p>如何防止 <code>initialize</code> 方法多次调用：</p>
-<pre><code class="language-objectivec">+ (void)initialize {
-  if (self == [ClassName self]) {
-    // ... do the initialization ...
-  }
-}
-</code></pre>
-<h2 id="源码解析"><a class="header" href="#源码解析">源码解析</a></h2>
-<p><a href="https://github.com/draveness/analyze/blob/master/contents/objc/%E6%87%92%E6%83%B0%E7%9A%84%20initialize%20%E6%96%B9%E6%B3%95.md">draveness/analyze</a></p>
-<p><code>initialize</code> 的源码解析，与 <code>load</code> 不同，<code>initialize</code> 方法调用时，所有的类都<strong>已经加载</strong>到了内存中。</p>
-<h2 id="如何在-swift-中使用-initialize"><a class="header" href="#如何在-swift-中使用-initialize">如何在 Swift 中使用 <code>initialize</code></a></h2>
-<p><a href="http://jordansmith.io/handling-the-deprecation-of-initialize/">Handling the Deprecation of initialize()</a></p>
-<p><code>load</code> 和 <code>initialize</code> 方法在 Swift 中都不会调用，所以需要一个替代的方案，在 Swift 中也可以起到 <code>load</code> 或者 <code>initialize</code> 的作用。</p>
-<p>一个简单的替代方案：</p>
-<p>直接在 <code>delegate</code> 的 <code>application(_:didFinishLaunchingWithOptions:)</code> 的方法中调用对应的方法，但是这样会有不少缺点：</p>
-<ul>
-<li>可能有大量的类需要处理，这会使得 <code>delegate</code> 变得笨重，因为它直接依赖了这些类，即使说把这部分的方法调用挪至单独的功能模块中，这个模块也是直接依赖这些类；</li>
-<li>可能说没有权限来获取 <code>delegate</code> ，在只是负责开发其中一小部分或者只是一个 SDK 时会有这种情况发生。</li>
-</ul>
-<p>一个不简单的替代方案：</p>
-<p>这个方案和 <code>load</code> 或者 <code>initialize</code> 方法类似，不需要主动调用，也不会影响 <code>delegate</code> 。</p>
-<p>首先定义以下类和协议：</p>
-<pre><code class="language-swift">protocol SelfAware: class {
-    static func awake()
-}
-
-class NothingToSeeHere {
-
-    static func harmlessFunction() {
-
-        let typeCount = Int(objc_getClassList(nil, 0))
-        let types = UnsafeMutablePointer&lt;AnyClass?&gt;.allocate(capacity: typeCount)
-        let safeTypes = AutoreleasingUnsafeMutablePointer&lt;AnyClass?&gt;(types)
-        objc_getClassList(safeTypes, Int32(typeCount))
-        for index in 0 ..&lt; typeCount { (types[index] as? SelfAware.Type)?.awake() }
-        types.deallocate(capacity: typeCount)
-
-    }
-
-}
-</code></pre>
-<p>可以看到 <code>harmlessFunction</code> 方法通过 <code>objc_getClassList</code> 来获取所有的类，如果类支持 <code>SelfAware</code> 的 <code>awake</code> 方法，那么就会进行调用，接下来需要无侵入地调用 <code>harmlessFunction</code> 方法：</p>
-<pre><code class="language-swift">extension UIApplication {
-
-    private static let runOnce: Void = {
-        NothingToSeeHere.harmlessFunction()
-    }()
-
-    override open var next: UIResponder? {
-        // Called before applicationDidFinishLaunching
-        UIApplication.runOnce
-        return super.next
-    }
-
-} 
-</code></pre>
-<p>但是这里有个不好的地方，就是需要通过 <code>objc_getClassList</code> 来获取所有的类，也就是只能是 <code>Objective-C</code> 的类，如果是纯 Swift 的类，是不支持的。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="load"><a class="header" href="#load">load</a></h1>
-<h2 id="原理"><a class="header" href="#原理">原理</a></h2>
-<p>官方文档：</p>
-<p><a href="https://developer.apple.com/documentation/objectivec/nsobject/1418815-load?language=objc">Apple Developer Documentation</a></p>
-<p>The order of initialization is as follows:</p>
-<ol>
-<li>All initializers in any framework you link to.</li>
-<li>All <code>+load</code> methods in your image.</li>
-<li>All C++ static initializers and C/C++ <code>__attribute__(constructor)</code> functions in your image.</li>
-<li>All initializers in frameworks that link to you.</li>
-</ol>
-<p>In addition:</p>
-<ul>
-<li>A class’s <code>+load</code> method is called after all of its superclasses’ <code>+load</code> methods.</li>
-<li>A category <code>+load</code> method is called after the class’s own <code>+load</code> method.</li>
-</ul>
-<p>运行时机： Objective-C 运行时会收集所有 <code>+load</code> 方法的类，然后在镜像加载完成后调用，时机在主函数运行前。</p>
-<p>初始化顺序：</p>
-<ol>
-<li>执行全部链接到的框架中的所有构造器；</li>
-<li>镜像（ Image ) 中所有的 <code>+load</code> 方法；</li>
-<li>镜像 （ Image ）中所有 C++ 静态构造器，以及 C/C++ 的 <code>__attribute__(constructor)</code> 方法；</li>
-<li>执行全部链接到当前框架的全部框架的所有构造器.</li>
-</ol>
-<p>特点：</p>
-<ol>
-<li>类的 <code>+load</code> 方法会在父类的 <code>+load</code> 方法调用后再调用；</li>
-<li>分类 <code>Category</code> 的 <code>+load</code> 方法会在类的 <code>+load</code> 方法后调用；</li>
-<li>Swift 中桥接到 Objective-C 的类不会自动调用 <code>+load</code> 方法。</li>
-</ol>
-<h2 id="你真的了解-load-方法么"><a class="header" href="#你真的了解-load-方法么">你真的了解 <code>load</code> 方法么？</a></h2>
-<p><a href="https://github.com/draveness/analyze/blob/master/contents/objc/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%20load%20%E6%96%B9%E6%B3%95%E4%B9%88%EF%BC%9F.md">draveness/analyze</a></p>
-<p>详细说明了 <code>+load</code> 方法的调用时机：</p>
-<pre><code class="language-c">0  +[XXObject load]
-1  call_class_loads()
-2  call_load_methods
-3  load_images
-4  dyld::notifySingle(dyld_image_states, ImageLoader const*)
-11 _dyld_start
-</code></pre>
-<p>在有新的镜像加载后，都会调用 <code>load_images</code> 方法进行回调，这个方法是运行时在 <code>_objc_init</code> 方法中进行注册的：</p>
-<pre><code class="language-objectivec">dyld_register_image_state_change_handler(dyld_image_state_dependents_initialized, 0/*not batch*/, &amp;load_images);
-</code></pre>
-<p>类的 <code>+load</code> 方法会在父类的 <code>+load</code> 方法调用后再调用：</p>
-<pre><code class="language-objectivec">static void schedule_class_load(Class cls)
-{
-    if (!cls) return;
-    // 类是否已经 realized
-    assert(cls-&gt;isRealized());
-		// 判断类是否有调用过 +load
-    if (cls-&gt;data()-&gt;flags &amp; RW_LOADED) return;
-		// 递归调用，先执行父类的 +load 方法
-    schedule_class_load(cls-&gt;superclass);
-		// 添加当前类至列表
-    add_class_to_loadable_list(cls);
-    // 设置为已调用过 +load
-    cls-&gt;setInfo(RW_LOADED); 
-}
-</code></pre>
-<p>分类的 <code>+load</code> 方法在类之后调用：</p>
-<pre><code class="language-objectivec">void call_load_methods(void)
-{
-    static bool loading = NO;
-    bool more_categories;
-
-    loadMethodLock.assertLocked();
-
-    // 加载中，直接返回
-    if (loading) return;
-    loading = YES;
-
-    void *pool = objc_autoreleasePoolPush();
-
-    do {
-        // 调用类的 +load 方法，直到列表为空
-        while (loadable_classes_used &gt; 0) {
-            // ➡️ 调用类的 +load 方法
-            call_class_loads();
-        }
-
-        // 调用分类的 +load 方法一次
-        more_categories = call_category_loads();
-
-        // 如果有类或者分类未调用 +load 方法，则尝试再调用一次
-    } while (loadable_classes_used &gt; 0  ||  more_categories);
-
-    objc_autoreleasePoolPop(pool);
-
-    loading = NO;
-}
-</code></pre>
-<p>调用分类 <code>+load</code> 方法时需要确保类已经加载：</p>
-<pre><code class="language-objectivec">if (cls  &amp;&amp;  cls-&gt;isLoadable()) {
-    (*load_method)(cls, SEL_load);
-    cats[i].cat = nil;
-}
-</code></pre>
-<h2 id="ios-中的-load-方法"><a class="header" href="#ios-中的-load-方法">iOS 中的 <code>+load</code> 方法</a></h2>
-<p><a href="https://kingcos.me/posts/2019/+load_in_ios/">iOS 中的 +load 方法</a></p>
-<p><code>+load</code> 方法的执行时机非常靠前，而且只会执行一次，所以一般来说我们可能会通过 <code>+load</code> 方法来执行一些 <code>hook</code> 操作，但是如果 <code>+load</code> 方法过多或者方法执行时间较长，就会影响增加应用的启动时间，所以在编写 <code>+load</code> 方法时需要非常小心。</p>
-<h2 id="监控-load-方法的耗时"><a class="header" href="#监控-load-方法的耗时">监控 <code>+load</code> 方法的耗时</a></h2>
-<p>这篇文章讲述了如何监控 <code>+load</code> 方法的耗时：</p>
-<p><a href="https://triplecc.github.io/2019/05/27/%E8%AE%A1%E7%AE%97load%E8%80%97%E6%97%B6/">计算 +load 方法的耗时</a></p>
-<p>实现有以下这几点需要注意：</p>
-<p>dyld 加载的镜像中包含系统的镜像，需要对这块做过滤；</p>
-<pre><code class="language-objectivec">static bool isSelfDefinedImage(const char *imageName) {
-    return !strstr(imageName, &quot;/Xcode.app/&quot;) &amp;&amp;
-    !strstr(imageName, &quot;/Library/PrivateFrameworks/&quot;) &amp;&amp;
-    !strstr(imageName, &quot;/System/Library/&quot;) &amp;&amp;
-    !strstr(imageName, &quot;/usr/lib/&quot;);
-}
-
-static const struct mach_header **copyAllSelfDefinedImageHeader(unsigned int *outCount) {
-    unsigned int imageCount = _dyld_image_count();
-    unsigned int count = 0;
-    const struct mach_header **mhdrList = NULL;
-    
-    if (imageCount &gt; 0) {
-        mhdrList = (const struct mach_header **)malloc(sizeof(struct mach_header *) * imageCount);
-        for (unsigned int i = 0; i &lt; imageCount; i++) {
-            const char *imageName = _dyld_get_image_name(i);
-            if (isSelfDefinedImage(imageName)) {
-                const struct mach_header *mhdr = _dyld_get_image_header(i);
-                mhdrList[count++] = mhdr;
-            }
-        }
-        mhdrList[count] = NULL;
-    }
-    
-    if (outCount) *outCount = count;
-    
-    return mhdrList;
-}
-</code></pre>
-<p>如何获取定义了 <code>+load</code> 的类或者分类，在编译时期，包含 <code>+load</code> 的 <code>class</code> 和 <code>category</code> 会写入 Mach-O 文件 data 段的 <code>__objc_nlcslist</code> 和 <code>__objc_nlcatlist</code> 节，可以通过读取这两部分来获取 no lazy class 和 no lazy category 列表，即定义了 <code>+load</code> 方法的类或者分类</p>
-<pre><code class="language-objectivec">static NSArray &lt;LMLoadInfo *&gt; *getNoLazyArray(const struct mach_header *mhdr) {
-    NSMutableArray *noLazyArray = [NSMutableArray new];
-    unsigned long bytes = 0;
-    Class *clses = (Class *)getDataSection(mhdr, &quot;__objc_nlclslist&quot;, &amp;bytes);
-    for (unsigned int i = 0; i &lt; bytes / sizeof(Class); i++) {
-        LMLoadInfo *info = [[LMLoadInfo alloc] initWithClass:clses[i]];
-        if (!shouldRejectClass(info.clsname)) [noLazyArray addObject:info];
-    }
-    
-    bytes = 0;
-    Category *cats = getDataSection(mhdr, &quot;__objc_nlcatlist&quot;, &amp;bytes);
-    for (unsigned int i = 0; i &lt; bytes / sizeof(Category); i++) {
-        LMLoadInfo *info = [[LMLoadInfo alloc] initWithCategory:cats[i]];
-        if (!shouldRejectClass(info.clsname)) [noLazyArray addObject:info];
-    }
-    
-    return noLazyArray;
-}
-</code></pre>
-<p>hook <code>+load</code> 方法：</p>
-<pre><code class="language-objectivec">static void swizzleLoadMethod(Class cls, Method method, LMLoadInfo *info) {
-retry:
-    do {
-        SEL hookSel = getRandomLoadSelector();
-        Class metaCls = object_getClass(cls);
-        IMP hookImp = imp_implementationWithBlock(^ {
-            info-&gt;_start = CFAbsoluteTimeGetCurrent();
-            ((void (*)(Class, SEL))objc_msgSend)(cls, hookSel);
-            info-&gt;_end = CFAbsoluteTimeGetCurrent();
-            if (!--LMAllLoadNumber) printLoadInfoWappers();
-        });
-        
-        BOOL didAddMethod = class_addMethod(metaCls, hookSel, hookImp, method_getTypeEncoding(method));
-        if (!didAddMethod) goto retry;
-        
-        info-&gt;_nSEL = hookSel;
-        Method hookMethod = class_getInstanceMethod(metaCls, hookSel);
-        method_exchangeImplementations(method, hookMethod);
-    } while(0);
-}
-
-static void hookAllLoadMethods(LMLoadInfoWrapper *infoWrapper) {
-    unsigned int count = 0;
-    Class metaCls = object_getClass(infoWrapper.cls);
-    Method *methodList = class_copyMethodList(metaCls, &amp;count);
-    for (unsigned int i = 0; i &lt; count; i++) {
-        Method method = methodList[i];
-        SEL sel = method_getName(method);
-        const char *name = sel_getName(sel);
-        if (!strcmp(name, &quot;load&quot;)) {
-            IMP imp = method_getImplementation(method);
-            LMLoadInfo *info = [infoWrapper findLoadInfoByImp:imp];
-            if (!info) {
-                info = [infoWrapper findClassLoadInfo];
-                if (!info) continue;
-            }
-            
-            swizzleLoadMethod(infoWrapper.cls, method, info);
-        }
-    }
-    free(methodList);
-}
-</code></pre>
-<p>相应的实现：</p>
-<p><a href="https://github.com/tripleCC/Laboratory/tree/master/HookLoadMethods">tripleCC/Laboratory</a></p>
-<h2 id="使用-load-进行自动发通知和解耦"><a class="header" href="#使用-load-进行自动发通知和解耦">使用 load 进行自动发通知和解耦</a></h2>
-<p><a href="https://blog.sunnyxx.com/2015/03/09/notification-once/">Notification Once</a></p>
-<p>利用 <code>+load</code> 的方法调用时机较早，实现 <code>AppDelegate</code> 的瘦身：</p>
-<pre><code class="language-objectivec">/// FooModule.m
-+ (void)load
-{
-    __block id observer =
-    [[NSNotificationCenter defaultCenter]
-     addObserverForName:UIApplicationDidFinishLaunchingNotification
-     object:nil
-     queue:nil
-     usingBlock:^(NSNotification *note) {
-         [self setup]; // Do whatever you want
-         [[NSNotificationCenter defaultCenter] removeObserver:observer];
-     }];
-}
-</code></pre>
-<ul>
-<li><code>+ load</code>方法在足够早的时间点被调用；</li>
-<li><code>block</code> 版本的通知注册会产生一个<code>__NSObserver *</code>对象用来给外部 <code>remove</code> 观察者；</li>
-<li><code>block</code> 对 <code>observer</code> 对象的捕获早于函数的返回，所以若不加<code>__block</code>，会捕获到 <code>nil</code> ；</li>
-<li>在 <code>block</code> 执行结束时移除 <code>observer</code> ，无需其他清理工作；</li>
-<li>这样，在模块内部就完成了在程序启动点代码的挂载。</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="block"><a class="header" href="#block">Block</a></h1>
+                        <h1 id="block"><a class="header" href="#block">Block</a></h1>
 <h2 id="深入研究-block-捕获外部变量和-__block-实现原理"><a class="header" href="#深入研究-block-捕获外部变量和-__block-实现原理">深入研究 Block 捕获外部变量和 __block 实现原理</a></h2>
 <p><a href="https://halfrost.com/ios_block/">深入研究 Block 捕获外部变量和 __block 实现原理</a></p>
 <p>里面有提到作用域：</p>
-<p><img src="programming-languages/Objective-C/media/16295345348106.jpg" alt="" /></p>
+<p><img src="media/16295345348106.jpg" alt="" /></p>
 <ul>
 <li><code>_NSConcreteStackBlock</code> ：只用到外部局部变量、成员属性变量，且没有强指针引用的 <code>block</code> 都是 <code>StackBlock</code> 。 <code>StackBlock</code> 的生命周期由系统控制的，一旦返回之后，就被系统销毁了。</li>
 <li><code>_NSConcreteMallocBlock</code> ：有强指针引用或 <code>copy</code> 修饰的成员属性引用的 <code>block</code> 会被复制一份到堆中成为 <code>MallocBlock</code> ，没有强指针引用即销毁，生命周期由程序员控制</li>
 <li><code>_NSConcreteGlobalBlock</code> ：没有用到外界变量或只用到全局变量、静态变量的 <code>block</code> 为 <code>_NSConcreteGlobalBlock</code> ，生命周期从创建到应用程序结束。</li>
 </ul>
 <p><code>__block</code> 结构体 <code>__forwarding</code> ：</p>
-<p><img src="programming-languages/Objective-C/media/16295347079014.jpg" alt="" /></p>
+<p><img src="media/16295347079014.jpg" alt="" /></p>
 <h2 id="block-技巧与底层解析"><a class="header" href="#block-技巧与底层解析">Block 技巧与底层解析</a></h2>
 <p><a href="https://triplecc.github.io/2015/07/19/2015-08-27-blockji-qiao-yu-di-ceng-jie-xi/">Block技巧与底层解析</a></p>
 <p>Block 的实际结构：</p>
@@ -801,7 +464,7 @@ int main_3(int argc, const char * argv[]) {
     return 0;
 }
 </code></pre>
-<p><img src="programming-languages/Objective-C/media/16295350902641.jpg" alt="" /></p>
+<p><img src="media/16295350902641.jpg" alt="" /></p>
 <p>Block 对于捕获变量的不同也会有不同的处理</p>
 <ol>
 <li>局部变量，进行值拷贝传递，修改原有的值不影响 Block 所捕获的值；</li>
@@ -823,7 +486,7 @@ int main_3(int argc, const char * argv[]) {
 <p>Block 内可以直接修改</p>
 <p><code>__block</code> 声明会将变量封装为对应的结构体，而不同的变量就会生成不同的结构体。 <code>__block</code> 变量从声明后，无论在 Block 内外去访问均是通过结构体的 <code>__forwarding</code> 指针即 <code>blockVar.__forwarding-&gt;blockVar</code> 。当 <code>__block</code> 变量在栈上时， <code>blockVar.__forwarding-&gt;blockVar</code> 就等同于直接通过 <code>blockVar-&gt;blockVar</code> 来访问的，因为此时 <code>__forwarding</code> 就指向栈上的结构体本身；而当 Block 拷贝到堆上时， <code>__block</code> 变量也会被拷贝到堆上，此时栈上的 <code>__forwarding</code> 将替换为指向堆上的结构体，而堆上的结构体里的 <code>__forwarding</code> 将指向堆上的结构体本身，从而保证后续的数据变动均是在堆上。</p>
 <p>上面说到 Block 会生成不同的结构体，也就说使用 Block 实现的功能代码量会较多。</p>
-<p><img src="programming-languages/Objective-C/media/16295351225941.jpg" alt="" /></p>
+<p><img src="media/16295351225941.jpg" alt="" /></p>
 <p>循环引用：</p>
 <pre><code class="language-objectivec">typedef void(^BlockType_5)(void);
 
@@ -872,7 +535,7 @@ int main_22(int argc, const char * argv[]) {
 // OUTPUT:
 // 20
 </code></pre>
-<p><img src="programming-languages/Objective-C/media/16295351549792.jpg" alt="" /></p>
+<p><img src="media/16295351549792.jpg" alt="" /></p>
 <h2 id="用-block-实现-delegate-方法"><a class="header" href="#用-block-实现-delegate-方法">用 Block 实现 delegate 方法</a></h2>
 <p><a href="https://triplecc.github.io/2017/07/28/2017-07-28-blockhe-nsmethodsignature/">用 Block 实现委托方法</a></p>
 <p>使用 <code>NSInvocation</code> ，消息转化机制和 Block 结构体获取 <code>NSMethodSignature</code> 。</p>
@@ -1294,12 +957,18 @@ void (^blk)(void) = ^{
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../programming-languages/Objective-C/load.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../programming-languages/Objective-C/load.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
             </nav>
 
         </div>
@@ -1307,18 +976,13 @@ void (^blk)(void) = ^{
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
     </body>
 </html>
