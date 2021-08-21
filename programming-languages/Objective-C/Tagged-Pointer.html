@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Tagged Pointer - Knowledge</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Category.html"><strong aria-hidden="true">1.1.5.</strong> Category</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html"><strong aria-hidden="true">1.1.6.</strong> Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVO.html"><strong aria-hidden="true">1.1.7.</strong> KVO</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVC.html"><strong aria-hidden="true">1.1.8.</strong> KVC</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/AutoreleasePool.html"><strong aria-hidden="true">1.1.9.</strong> AutoreleasePool</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/dealloc.html"><strong aria-hidden="true">1.1.10.</strong> dealloc</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Tagged-Pointer.html" class="active"><strong aria-hidden="true">1.1.11.</strong> Tagged Pointer</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Knowledge</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tagged-pointer"><a class="header" href="#tagged-pointer">Tagged Pointer</a></h1>
+<h2 id="说明"><a class="header" href="#说明">说明</a></h2>
+<p><a href="https://en.wikipedia.org/wiki/Tagged_pointer">Tagged pointer</a></p>
+<p>对象存储在内存中的时候总是内存对齐的，所以它们的地址会是单个指针大小的倍数，通常来说会是 16 的倍数。在 64 位系统中，对象的指针为 64 位整形。后面几位为 0 。由于后面几位一直为 0 。所以我们可以使用后面几位来记录一些事情。</p>
+<p><a href="https://developer.apple.com/videos/play/wwdc2013/404/">Advances in Objective-C - WWDC 2013 - Videos - Apple Developer</a></p>
+<p>WWDC 2013 上相关介绍，从 36:49 开始。</p>
+<p><img src="media/16295382272652.jpg" alt="" /></p>
+<ul>
+<li>苹果使用 Tagged Pointer 来存储一些比较小的数据，如： <code>NSNumber</code> ， <code>NSDate</code> 和 <code>NSString</code> 等；</li>
+<li>由于直接使用指针本身来存储数据，不再需要额外生命周期管理，没有 <code>malloc/free</code> ；</li>
+<li>3 倍的空间优化， 106 倍的创建或者销毁速度。</li>
+</ul>
+<p><img src="media/16295384569038.jpg" alt="" /></p>
+<p>使用低位的 <code>bit</code> 来作为标识位。</p>
+<h2 id="tagged-pointer-解析"><a class="header" href="#tagged-pointer-解析">Tagged Pointer 解析</a></h2>
+<p><a href="https://wenghengcong.com/posts/b6becb26/">内存管理（二）Tagged Pointer</a></p>
+<p><a href="https://juejin.cn/post/6844904132940136462">iOS - 老生常谈内存管理（五）：Tagged Pointer</a></p>
+<p>由于内存对齐的关系，指针的值最后四位都是 0 ，所以可以使用这四位来做一些记录。如果最后一位是 1 ，则这个指针是 Tagged Pointer 。</p>
+<pre><code class="language-objectivec">static inline bool 
+_objc_isTaggedPointer(const void *ptr) 
+{
+    return ((intptr_t)ptr &amp; _OBJC_TAG_MASK) == _OBJC_TAG_MASK;
+}
+
+#if OBJC_MSB_TAGGED_POINTERS
+#   define _OBJC_TAG_MASK (1ULL&lt;&lt;63)
+#else
+#   define _OBJC_TAG_MASK 1
+#endif
+
+#if TARGET_OS_OSX &amp;&amp; __x86_64__
+    // 64-bit Mac - tag bit is LSB
+#   define OBJC_MSB_TAGGED_POINTERS 0
+#else
+    // Everything else - tag bit is MSB
+#   define OBJC_MSB_TAGGED_POINTERS 1
+#endif
+</code></pre>
+<p>在 iOS 平台上使用的是最高位进行判断，在 macOS 上 使用的是最低位。 Tagged Pointer 支持的类型：</p>
+<pre><code class="language-objectivec">enum
+{
+    OBJC_TAG_NSAtom            = 0, 
+    OBJC_TAG_1                 = 1, 
+    OBJC_TAG_NSString          = 2, 
+    OBJC_TAG_NSNumber          = 3, 
+    OBJC_TAG_NSIndexPath       = 4, 
+    OBJC_TAG_NSManagedObjectID = 5, 
+    OBJC_TAG_NSDate            = 6, 
+    OBJC_TAG_RESERVED_7        = 7, 
+
+    OBJC_TAG_First60BitPayload = 0, 
+    OBJC_TAG_Last60BitPayload  = 6, 
+    OBJC_TAG_First52BitPayload = 8, 
+    OBJC_TAG_Last52BitPayload  = 263, 
+
+    OBJC_TAG_RESERVED_264      = 264
+};
+</code></pre>
+<p>Tagged Pointer 不是真的对象，没有 isa 指针，不存在 <code>retain</code> ， <code>release</code> ， <code>autorelease</code> 等对象生命周期管理的流程，其引用计数为 <code>NSUInteger</code> 的最大值。</p>
+<pre><code class="language-objectivec">dispatch_queue_t queue = dispatch_queue_create(&quot;parallel&quot;, DISPATCH_QUEUE_CONCURRENT);
+for (int i = 0; i &lt; 1000; i ++) {
+    dispatch_async(queue, ^{
+        self.name = [NSString stringWithFormat:@&quot;abcdefghijk&quot;];
+    })
+}
+dispatch_queue_t queue = dispatch_queue_create(&quot;parallel&quot;, DISPATCH_QUEUE_CONCURRENT);
+for (int i = 0; i &lt; 1000; i ++) {
+    dispatch_async(queue, ^{
+        self.name = [NSString stringWithFormat:@&quot;abc&quot;];
+    })
+}
+</code></pre>
+<p>上面的代码中，第一个 for 循环会崩溃，因为在多线程中可能会重复 <code>release</code> ，而第二个不会，因为 Tagged Pointer 其实是值类型，不涉及到 <code>retain</code> 和 <code>release</code> 操作，其赋值操作是原子性的。</p>
+<h2 id="lets-build-tagged-pointers"><a class="header" href="#lets-build-tagged-pointers">Let's Build Tagged Pointers</a></h2>
+<p><a href="https://www.mikeash.com/pyblog/friday-qa-2012-07-27-lets-build-tagged-pointers.html">mikeash.com: Friday Q&amp;A 2012-07-27: Let's Build Tagged Pointers</a></p>
+<p>Mike Ash 尝试自己实现了一个 Tagged Pointer 。</p>
+<h2 id="tagged-pointer-strings"><a class="header" href="#tagged-pointer-strings">Tagged Pointer Strings</a></h2>
+<p><a href="https://mikeash.com/pyblog/friday-qa-2015-07-31-tagged-pointer-strings.html">mikeash.com: Friday Q&amp;A 2015-07-31: Tagged Pointer Strings</a></p>
+<p><a href="https://swift.gg/2018/10/08/tagged-pointer-strings/">Tagged Pointer 字符串</a></p>
+<p>如果某些字符串可以保存为 60 位以内的二进制数据，那么对应的 <code>NSString</code> 就会被创建为 Tagged Pointer 。</p>
+<p>由于 <code>NSString</code> 字符串编码的特殊性，苹果针对 <code>NSString</code> 的 Tagged Pointer 进行优化。</p>
+<h3 id="实现"><a class="header" href="#实现">实现</a></h3>
+<pre><code class="language-objectivec">NSString *a = @&quot;a&quot;;
+NSString *b = [[a mutableCopy] copy];
+NSLog(@&quot;%p %p %@&quot;, a, b, object_getClass(b));
+</code></pre>
+<ol>
+<li>常量字符串不会被存储为 Tagged Pointer ，因为常量字符串必须保证可以兼容不同的系统，但是 Tagged Pointer 的内部实现细节却不能保证兼容不同的系统，常量字符串嵌入到二进制字符串时有可能会崩溃；</li>
+<li>先执行 <code>[a mutableCopy]</code> ，因 <code>copy</code> 返回的是不可变的字符串，所以常量字符串的 <code>copy</code> 得到的还是原来的常量字符串，所以先通过 <code>mutableCopy</code> 生成一个新的可变字符串，然后再通过 <code>copy</code> 得到一个不可变的 Tagged Pointer ， Tagged Pointer 只会在运行时创建。</li>
+</ol>
+<p>输出结果如下：</p>
+<pre><code class="language-objectivec">0x10ba41038 0x6115 NSTaggedPointerString
+</code></pre>
+<p>首先第一个 <code>a</code> 不是 Tagged Pointer ，是一个对象的指针，第二个是 Tagged Pointer。</p>
+<p>然后 <code>NSString</code> 对应的 Tagged Pointer 使用的是 ASCII 编码，占用的长度较少。</p>
+<p>伪代码：</p>
+<pre><code class="language-objectivec">unsigned short -[NSTaggedPointerString characterAtIndex:](void * self, void * _cmd, unsigned long long index) {
+     int8_t buffer[11];
+     length = self &gt;&gt; 0x4 &amp; 0xf;
+     if (length &gt;= 0x8) {
+         stringData = self &gt;&gt; 0x8;
+         table = &quot;eilotrm.apdnsIc ufkMShjTRxgC4013bDNvwyUL2O856P-B79AFKEWV_zGJ/HYX&quot;;
+             cursor = length;
+             if (length &lt; 0xa) {
+                 do {
+                     buffer[cursor - 1] = table[stringData &amp; 0x3f];
+                     cursor = cursor - 0x1;
+                     stringData = stringData &gt;&gt; 0x6;
+                 } while (cursor != 0x0);
+             }
+             else {
+                 do {
+                     buffer[cursor - 1] = table[stringData &amp; 0x1f];
+                     cursor = cursor - 0x1;
+                     stringData = stringData &gt;&gt; 0x5;
+                 } while (cursor != 0x0);
+             }
+     } else {
+         *(uint64_t *)buffer = self &gt;&gt; 8;
+     }
+     if (length &lt;= index) {
+         rbx = r8;
+         ___CFExceptionProem(self, _cmd);
+         [NSException raise:@&quot;NSRangeException&quot; format:@&quot;%@: Index %lu out of bounds; string length %lu&quot;];
+         r8 = rbx;
+     }
+     rax = buffer[index];
+     return rax;
+ }
+</code></pre>
+<ol>
+<li>长度小于 8 的情况下，直接使用 ASCII 编码，所以 <code>self</code> 按位编译后直接赋值给 <code>buff</code> 即可；</li>
+<li>长度大于等于8小于10，就会取出 <code>stringData</code> 的最低 6 位，作为 <code>table</code> 的索引取出相应的值拷贝到 <code>buffer</code> 中，然后将 <code>stringData</code> 右移 6 位，重复操作；</li>
+<li>如果大于等于 10 ，那么就会使用 5 位编码，而 <code>table</code> 只使用前半部分。</li>
+</ol>
+<p>构造 <code>NSString</code> Tagged Pointer 的原理大致上也和上面的一致。</p>
+<p>6 位编码表：</p>
+<pre><code>eilotrm.apdnsIc ufkMShjTRxgC4013bDNvwyUL2O856P-B79AFKEWV_zGJ/HYX
+</code></pre>
+<p>猜测是按照在英语中出现的频率进行排序，使得尽量多的字符串可以使用 Tagged Pointer 。通过一个简单又巧妙的查找表方式在有限的空间内存储尽量的数据。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../programming-languages/Objective-C/dealloc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../programming-languages/Objective-C/dealloc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

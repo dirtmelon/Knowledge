@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Category.html"><strong aria-hidden="true">1.1.5.</strong> Category</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Message-Sending-And-Forwarding.html"><strong aria-hidden="true">1.1.6.</strong> Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/KVO.html"><strong aria-hidden="true">1.1.7.</strong> KVO</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/KVC.html"><strong aria-hidden="true">1.1.8.</strong> KVC</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/AutoreleasePool.html"><strong aria-hidden="true">1.1.9.</strong> AutoreleasePool</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Category.html"><strong aria-hidden="true">1.1.5.</strong> Category</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Message-Sending-And-Forwarding.html"><strong aria-hidden="true">1.1.6.</strong> Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/KVO.html"><strong aria-hidden="true">1.1.7.</strong> KVO</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/KVC.html"><strong aria-hidden="true">1.1.8.</strong> KVC</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/AutoreleasePool.html"><strong aria-hidden="true">1.1.9.</strong> AutoreleasePool</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/dealloc.html"><strong aria-hidden="true">1.1.10.</strong> dealloc</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Tagged-Pointer.html"><strong aria-hidden="true">1.1.11.</strong> Tagged Pointer</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -153,6 +153,8 @@
 <li><a href="programming-languages/Objective-C/./KVO.html">KVO</a></li>
 <li><a href="programming-languages/Objective-C/./KVC.html">KVC</a></li>
 <li><a href="programming-languages/Objective-C/./AutoreleasePool.html">AutoreleasePool</a></li>
+<li><a href="programming-languages/Objective-C/./dealloc.html">dealloc</a></li>
+<li><a href="programming-languages/Objective-C/./Tagged-Pointer.html">Tagged Pointer</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="associated-objects"><a class="header" href="#associated-objects">Associated Objects</a></h1>
 <p><a href="https://nshipster.com/associated-objects/">Associated Objects</a></p>
@@ -1778,6 +1780,263 @@ void objc_autoreleasePoolPop(void *ctxt) {
 <pre><code class="language-swift">let data = Data(contentsOfFile: path)
 </code></pre>
 <p>使用初始化方法的话，我们就不需要面临自动释放的问题了，每次在超过作用域后，自动内存管理都将为我们处理好内存相关的事情。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dealloc"><a class="header" href="#dealloc">dealloc</a></h1>
+<h2 id="llvm-关于-dealloc-的说明"><a class="header" href="#llvm-关于-dealloc-的说明">LLVM 关于 <code>dealloc</code> 的说明</a></h2>
+<p><a href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html#dealloc">Clang 12 documentation</a></p>
+<blockquote>
+<p>A class may provide a method definition for an instance method named dealloc. This method will be called after the final release of the object but before it is deallocated or any of its instance variables are destroyed. The superclass’s implementation of dealloc will be called automatically when the method returns.</p>
+</blockquote>
+<p><code>dealloc</code> 在最后 <code>release</code> 时调用，但此时实例变量（ <code>Ivars</code> ）并未释放，父类的  <code>dealloc</code> 会在子类的 <code>dealloc</code> 返回后调用。</p>
+<blockquote>
+<p>The instance variables for an ARC-compiled class will be destroyed at some point after control enters the dealloc method for the root class of the class. The ordering of the destruction of instance variables is unspecified, both within a single class and between subclasses and superclasses.</p>
+</blockquote>
+<p>实例变量会在 <code>root class</code> （根类）的 <code>dealloc</code> 中释放，一般来说就是 <code>NSObject</code> 的 <code>dealloc</code> 方法，释放顺序不确定。</p>
+<h3 id="dealloc-调用时机"><a class="header" href="#dealloc-调用时机">dealloc 调用时机</a></h3>
+<p><a href="https://zhongwuzw.github.io/2017/09/21/%E8%81%8A%E8%81%8Adealloc/">聊聊dealloc</a></p>
+<p>当对象调用 <code>release</code> 方法时会走到 <code>sidetable_release</code> 这个方法中，而 <code>sidetable_release</code> 这个方法会判断是否需要调用 <code>dealloc</code> 方法：</p>
+<pre><code class="language-objectivec">uintptr_t objc_object::sidetable_release(bool performDealloc)
+{
+#if SUPPORT_NONPOINTER_ISA
+    assert(!isa.nonpointer);
+#endif
+    // 找到当前对象所对应的 SideTable
+    SideTable&amp; table = SideTables()[this];
+    bool do_dealloc = false;
+    table.lock();
+    // 找到当前对象所对应的引用计数
+    RefcountMap::iterator it = table.refcnts.find(this);
+    if (it == table.refcnts.end()) {
+        // 如果找不到所对应的应用计数，则表示可以执行 dealloc ，
+			  // 同时设置对应的值为 SIDE_TABLE_DEALLOCATING
+        do_dealloc = true;
+        table.refcnts[this] = SIDE_TABLE_DEALLOCATING;
+    } else if (it-&gt;second &lt; SIDE_TABLE_DEALLOCATING) {
+        // SIDE_TABLE_WEAKLY_REFERENCED may be set. Don't change it.
+        // 如果引用计数小于 SIDE_TABLE_DEALLOCATING ，则表示引用计数为 0 ，可以执行 dealloc
+        do_dealloc = true;
+        it-&gt;second |= SIDE_TABLE_DEALLOCATING;
+    } else if (! (it-&gt;second &amp; SIDE_TABLE_RC_PINNED)) {
+        // 引用计数减 1
+        it-&gt;second -= SIDE_TABLE_RC_ONE;
+    }
+    table.unlock();
+    // 进行释放操作，执行 dealloc
+    if (do_dealloc  &amp;&amp;  performDealloc) {
+        ((void(*)(objc_object *, SEL))objc_msgSend)(this, SEL_dealloc);
+    }
+    return do_dealloc;
+}
+</code></pre>
+<p><code>dealloc</code> 有可能在任何线程调用，在最后一个调用 <code>release</code> 方法的线程中调用。</p>
+<p>函数调用顺序： <code>dealloc-&gt;_objc_rootDealloc-&gt;objc_object::rootDealloc-&gt;object_dispose-&gt;objc_destructInstance</code> ：</p>
+<pre><code class="language-objectivec">- (void)dealloc {
+    _objc_rootDealloc(self);
+}
+</code></pre>
+<pre><code class="language-objectivec">void _objc_rootDealloc(id obj)
+{
+    assert(obj);
+
+    obj-&gt;rootDealloc();
+}
+</code></pre>
+<pre><code class="language-objectivec">inline void
+objc_object::rootDealloc()
+{
+    if (isTaggedPointer()) return;  // fixme necessary?
+		// 判断 isa 的各个标志位，确认是否需要进行快速释放。
+    if (fastpath(isa.nonpointer  &amp;&amp;  
+                 !isa.weakly_referenced  &amp;&amp;  
+                 !isa.has_assoc  &amp;&amp;  
+                 !isa.has_cxx_dtor  &amp;&amp;  
+                 !isa.has_sidetable_rc))
+    {
+        assert(!sidetable_present());
+        free(this);
+    } 
+    else {
+        object_dispose((id)this);
+    }
+}
+</code></pre>
+<pre><code class="language-objectivec">id object_dispose(id obj)
+{
+    if (!obj) return nil;
+
+    objc_destructInstance(obj);    
+    free(obj);
+
+    return nil;
+}
+</code></pre>
+<pre><code class="language-objectivec">void *objc_destructInstance(id obj)
+{
+    if (obj) {
+        Class isa_gen = _object_getClass(obj);
+        class_t *isa = newcls(isa_gen);
+
+        // Read all of the flags at once for performance.
+        bool cxx = hasCxxStructors(isa);
+        bool assoc = !UseGC &amp;&amp; _class_instancesHaveAssociatedObjects(isa_gen);
+
+        // This order is important.
+        if (cxx) object_cxxDestruct(obj); // 1
+        if (assoc) _object_remove_assocations(obj); // 2
+
+        if (!UseGC) objc_clear_deallocating(obj); // 3
+    }
+
+    return obj;
+}
+</code></pre>
+<ol>
+<li><code>object_cxxDestruct</code> 调用 C++ 析构器，释放实例变量；</li>
+<li><code>_object_remove_assocations</code> 清除 <code>Associated</code> 对象；</li>
+<li><code>objc_clear_deallocating</code> ARC 相关操作，清理 <code>SideTable</code> ， <code>weak</code> 设置为 <code>nil</code> 等。</li>
+</ol>
+<h2 id="arc-下-dealloc-过程及-cxx_destruct-的探究"><a class="header" href="#arc-下-dealloc-过程及-cxx_destruct-的探究">ARC 下 <code>dealloc</code> 过程及 <code>.cxx_destruct</code> 的探究</a></h2>
+<p><a href="http://blog.sunnyxx.com/2014/04/02/objc_dig_arc_dealloc/">ARC下dealloc过程及.cxx_destruct的探究</a></p>
+<p>这篇文章对 <code>.cxx_destruct</code> 做了深入研究，包括 <code>.cxx_destruct</code> 如何释放实例变量，如何调用 <code>[super dealloc]</code> 。这两者都是由编译器帮我们完成，插入这部分的代码。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tagged-pointer"><a class="header" href="#tagged-pointer">Tagged Pointer</a></h1>
+<h2 id="说明"><a class="header" href="#说明">说明</a></h2>
+<p><a href="https://en.wikipedia.org/wiki/Tagged_pointer">Tagged pointer</a></p>
+<p>对象存储在内存中的时候总是内存对齐的，所以它们的地址会是单个指针大小的倍数，通常来说会是 16 的倍数。在 64 位系统中，对象的指针为 64 位整形。后面几位为 0 。由于后面几位一直为 0 。所以我们可以使用后面几位来记录一些事情。</p>
+<p><a href="https://developer.apple.com/videos/play/wwdc2013/404/">Advances in Objective-C - WWDC 2013 - Videos - Apple Developer</a></p>
+<p>WWDC 2013 上相关介绍，从 36:49 开始。</p>
+<p><img src="programming-languages/Objective-C/media/16295382272652.jpg" alt="" /></p>
+<ul>
+<li>苹果使用 Tagged Pointer 来存储一些比较小的数据，如： <code>NSNumber</code> ， <code>NSDate</code> 和 <code>NSString</code> 等；</li>
+<li>由于直接使用指针本身来存储数据，不再需要额外生命周期管理，没有 <code>malloc/free</code> ；</li>
+<li>3 倍的空间优化， 106 倍的创建或者销毁速度。</li>
+</ul>
+<p><img src="programming-languages/Objective-C/media/16295384569038.jpg" alt="" /></p>
+<p>使用低位的 <code>bit</code> 来作为标识位。</p>
+<h2 id="tagged-pointer-解析"><a class="header" href="#tagged-pointer-解析">Tagged Pointer 解析</a></h2>
+<p><a href="https://wenghengcong.com/posts/b6becb26/">内存管理（二）Tagged Pointer</a></p>
+<p><a href="https://juejin.cn/post/6844904132940136462">iOS - 老生常谈内存管理（五）：Tagged Pointer</a></p>
+<p>由于内存对齐的关系，指针的值最后四位都是 0 ，所以可以使用这四位来做一些记录。如果最后一位是 1 ，则这个指针是 Tagged Pointer 。</p>
+<pre><code class="language-objectivec">static inline bool 
+_objc_isTaggedPointer(const void *ptr) 
+{
+    return ((intptr_t)ptr &amp; _OBJC_TAG_MASK) == _OBJC_TAG_MASK;
+}
+
+#if OBJC_MSB_TAGGED_POINTERS
+#   define _OBJC_TAG_MASK (1ULL&lt;&lt;63)
+#else
+#   define _OBJC_TAG_MASK 1
+#endif
+
+#if TARGET_OS_OSX &amp;&amp; __x86_64__
+    // 64-bit Mac - tag bit is LSB
+#   define OBJC_MSB_TAGGED_POINTERS 0
+#else
+    // Everything else - tag bit is MSB
+#   define OBJC_MSB_TAGGED_POINTERS 1
+#endif
+</code></pre>
+<p>在 iOS 平台上使用的是最高位进行判断，在 macOS 上 使用的是最低位。 Tagged Pointer 支持的类型：</p>
+<pre><code class="language-objectivec">enum
+{
+    OBJC_TAG_NSAtom            = 0, 
+    OBJC_TAG_1                 = 1, 
+    OBJC_TAG_NSString          = 2, 
+    OBJC_TAG_NSNumber          = 3, 
+    OBJC_TAG_NSIndexPath       = 4, 
+    OBJC_TAG_NSManagedObjectID = 5, 
+    OBJC_TAG_NSDate            = 6, 
+    OBJC_TAG_RESERVED_7        = 7, 
+
+    OBJC_TAG_First60BitPayload = 0, 
+    OBJC_TAG_Last60BitPayload  = 6, 
+    OBJC_TAG_First52BitPayload = 8, 
+    OBJC_TAG_Last52BitPayload  = 263, 
+
+    OBJC_TAG_RESERVED_264      = 264
+};
+</code></pre>
+<p>Tagged Pointer 不是真的对象，没有 isa 指针，不存在 <code>retain</code> ， <code>release</code> ， <code>autorelease</code> 等对象生命周期管理的流程，其引用计数为 <code>NSUInteger</code> 的最大值。</p>
+<pre><code class="language-objectivec">dispatch_queue_t queue = dispatch_queue_create(&quot;parallel&quot;, DISPATCH_QUEUE_CONCURRENT);
+for (int i = 0; i &lt; 1000; i ++) {
+    dispatch_async(queue, ^{
+        self.name = [NSString stringWithFormat:@&quot;abcdefghijk&quot;];
+    })
+}
+dispatch_queue_t queue = dispatch_queue_create(&quot;parallel&quot;, DISPATCH_QUEUE_CONCURRENT);
+for (int i = 0; i &lt; 1000; i ++) {
+    dispatch_async(queue, ^{
+        self.name = [NSString stringWithFormat:@&quot;abc&quot;];
+    })
+}
+</code></pre>
+<p>上面的代码中，第一个 for 循环会崩溃，因为在多线程中可能会重复 <code>release</code> ，而第二个不会，因为 Tagged Pointer 其实是值类型，不涉及到 <code>retain</code> 和 <code>release</code> 操作，其赋值操作是原子性的。</p>
+<h2 id="lets-build-tagged-pointers"><a class="header" href="#lets-build-tagged-pointers">Let's Build Tagged Pointers</a></h2>
+<p><a href="https://www.mikeash.com/pyblog/friday-qa-2012-07-27-lets-build-tagged-pointers.html">mikeash.com: Friday Q&amp;A 2012-07-27: Let's Build Tagged Pointers</a></p>
+<p>Mike Ash 尝试自己实现了一个 Tagged Pointer 。</p>
+<h2 id="tagged-pointer-strings"><a class="header" href="#tagged-pointer-strings">Tagged Pointer Strings</a></h2>
+<p><a href="https://mikeash.com/pyblog/friday-qa-2015-07-31-tagged-pointer-strings.html">mikeash.com: Friday Q&amp;A 2015-07-31: Tagged Pointer Strings</a></p>
+<p><a href="https://swift.gg/2018/10/08/tagged-pointer-strings/">Tagged Pointer 字符串</a></p>
+<p>如果某些字符串可以保存为 60 位以内的二进制数据，那么对应的 <code>NSString</code> 就会被创建为 Tagged Pointer 。</p>
+<p>由于 <code>NSString</code> 字符串编码的特殊性，苹果针对 <code>NSString</code> 的 Tagged Pointer 进行优化。</p>
+<h3 id="实现"><a class="header" href="#实现">实现</a></h3>
+<pre><code class="language-objectivec">NSString *a = @&quot;a&quot;;
+NSString *b = [[a mutableCopy] copy];
+NSLog(@&quot;%p %p %@&quot;, a, b, object_getClass(b));
+</code></pre>
+<ol>
+<li>常量字符串不会被存储为 Tagged Pointer ，因为常量字符串必须保证可以兼容不同的系统，但是 Tagged Pointer 的内部实现细节却不能保证兼容不同的系统，常量字符串嵌入到二进制字符串时有可能会崩溃；</li>
+<li>先执行 <code>[a mutableCopy]</code> ，因 <code>copy</code> 返回的是不可变的字符串，所以常量字符串的 <code>copy</code> 得到的还是原来的常量字符串，所以先通过 <code>mutableCopy</code> 生成一个新的可变字符串，然后再通过 <code>copy</code> 得到一个不可变的 Tagged Pointer ， Tagged Pointer 只会在运行时创建。</li>
+</ol>
+<p>输出结果如下：</p>
+<pre><code class="language-objectivec">0x10ba41038 0x6115 NSTaggedPointerString
+</code></pre>
+<p>首先第一个 <code>a</code> 不是 Tagged Pointer ，是一个对象的指针，第二个是 Tagged Pointer。</p>
+<p>然后 <code>NSString</code> 对应的 Tagged Pointer 使用的是 ASCII 编码，占用的长度较少。</p>
+<p>伪代码：</p>
+<pre><code class="language-objectivec">unsigned short -[NSTaggedPointerString characterAtIndex:](void * self, void * _cmd, unsigned long long index) {
+     int8_t buffer[11];
+     length = self &gt;&gt; 0x4 &amp; 0xf;
+     if (length &gt;= 0x8) {
+         stringData = self &gt;&gt; 0x8;
+         table = &quot;eilotrm.apdnsIc ufkMShjTRxgC4013bDNvwyUL2O856P-B79AFKEWV_zGJ/HYX&quot;;
+             cursor = length;
+             if (length &lt; 0xa) {
+                 do {
+                     buffer[cursor - 1] = table[stringData &amp; 0x3f];
+                     cursor = cursor - 0x1;
+                     stringData = stringData &gt;&gt; 0x6;
+                 } while (cursor != 0x0);
+             }
+             else {
+                 do {
+                     buffer[cursor - 1] = table[stringData &amp; 0x1f];
+                     cursor = cursor - 0x1;
+                     stringData = stringData &gt;&gt; 0x5;
+                 } while (cursor != 0x0);
+             }
+     } else {
+         *(uint64_t *)buffer = self &gt;&gt; 8;
+     }
+     if (length &lt;= index) {
+         rbx = r8;
+         ___CFExceptionProem(self, _cmd);
+         [NSException raise:@&quot;NSRangeException&quot; format:@&quot;%@: Index %lu out of bounds; string length %lu&quot;];
+         r8 = rbx;
+     }
+     rax = buffer[index];
+     return rax;
+ }
+</code></pre>
+<ol>
+<li>长度小于 8 的情况下，直接使用 ASCII 编码，所以 <code>self</code> 按位编译后直接赋值给 <code>buff</code> 即可；</li>
+<li>长度大于等于8小于10，就会取出 <code>stringData</code> 的最低 6 位，作为 <code>table</code> 的索引取出相应的值拷贝到 <code>buffer</code> 中，然后将 <code>stringData</code> 右移 6 位，重复操作；</li>
+<li>如果大于等于 10 ，那么就会使用 5 位编码，而 <code>table</code> 只使用前半部分。</li>
+</ol>
+<p>构造 <code>NSString</code> Tagged Pointer 的原理大致上也和上面的一致。</p>
+<p>6 位编码表：</p>
+<pre><code>eilotrm.apdnsIc ufkMShjTRxgC4013bDNvwyUL2O856P-B79AFKEWV_zGJ/HYX
+</code></pre>
+<p>猜测是按照在英语中出现的频率进行排序，使得尽量多的字符串可以使用 Tagged Pointer 。通过一个简单又巧妙的查找表方式在有限的空间内存储尽量的数据。</p>
 
                     </main>
 

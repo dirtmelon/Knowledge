@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>dealloc - Knowledge</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Category.html"><strong aria-hidden="true">1.1.5.</strong> Category</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html"><strong aria-hidden="true">1.1.6.</strong> Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVO.html"><strong aria-hidden="true">1.1.7.</strong> KVO</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVC.html"><strong aria-hidden="true">1.1.8.</strong> KVC</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/AutoreleasePool.html"><strong aria-hidden="true">1.1.9.</strong> AutoreleasePool</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/dealloc.html" class="active"><strong aria-hidden="true">1.1.10.</strong> dealloc</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Tagged-Pointer.html"><strong aria-hidden="true">1.1.11.</strong> Tagged Pointer</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Knowledge</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="dealloc"><a class="header" href="#dealloc">dealloc</a></h1>
+<h2 id="llvm-关于-dealloc-的说明"><a class="header" href="#llvm-关于-dealloc-的说明">LLVM 关于 <code>dealloc</code> 的说明</a></h2>
+<p><a href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html#dealloc">Clang 12 documentation</a></p>
+<blockquote>
+<p>A class may provide a method definition for an instance method named dealloc. This method will be called after the final release of the object but before it is deallocated or any of its instance variables are destroyed. The superclass’s implementation of dealloc will be called automatically when the method returns.</p>
+</blockquote>
+<p><code>dealloc</code> 在最后 <code>release</code> 时调用，但此时实例变量（ <code>Ivars</code> ）并未释放，父类的  <code>dealloc</code> 会在子类的 <code>dealloc</code> 返回后调用。</p>
+<blockquote>
+<p>The instance variables for an ARC-compiled class will be destroyed at some point after control enters the dealloc method for the root class of the class. The ordering of the destruction of instance variables is unspecified, both within a single class and between subclasses and superclasses.</p>
+</blockquote>
+<p>实例变量会在 <code>root class</code> （根类）的 <code>dealloc</code> 中释放，一般来说就是 <code>NSObject</code> 的 <code>dealloc</code> 方法，释放顺序不确定。</p>
+<h3 id="dealloc-调用时机"><a class="header" href="#dealloc-调用时机">dealloc 调用时机</a></h3>
+<p><a href="https://zhongwuzw.github.io/2017/09/21/%E8%81%8A%E8%81%8Adealloc/">聊聊dealloc</a></p>
+<p>当对象调用 <code>release</code> 方法时会走到 <code>sidetable_release</code> 这个方法中，而 <code>sidetable_release</code> 这个方法会判断是否需要调用 <code>dealloc</code> 方法：</p>
+<pre><code class="language-objectivec">uintptr_t objc_object::sidetable_release(bool performDealloc)
+{
+#if SUPPORT_NONPOINTER_ISA
+    assert(!isa.nonpointer);
+#endif
+    // 找到当前对象所对应的 SideTable
+    SideTable&amp; table = SideTables()[this];
+    bool do_dealloc = false;
+    table.lock();
+    // 找到当前对象所对应的引用计数
+    RefcountMap::iterator it = table.refcnts.find(this);
+    if (it == table.refcnts.end()) {
+        // 如果找不到所对应的应用计数，则表示可以执行 dealloc ，
+			  // 同时设置对应的值为 SIDE_TABLE_DEALLOCATING
+        do_dealloc = true;
+        table.refcnts[this] = SIDE_TABLE_DEALLOCATING;
+    } else if (it-&gt;second &lt; SIDE_TABLE_DEALLOCATING) {
+        // SIDE_TABLE_WEAKLY_REFERENCED may be set. Don't change it.
+        // 如果引用计数小于 SIDE_TABLE_DEALLOCATING ，则表示引用计数为 0 ，可以执行 dealloc
+        do_dealloc = true;
+        it-&gt;second |= SIDE_TABLE_DEALLOCATING;
+    } else if (! (it-&gt;second &amp; SIDE_TABLE_RC_PINNED)) {
+        // 引用计数减 1
+        it-&gt;second -= SIDE_TABLE_RC_ONE;
+    }
+    table.unlock();
+    // 进行释放操作，执行 dealloc
+    if (do_dealloc  &amp;&amp;  performDealloc) {
+        ((void(*)(objc_object *, SEL))objc_msgSend)(this, SEL_dealloc);
+    }
+    return do_dealloc;
+}
+</code></pre>
+<p><code>dealloc</code> 有可能在任何线程调用，在最后一个调用 <code>release</code> 方法的线程中调用。</p>
+<p>函数调用顺序： <code>dealloc-&gt;_objc_rootDealloc-&gt;objc_object::rootDealloc-&gt;object_dispose-&gt;objc_destructInstance</code> ：</p>
+<pre><code class="language-objectivec">- (void)dealloc {
+    _objc_rootDealloc(self);
+}
+</code></pre>
+<pre><code class="language-objectivec">void _objc_rootDealloc(id obj)
+{
+    assert(obj);
+
+    obj-&gt;rootDealloc();
+}
+</code></pre>
+<pre><code class="language-objectivec">inline void
+objc_object::rootDealloc()
+{
+    if (isTaggedPointer()) return;  // fixme necessary?
+		// 判断 isa 的各个标志位，确认是否需要进行快速释放。
+    if (fastpath(isa.nonpointer  &amp;&amp;  
+                 !isa.weakly_referenced  &amp;&amp;  
+                 !isa.has_assoc  &amp;&amp;  
+                 !isa.has_cxx_dtor  &amp;&amp;  
+                 !isa.has_sidetable_rc))
+    {
+        assert(!sidetable_present());
+        free(this);
+    } 
+    else {
+        object_dispose((id)this);
+    }
+}
+</code></pre>
+<pre><code class="language-objectivec">id object_dispose(id obj)
+{
+    if (!obj) return nil;
+
+    objc_destructInstance(obj);    
+    free(obj);
+
+    return nil;
+}
+</code></pre>
+<pre><code class="language-objectivec">void *objc_destructInstance(id obj)
+{
+    if (obj) {
+        Class isa_gen = _object_getClass(obj);
+        class_t *isa = newcls(isa_gen);
+
+        // Read all of the flags at once for performance.
+        bool cxx = hasCxxStructors(isa);
+        bool assoc = !UseGC &amp;&amp; _class_instancesHaveAssociatedObjects(isa_gen);
+
+        // This order is important.
+        if (cxx) object_cxxDestruct(obj); // 1
+        if (assoc) _object_remove_assocations(obj); // 2
+
+        if (!UseGC) objc_clear_deallocating(obj); // 3
+    }
+
+    return obj;
+}
+</code></pre>
+<ol>
+<li><code>object_cxxDestruct</code> 调用 C++ 析构器，释放实例变量；</li>
+<li><code>_object_remove_assocations</code> 清除 <code>Associated</code> 对象；</li>
+<li><code>objc_clear_deallocating</code> ARC 相关操作，清理 <code>SideTable</code> ， <code>weak</code> 设置为 <code>nil</code> 等。</li>
+</ol>
+<h2 id="arc-下-dealloc-过程及-cxx_destruct-的探究"><a class="header" href="#arc-下-dealloc-过程及-cxx_destruct-的探究">ARC 下 <code>dealloc</code> 过程及 <code>.cxx_destruct</code> 的探究</a></h2>
+<p><a href="http://blog.sunnyxx.com/2014/04/02/objc_dig_arc_dealloc/">ARC下dealloc过程及.cxx_destruct的探究</a></p>
+<p>这篇文章对 <code>.cxx_destruct</code> 做了深入研究，包括 <code>.cxx_destruct</code> 如何释放实例变量，如何调用 <code>[super dealloc]</code> 。这两者都是由编译器帮我们完成，插入这部分的代码。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../programming-languages/Objective-C/AutoreleasePool.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../programming-languages/Objective-C/Tagged-Pointer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../programming-languages/Objective-C/AutoreleasePool.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../programming-languages/Objective-C/Tagged-Pointer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
