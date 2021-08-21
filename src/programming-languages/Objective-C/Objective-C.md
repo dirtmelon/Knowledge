@@ -8,3 +8,4 @@
 - [KVO](./KVO.md)
 - [KVC](./KVC.md)
 - [AutoreleasePool](./AutoreleasePool.md)
+- [dealloc](./dealloc.md)

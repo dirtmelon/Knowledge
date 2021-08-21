@@ -10,3 +10,4 @@
     - [KVO](./programming-languages/Objective-C/KVO.md)
     - [KVC](./programming-languages/Objective-C/KVC.md)
     - [AutoreleasePool](./programming-languages/Objective-C/AutoreleasePool.md)
+    - [dealloc](./programming-languages/Objective-C/dealloc.md)
