@@ -3,3 +3,4 @@
 - [initialize](./initialize.md)
 - [load](./load.md)
 - [Block](./Block.md)
+- [Category](./Category.md)

@@ -5,3 +5,4 @@
     - [initialize](./programming-languages/Objective-C/initialize.md)
     - [load](./programming-languages/Objective-C/load.md)
     - [Block](./programming-languages/Objective-C/Block.md)
+    - [Category](./programming-languages/Objective-C/Category.md)
