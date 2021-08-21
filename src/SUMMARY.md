@@ -12,3 +12,4 @@
     - [AutoreleasePool](./programming-languages/Objective-C/AutoreleasePool.md)
     - [dealloc](./programming-languages/Objective-C/dealloc.md)
     - [Tagged Pointer](./programming-languages/Objective-C/Tagged-Pointer.md)
+    - [weak](./programming-languages/Objective-C/weak.md)

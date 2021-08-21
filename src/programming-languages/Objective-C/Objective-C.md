@@ -10,3 +10,4 @@
 - [AutoreleasePool](./AutoreleasePool.md)
 - [dealloc](./dealloc.md)
 - [Tagged Pointer](./Tagged-Pointer.md)
+- [weak](./weak.md)
