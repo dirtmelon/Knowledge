@@ -5,6 +5,13 @@ multilingual = false
 src = "src"
 title = "Knowledge"
 
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+no-section-label = true
+git-repository-url = "https://github.com/dirtmelon/Knowledge"
+git-repository-icon = "fa-github"
+
 [output.html.fold]
 enable = false
 level = 0
