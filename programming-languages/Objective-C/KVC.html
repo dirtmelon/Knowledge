@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>KVC - Knowledge</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Category.html"><strong aria-hidden="true">1.1.5.</strong> Category</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html"><strong aria-hidden="true">1.1.6.</strong> Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVO.html"><strong aria-hidden="true">1.1.7.</strong> KVO</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVC.html" class="active"><strong aria-hidden="true">1.1.8.</strong> KVC</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/AutoreleasePool.html"><strong aria-hidden="true">1.1.9.</strong> AutoreleasePool</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Knowledge</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="kvc"><a class="header" href="#kvc">KVC</a></h1>
+<h2 id="基础"><a class="header" href="#基础">基础</a></h2>
+<p>官方文档：</p>
+<p><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/KeyValueCoding/index.html#//apple_ref/doc/uid/10000107-SW1">About Key-Value Coding</a></p>
+<p><code>KVC</code> 是通过 <code>NSKeyValueCodinng</code> 协议来实现的。当一个对象支持 <code>KVC</code> 时，它的属性可以通过字符串来进行访问。 <code>KVC</code> 对象提供了简单的接口，通过接口和字符串可以访问所有的属性。 <code>KVC</code> 是 Cocoa 中一些功能的基石，如 <code>KVO</code> ， <code>Cocoa</code> 绑定机制， Core Data 等。</p>
+<h3 id="用途"><a class="header" href="#用途">用途</a></h3>
+<p>只要继承自 <code>NSObject</code> 就可以使用 <code>KVC</code> ， <code>NSObject</code> 已默认支持 <code>NSKeyValueCoding</code> 协议和提供默认的必须方法， <code>KVC</code> 提供了以下特性：</p>
+<ul>
+<li>获取对象属性。协议定义了一些方法，比如说 <code>valueForKey:</code> 和 <code>setValue:forKey:</code> ，使用字符串作为参数，可以访问到对象的属性或者对属性进行设置；</li>
+<li>操作集合属性，跟其它属性一样，提供了对集合属性进行操作的方法，如果需要对集合进行修改， <code>KVC</code> 也提供了独特高效的方法；</li>
+<li>集合属性的操作符，当访问对象的集合属性时， <code>KVC</code> 为我们提供了一些操作符，通过这些操作符可以直接对集合获取某些属性，继续计算转换等；</li>
+<li>获取非对象属性， <code>KVC</code> 也支持获取非对象属性，包括纯量属性和结构体等，会自动将它们和对象之间进行转换，以便协议的方法进行调用；</li>
+</ul>
+<h3 id="适配-kvc"><a class="header" href="#适配-kvc">适配 KVC</a></h3>
+<p>如果想要你的对象支持 <code>KVC</code> ，那么你需要使得它们遵循 <code>NSKeyValueCoding</code> 协议。幸运的是， <code>NSObject</code> 已经为我们做好一切工作，因此如果你想要使用 <code>KVC</code> ，那么只需要继承自 <code>NSObject</code> 即可。为了保证 <code>KVC</code> 生效，你需要保证对象的存取器和变量名遵守相关的规则。</p>
+<h3 id="获取对象属性"><a class="header" href="#获取对象属性">获取对象属性</a></h3>
+<p>一个对象会在它的 <code>interface</code> 声明中定义属性，而属性则会分成以下几个分类：</p>
+<ul>
+<li>属性，系统提供的一些比较简单的值，如纯量属性，字符串， <code>Bool</code> 值等。</li>
+<li>一对一关系，对于拥有者来说它们是可变对象。一个对象的属性可以在对象本身不改变的情况下发生改变。举个例子，比如说一个银行客户的对象拥有一个 <code>Person</code> 的 <code>owner</code> 属性， <code>Person</code> 拥有一个地址属性。 <code>owner</code> 就可以在不改变银行客户的引用关系的前提下改变自己的地址属性；</li>
+<li>一对多，集合对象，比如说 <code>NSArray</code> 或者 <code>NSSet</code> ，也可以使用其它的一些自定义集合类型；</li>
+</ul>
+<pre><code class="language-objectivec">@interface BankAccount : NSObject
+ 
+@property (nonatomic) NSNumber* currentBalance;              // An attribute
+@property (nonatomic) Person* owner;                         // A to-one relation
+@property (nonatomic) NSArray&lt; Transaction* &gt;* transactions; // A to-many relation
+ 
+@end
+</code></pre>
+<p>为了保持封装性，一个对象会提供为属性提供存取方法作为它的接口。</p>
+<pre><code class="language-objectivec">[myAccount setCurrentBalance:@(100.0)];
+</code></pre>
+<p>这样很直接，但是会缺少灵活性。 <code>KVC</code> 为对象提供了一种通过字符串来获取属性的机制。</p>
+<h3 id="通过-keys-或者-keypaths-识别对象的属性"><a class="header" href="#通过-keys-或者-keypaths-识别对象的属性">通过 <code>Keys</code> 或者 <code>KeyPaths</code> 识别对象的属性</a></h3>
+<p><code>key</code> 是一个字符串，对应某个属性。通常情况下， <code>key</code> 会跟属性的名字一致。使用  <code>ASCII</code> 编码，不包含空格，以小写字母开头 （当然了，也会有例外，比如说 <code>URL</code> 属性）。</p>
+<p>对于 <code>BankAccount</code> 来说，我们可以通过以下属性来设置 <code>currentBalance</code> ：</p>
+<pre><code class="language-objectivec">[myAccount setValue:@(100.0) forKey:@&quot;currentBalance&quot;];
+</code></pre>
+<p>实际上，我们可以使用相同的方法，不同的 <code>key</code> 参数来获取 <code>myAccount</code> 对象的所有属性。</p>
+<p>我们可以通过 <code>.</code> 来使用 <code>KeyPath</code> 。假设 <code>Person</code> 和 <code>Address</code> 也符合 <code>KVC</code> 规范，我们可以通过 <code>owner.address.street</code> 的方式来访问账户所有者的地址中的街道信息。</p>
+<p><code>NSObject</code> 已经实现了 <code>NSKeyValueCoding</code> 协议所需要的方法，所以只需要继承自 <code>NSObject</code> ，就可以得到默认的实现和支持 <code>KVC</code> 。</p>
+<ul>
+<li><code>valueForKey:</code> ，返回一个以 <code>key</code> 参数来进行命名的属性。如果说属性无法被 <code>key</code> 通过定好的规则搜索到，对象会调用 <code>valueForUndefinedKey:</code> 方法，这个方法的默认实现是抛出一个 <code>NSUndefinedKeyException</code> 异常，但是子类可以通过重写这个方法来更优雅地处理这个场景；</li>
+<li><code>valueForKeyPath:</code> ，返回接收器中满足 <code>keyPath</code> 路径的值。所有在这个 <code>keyPath</code> 路径中的对象都需要满足特定的 <code>key</code> 对应的 <code>KVC</code> 机制，如果说 <code>valueForKey:</code> 找不到对应的存取方法，就会收到 <code>valueForUndefinedKey:</code> 消息；</li>
+<li><code>dictionaryWithValuesForKeys:</code> ，返回 <code>value</code> 和 <code>key</code> 组成的 <code>NSDictionary</code> ，它会为数组的每个 <code>key</code> 调用 <code>valueForKey:</code> 方法来获取对应的值。</li>
+</ul>
+<p>集合对象，比如说 <code>NSArray</code> ， <code>NSSet</code> 和 <code>NSDictionary</code> ，不可以包含 <code>nil</code> 。你可以使用 <code>NSNull</code> 对象来替换 <code>nil</code> ， <code>NSNull</code> 提供了一个单例来表示 <code>nil</code> 值。 <code>dictionaryWithValuesForKeys:</code> 和 <code>setValuesForKeysWithDictionary:</code> 会在 <code>NSNull</code> （ dictionary 参数）和 <code>nil</code> （属性）中自动切换。</p>
+<p><code>KeyPath</code> 也支持多对一关系，当 <code>key-path</code> 路径中有一对多的关系时，那么就会返回数组。比如说 <code>transactions.payee</code> 会以数组形式返回所有 <code>transactions</code> 中的 <code>payee</code> 对象。</p>
+<h3 id="通过-keys-设置属性值"><a class="header" href="#通过-keys-设置属性值">通过 <code>Keys</code> 设置属性值</a></h3>
+<p>和 <code>getter</code> 一样， <code>KVC</code> 也提供了一组通用的 <code>setter</code> 方法，由 <code>NSObject</code> 中 <code>NSKeyValueCoding</code> 协议的默认方法提供：</p>
+<ul>
+<li><code>setValue:forKey:</code> ，使用 <code>value</code> 来设置对象中对应 <code>key</code> 的属性。 <code>setValue:forKey:</code> 的默认实现会自动对 <code>NSNumber</code> 和 <code>NSValue</code> 对象进行解包，把它们转换为对应的纯量和结构体，然后设置到对应的属性中。如果对象中没有和 <code>key</code> 对应的 <code>setter</code> ，那么对象就会调用它自己的 <code>setValue:forUndefinedKey:</code> 方法，这个方法的默认实现会抛出一个 <code>NSUndefinedKeyException</code> 异常。子类可以通过重写这个方法来 实现自定义逻辑。</li>
+<li><code>setValue:forKeyPath:</code> ，使用 <code>value</code> 来设置对象中与 <code>keyPath</code> 路径相符的属性。当存在 <code>keyPath</code> 路径上不支持对应的 <code>key</code> 的 <code>KVC</code> 时，就会收到 <code>setValue:forUndefinedKey:</code> 消息。</li>
+<li><code>setValuesForKeysWithDictionary:</code> ，批量设置属性，使用 <code>dictionary</code> 中的 <code>key</code> 来指明属性。它通过调用 <code>setValue:forKey:</code> 方法来为每一对 <code>key-value</code> 进行设置，自动将 <code>NSNull</code> 对象替换为 <code>nil</code> 。</li>
+</ul>
+<p>在默认的实现中，当你尝试设置一个非对象的属性为 <code>nil</code> 时， <code>KVC</code> 会调用 <code>setNilValueForKey:</code> 方法。这个方法的默认实现会抛出一个 <code>NSInvalidArgumentException</code> ，对象可以通过重写这个行为来提供一个默认值或者标记值（ marker value ）。</p>
+<p><a href="https://kingcos.me/posts/2019/kvc_in_ios/">iOS 中的 KVC</a></p>
+<p>这篇文章有更详细的说明</p>
+<p><a href="https://juejin.im/post/6844903934662803464">iOS 开发：『Crash 防护系统』（三）KVC 防护</a></p>
+<p><code>KVC</code> 崩溃防护。上面提到 <code>KVC</code> 相关的崩溃，这篇文章中相关防护也是对这些方法进行 <code>hook</code> ，替换掉原来的实现。</p>
+<pre><code class="language-objectivec">/********************* NSObject+KVCDefender.h 文件 *********************/
+#import &lt;Foundation/Foundation.h&gt;
+
+@interface NSObject (KVCDefender)
+
+@end
+
+/********************* NSObject+KVCDefender.m 文件 *********************/
+#import &quot;NSObject+KVCDefender.h&quot;
+#import &quot;NSObject+MethodSwizzling.h&quot;
+
+@implementation NSObject (KVCDefender)
+
+// 不建议拦截 `setValue:forKey:` 方法
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+
+        // 拦截 `setValue:forKey:` 方法，替换自定义实现
+        [NSObject yscDefenderSwizzlingInstanceMethod:@selector(setValue:forKey:)
+                                       withMethod:@selector(ysc_setValue:forKey:)
+                                        withClass:[NSObject class]];
+
+    });
+}
+
+- (void)ysc_setValue:(id)value forKey:(NSString *)key {
+    if (key == nil) {
+        NSString *crashMessages = [NSString stringWithFormat:@&quot;crashMessages : [&lt;%@ %p&gt; setNilValueForKey]: could not set nil as the value for the key %@.&quot;,NSStringFromClass([self class]),self,key];
+        NSLog(@&quot;%@&quot;, crashMessages);
+        return;
+    }
+
+    [self ysc_setValue:value forKey:key];
+}
+
+- (void)setNilValueForKey:(NSString *)key {
+    NSString *crashMessages = [NSString stringWithFormat:@&quot;crashMessages : [&lt;%@ %p&gt; setNilValueForKey]: could not set nil as the value for the key %@.&quot;,NSStringFromClass([self class]),self,key];
+    NSLog(@&quot;%@&quot;, crashMessages);
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    NSString *crashMessages = [NSString stringWithFormat:@&quot;crashMessages : [&lt;%@ %p&gt; setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key: %@,value:%@'&quot;,NSStringFromClass([self class]),self,key,value];
+    NSLog(@&quot;%@&quot;, crashMessages);
+}
+
+- (nullable id)valueForUndefinedKey:(NSString *)key {
+    NSString *crashMessages = [NSString stringWithFormat:@&quot;crashMessages :[&lt;%@ %p&gt; valueForUndefinedKey:]: this class is not key value coding-compliant for the key: %@&quot;,NSStringFromClass([self class]),self,key];
+    NSLog(@&quot;%@&quot;, crashMessages);
+    
+    return self;
+}
+
+@end
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../programming-languages/Objective-C/KVO.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../programming-languages/Objective-C/AutoreleasePool.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../programming-languages/Objective-C/KVO.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../programming-languages/Objective-C/AutoreleasePool.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

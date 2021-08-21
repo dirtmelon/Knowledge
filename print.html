@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Category.html"><strong aria-hidden="true">1.1.5.</strong> Category</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Message-Sending-And-Forwarding.html"><strong aria-hidden="true">1.1.6.</strong> Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/KVO.html"><strong aria-hidden="true">1.1.7.</strong> KVO</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="programming-languages/programming-languages.html"><strong aria-hidden="true">1.</strong> 编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Objective-C.html"><strong aria-hidden="true">1.1.</strong> Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming-languages/Objective-C/associated-objects.html"><strong aria-hidden="true">1.1.1.</strong> Associated Objects</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/initialize.html"><strong aria-hidden="true">1.1.2.</strong> initialize</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/load.html"><strong aria-hidden="true">1.1.3.</strong> load</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Block.html"><strong aria-hidden="true">1.1.4.</strong> Block</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Category.html"><strong aria-hidden="true">1.1.5.</strong> Category</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/Message-Sending-And-Forwarding.html"><strong aria-hidden="true">1.1.6.</strong> Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/KVO.html"><strong aria-hidden="true">1.1.7.</strong> KVO</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/KVC.html"><strong aria-hidden="true">1.1.8.</strong> KVC</a></li><li class="chapter-item expanded "><a href="programming-languages/Objective-C/AutoreleasePool.html"><strong aria-hidden="true">1.1.9.</strong> AutoreleasePool</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -151,6 +151,8 @@
 <li><a href="programming-languages/Objective-C/./Category.html">Category</a></li>
 <li><a href="programming-languages/Objective-C/./Message-Sending-And-Forwarding.html">Message Sending And Forwarding</a></li>
 <li><a href="programming-languages/Objective-C/./KVO.html">KVO</a></li>
+<li><a href="programming-languages/Objective-C/./KVC.html">KVC</a></li>
+<li><a href="programming-languages/Objective-C/./AutoreleasePool.html">AutoreleasePool</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="associated-objects"><a class="header" href="#associated-objects">Associated Objects</a></h1>
 <p><a href="https://nshipster.com/associated-objects/">Associated Objects</a></p>
@@ -1599,6 +1601,183 @@ if (currentClass) {
 <p>其原因在于苹果使用的是 <code>two level namespace</code> 的技术。在这种形式下，符号所在的“库”的名称也会作为符号的一部分。链接的时候， <code>staic linker</code> 会标记住在这个符号是来自于哪个库的。这样不仅大大减少了dyld搜索符号所需要的时间，也更好对后续库的更新进行了兼容。</p>
 </blockquote>
 <p>但是由于全局类表的存在，在动态创建 <code>KVO</code> 的子类时，只能产生一个。所以就导致 <code>allocate</code> 失败，从而引发 <code>register</code> 过程的 Crash 问题。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="kvc"><a class="header" href="#kvc">KVC</a></h1>
+<h2 id="基础-1"><a class="header" href="#基础-1">基础</a></h2>
+<p>官方文档：</p>
+<p><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/KeyValueCoding/index.html#//apple_ref/doc/uid/10000107-SW1">About Key-Value Coding</a></p>
+<p><code>KVC</code> 是通过 <code>NSKeyValueCodinng</code> 协议来实现的。当一个对象支持 <code>KVC</code> 时，它的属性可以通过字符串来进行访问。 <code>KVC</code> 对象提供了简单的接口，通过接口和字符串可以访问所有的属性。 <code>KVC</code> 是 Cocoa 中一些功能的基石，如 <code>KVO</code> ， <code>Cocoa</code> 绑定机制， Core Data 等。</p>
+<h3 id="用途"><a class="header" href="#用途">用途</a></h3>
+<p>只要继承自 <code>NSObject</code> 就可以使用 <code>KVC</code> ， <code>NSObject</code> 已默认支持 <code>NSKeyValueCoding</code> 协议和提供默认的必须方法， <code>KVC</code> 提供了以下特性：</p>
+<ul>
+<li>获取对象属性。协议定义了一些方法，比如说 <code>valueForKey:</code> 和 <code>setValue:forKey:</code> ，使用字符串作为参数，可以访问到对象的属性或者对属性进行设置；</li>
+<li>操作集合属性，跟其它属性一样，提供了对集合属性进行操作的方法，如果需要对集合进行修改， <code>KVC</code> 也提供了独特高效的方法；</li>
+<li>集合属性的操作符，当访问对象的集合属性时， <code>KVC</code> 为我们提供了一些操作符，通过这些操作符可以直接对集合获取某些属性，继续计算转换等；</li>
+<li>获取非对象属性， <code>KVC</code> 也支持获取非对象属性，包括纯量属性和结构体等，会自动将它们和对象之间进行转换，以便协议的方法进行调用；</li>
+</ul>
+<h3 id="适配-kvc"><a class="header" href="#适配-kvc">适配 KVC</a></h3>
+<p>如果想要你的对象支持 <code>KVC</code> ，那么你需要使得它们遵循 <code>NSKeyValueCoding</code> 协议。幸运的是， <code>NSObject</code> 已经为我们做好一切工作，因此如果你想要使用 <code>KVC</code> ，那么只需要继承自 <code>NSObject</code> 即可。为了保证 <code>KVC</code> 生效，你需要保证对象的存取器和变量名遵守相关的规则。</p>
+<h3 id="获取对象属性"><a class="header" href="#获取对象属性">获取对象属性</a></h3>
+<p>一个对象会在它的 <code>interface</code> 声明中定义属性，而属性则会分成以下几个分类：</p>
+<ul>
+<li>属性，系统提供的一些比较简单的值，如纯量属性，字符串， <code>Bool</code> 值等。</li>
+<li>一对一关系，对于拥有者来说它们是可变对象。一个对象的属性可以在对象本身不改变的情况下发生改变。举个例子，比如说一个银行客户的对象拥有一个 <code>Person</code> 的 <code>owner</code> 属性， <code>Person</code> 拥有一个地址属性。 <code>owner</code> 就可以在不改变银行客户的引用关系的前提下改变自己的地址属性；</li>
+<li>一对多，集合对象，比如说 <code>NSArray</code> 或者 <code>NSSet</code> ，也可以使用其它的一些自定义集合类型；</li>
+</ul>
+<pre><code class="language-objectivec">@interface BankAccount : NSObject
+ 
+@property (nonatomic) NSNumber* currentBalance;              // An attribute
+@property (nonatomic) Person* owner;                         // A to-one relation
+@property (nonatomic) NSArray&lt; Transaction* &gt;* transactions; // A to-many relation
+ 
+@end
+</code></pre>
+<p>为了保持封装性，一个对象会提供为属性提供存取方法作为它的接口。</p>
+<pre><code class="language-objectivec">[myAccount setCurrentBalance:@(100.0)];
+</code></pre>
+<p>这样很直接，但是会缺少灵活性。 <code>KVC</code> 为对象提供了一种通过字符串来获取属性的机制。</p>
+<h3 id="通过-keys-或者-keypaths-识别对象的属性"><a class="header" href="#通过-keys-或者-keypaths-识别对象的属性">通过 <code>Keys</code> 或者 <code>KeyPaths</code> 识别对象的属性</a></h3>
+<p><code>key</code> 是一个字符串，对应某个属性。通常情况下， <code>key</code> 会跟属性的名字一致。使用  <code>ASCII</code> 编码，不包含空格，以小写字母开头 （当然了，也会有例外，比如说 <code>URL</code> 属性）。</p>
+<p>对于 <code>BankAccount</code> 来说，我们可以通过以下属性来设置 <code>currentBalance</code> ：</p>
+<pre><code class="language-objectivec">[myAccount setValue:@(100.0) forKey:@&quot;currentBalance&quot;];
+</code></pre>
+<p>实际上，我们可以使用相同的方法，不同的 <code>key</code> 参数来获取 <code>myAccount</code> 对象的所有属性。</p>
+<p>我们可以通过 <code>.</code> 来使用 <code>KeyPath</code> 。假设 <code>Person</code> 和 <code>Address</code> 也符合 <code>KVC</code> 规范，我们可以通过 <code>owner.address.street</code> 的方式来访问账户所有者的地址中的街道信息。</p>
+<p><code>NSObject</code> 已经实现了 <code>NSKeyValueCoding</code> 协议所需要的方法，所以只需要继承自 <code>NSObject</code> ，就可以得到默认的实现和支持 <code>KVC</code> 。</p>
+<ul>
+<li><code>valueForKey:</code> ，返回一个以 <code>key</code> 参数来进行命名的属性。如果说属性无法被 <code>key</code> 通过定好的规则搜索到，对象会调用 <code>valueForUndefinedKey:</code> 方法，这个方法的默认实现是抛出一个 <code>NSUndefinedKeyException</code> 异常，但是子类可以通过重写这个方法来更优雅地处理这个场景；</li>
+<li><code>valueForKeyPath:</code> ，返回接收器中满足 <code>keyPath</code> 路径的值。所有在这个 <code>keyPath</code> 路径中的对象都需要满足特定的 <code>key</code> 对应的 <code>KVC</code> 机制，如果说 <code>valueForKey:</code> 找不到对应的存取方法，就会收到 <code>valueForUndefinedKey:</code> 消息；</li>
+<li><code>dictionaryWithValuesForKeys:</code> ，返回 <code>value</code> 和 <code>key</code> 组成的 <code>NSDictionary</code> ，它会为数组的每个 <code>key</code> 调用 <code>valueForKey:</code> 方法来获取对应的值。</li>
+</ul>
+<p>集合对象，比如说 <code>NSArray</code> ， <code>NSSet</code> 和 <code>NSDictionary</code> ，不可以包含 <code>nil</code> 。你可以使用 <code>NSNull</code> 对象来替换 <code>nil</code> ， <code>NSNull</code> 提供了一个单例来表示 <code>nil</code> 值。 <code>dictionaryWithValuesForKeys:</code> 和 <code>setValuesForKeysWithDictionary:</code> 会在 <code>NSNull</code> （ dictionary 参数）和 <code>nil</code> （属性）中自动切换。</p>
+<p><code>KeyPath</code> 也支持多对一关系，当 <code>key-path</code> 路径中有一对多的关系时，那么就会返回数组。比如说 <code>transactions.payee</code> 会以数组形式返回所有 <code>transactions</code> 中的 <code>payee</code> 对象。</p>
+<h3 id="通过-keys-设置属性值"><a class="header" href="#通过-keys-设置属性值">通过 <code>Keys</code> 设置属性值</a></h3>
+<p>和 <code>getter</code> 一样， <code>KVC</code> 也提供了一组通用的 <code>setter</code> 方法，由 <code>NSObject</code> 中 <code>NSKeyValueCoding</code> 协议的默认方法提供：</p>
+<ul>
+<li><code>setValue:forKey:</code> ，使用 <code>value</code> 来设置对象中对应 <code>key</code> 的属性。 <code>setValue:forKey:</code> 的默认实现会自动对 <code>NSNumber</code> 和 <code>NSValue</code> 对象进行解包，把它们转换为对应的纯量和结构体，然后设置到对应的属性中。如果对象中没有和 <code>key</code> 对应的 <code>setter</code> ，那么对象就会调用它自己的 <code>setValue:forUndefinedKey:</code> 方法，这个方法的默认实现会抛出一个 <code>NSUndefinedKeyException</code> 异常。子类可以通过重写这个方法来 实现自定义逻辑。</li>
+<li><code>setValue:forKeyPath:</code> ，使用 <code>value</code> 来设置对象中与 <code>keyPath</code> 路径相符的属性。当存在 <code>keyPath</code> 路径上不支持对应的 <code>key</code> 的 <code>KVC</code> 时，就会收到 <code>setValue:forUndefinedKey:</code> 消息。</li>
+<li><code>setValuesForKeysWithDictionary:</code> ，批量设置属性，使用 <code>dictionary</code> 中的 <code>key</code> 来指明属性。它通过调用 <code>setValue:forKey:</code> 方法来为每一对 <code>key-value</code> 进行设置，自动将 <code>NSNull</code> 对象替换为 <code>nil</code> 。</li>
+</ul>
+<p>在默认的实现中，当你尝试设置一个非对象的属性为 <code>nil</code> 时， <code>KVC</code> 会调用 <code>setNilValueForKey:</code> 方法。这个方法的默认实现会抛出一个 <code>NSInvalidArgumentException</code> ，对象可以通过重写这个行为来提供一个默认值或者标记值（ marker value ）。</p>
+<p><a href="https://kingcos.me/posts/2019/kvc_in_ios/">iOS 中的 KVC</a></p>
+<p>这篇文章有更详细的说明</p>
+<p><a href="https://juejin.im/post/6844903934662803464">iOS 开发：『Crash 防护系统』（三）KVC 防护</a></p>
+<p><code>KVC</code> 崩溃防护。上面提到 <code>KVC</code> 相关的崩溃，这篇文章中相关防护也是对这些方法进行 <code>hook</code> ，替换掉原来的实现。</p>
+<pre><code class="language-objectivec">/********************* NSObject+KVCDefender.h 文件 *********************/
+#import &lt;Foundation/Foundation.h&gt;
+
+@interface NSObject (KVCDefender)
+
+@end
+
+/********************* NSObject+KVCDefender.m 文件 *********************/
+#import &quot;NSObject+KVCDefender.h&quot;
+#import &quot;NSObject+MethodSwizzling.h&quot;
+
+@implementation NSObject (KVCDefender)
+
+// 不建议拦截 `setValue:forKey:` 方法
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+
+        // 拦截 `setValue:forKey:` 方法，替换自定义实现
+        [NSObject yscDefenderSwizzlingInstanceMethod:@selector(setValue:forKey:)
+                                       withMethod:@selector(ysc_setValue:forKey:)
+                                        withClass:[NSObject class]];
+
+    });
+}
+
+- (void)ysc_setValue:(id)value forKey:(NSString *)key {
+    if (key == nil) {
+        NSString *crashMessages = [NSString stringWithFormat:@&quot;crashMessages : [&lt;%@ %p&gt; setNilValueForKey]: could not set nil as the value for the key %@.&quot;,NSStringFromClass([self class]),self,key];
+        NSLog(@&quot;%@&quot;, crashMessages);
+        return;
+    }
+
+    [self ysc_setValue:value forKey:key];
+}
+
+- (void)setNilValueForKey:(NSString *)key {
+    NSString *crashMessages = [NSString stringWithFormat:@&quot;crashMessages : [&lt;%@ %p&gt; setNilValueForKey]: could not set nil as the value for the key %@.&quot;,NSStringFromClass([self class]),self,key];
+    NSLog(@&quot;%@&quot;, crashMessages);
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    NSString *crashMessages = [NSString stringWithFormat:@&quot;crashMessages : [&lt;%@ %p&gt; setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key: %@,value:%@'&quot;,NSStringFromClass([self class]),self,key,value];
+    NSLog(@&quot;%@&quot;, crashMessages);
+}
+
+- (nullable id)valueForUndefinedKey:(NSString *)key {
+    NSString *crashMessages = [NSString stringWithFormat:@&quot;crashMessages :[&lt;%@ %p&gt; valueForUndefinedKey:]: this class is not key value coding-compliant for the key: %@&quot;,NSStringFromClass([self class]),self,key];
+    NSLog(@&quot;%@&quot;, crashMessages);
+    
+    return self;
+}
+
+@end
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="autoreleasepool"><a class="header" href="#autoreleasepool">AutoreleasePool</a></h1>
+<h2 id="autoreleasepool-解析"><a class="header" href="#autoreleasepool-解析">AutoreleasePool 解析</a></h2>
+<p><a href="https://github.com/draveness/analyze/blob/master/contents/objc/%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F.md">draveness/analyze</a></p>
+<p><a href="http://blog.sunnyxx.com/2014/10/15/behind-autorelease/">黑幕背后的Autorelease</a></p>
+<p>整个 iOS 的入口都是放到 <code>@autoreleasepool</code> 的 <code>block</code> 中：</p>
+<pre><code class="language-objectivec">int main(int argc, char * argv[]) {
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+</code></pre>
+<p>然后编译器会将其改写成下面的代码：</p>
+<pre><code class="language-objectivec">void *context = objc_autoreleasePoolPush();
+// {}中的代码
+objc_autoreleasePoolPop(context);
+</code></pre>
+<p>我们也可以通过手动调用 <code>@autoreleasepool</code> 来创建自己的自动释放池。</p>
+<p>RunLoop 每次处理事件时也会创建和释放 <code>autoreleasepool</code> 。App 启动后，会在主线程的 RunLoop 里注册两个 <code>autoreleasepool</code> 相关的 Observer ，其回调的方法都是 <code>_wrapRunLoopWithAutoreleasePoolHandler()</code> 。</p>
+<ol>
+<li>第一个 Observer 监听的事件是 Entry ，即将进入 Loop ，会调用 <code>_objc_autoreleasePoolPush()</code> 来创建自动释放池，order 是 -2147483647 ，优先级最高，确保自动释放池的创建在其它回调之前；</li>
+<li>第二个 Observer 监听了 BeforeWaiting 事件，当处理完事件即将进入休眠时调用，会调用 <code>_objc_autoreleasePoolPop()</code> 来释放自动释放池，order 是 2147483647 ，优先级最低，确保自动释放池的释放在所有回调之后，同时也会调用 <code>_objc_autoreleasePoolPush()</code> 来创建一个新的自动释放池，以供下一次唤醒使用；</li>
+</ol>
+<pre><code class="language-objectivec">void *objc_autoreleasePoolPush(void) {
+    return AutoreleasePoolPage::push();
+}
+
+void objc_autoreleasePoolPop(void *ctxt) {
+    AutoreleasePoolPage::pop(ctxt);
+}
+</code></pre>
+<p><code>AutoreleasePage</code> 的定义如下：</p>
+<pre><code class="language-objectivec">class AutoreleasePoolPage {
+    magic_t const magic;
+    id *next;
+    pthread_t const thread;
+    AutoreleasePoolPage * const parent;
+    AutoreleasePoolPage *child;
+    uint32_t const depth;
+    uint32_t hiwat;
+};
+</code></pre>
+<p>自动释放池是由一系列的 <code>AutoreleasePoolPage</code> 组成，每个 <code>AutoreleasePoolPage</code> 的大小都是 4096 bit 大小。</p>
+<ul>
+<li>自动释放池是由 <code>AutoreleasePoolPage</code> 以双向链表的方式实现的</li>
+<li>当对象调用 <code>autorelease</code> 方法时，会将对象加入 <code>AutoreleasePoolPage</code> 的栈中</li>
+<li>调用 <code>AutoreleasePoolPage::pop</code> 方法会向栈中的对象发送 <code>release</code> 消息</li>
+</ul>
+<p>当使用容器的 <code>block</code> 枚举时，内部会自动添加一个 <code>AutoreleasePool</code> ：</p>
+<pre><code class="language-objectivec">[array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    // 这里被一个局部@autoreleasepool包围着
+}];
+</code></pre>
+<p>但是普通的 for 循环和 for in 循环中是没有的，所以当遍历中的 <code>autorelease</code> 变量所占用的内存较大时，需要手动添加 <code>@autoreleasepool</code> 。</p>
+<h2 id="autoreleasepool-uses-in-swift"><a class="header" href="#autoreleasepool-uses-in-swift"><code>@autoreleasepool</code> uses in Swift</a></h2>
+<p><a href="https://swiftrocks.com/autoreleasepool-in-2019-swift.html">@autoreleasepool uses in 2019 Swift</a></p>
+<p>本文先是简单的介绍了 <code>autoreleasepool</code> 在 Objective-C 中的使用场景——在循环体中大量创建 <code>autorelease</code> 对象。而 ARC 对 Swift 的优化在过去几年中进步了很多，根据作者的测试，似乎 ARC for Swift 从不调用 <code>autorelease</code> ，而是用多次调用 <code>release</code> 来替代。所以对于纯粹的 Swift 对象我们可能不再需要 <code>autoreleasepool</code> 。但在 Swift 开发中 <code>autoreleasepool</code> 仍然有用，因为在 UIKit 和 Foundation 中仍然存在调用 <code>autorelease</code> 的遗留 <code>Objective-C</code> 类。在 Swift 5.2 上测试确实如此。</p>
+<p><a href="https://swifter.tips/autoreleasepool/">Swifter</a></p>
+<p>其实对于这个特定的例子，我们并不一定需要加入自动释放。在 Swift 中更提倡的是用初始化方法而不是用像上面那样的类方法来生成对象，而且从 Swift 1.1 开始，因为加入了可以<a href="https://swifter.tips/init-nil/">返回 <code>nil</code> 的初始化方法</a>，像上面例子中那样的工厂方法都已经从 API 中删除了。今后我们都应该这样写：</p>
+<pre><code class="language-swift">let data = Data(contentsOfFile: path)
+</code></pre>
+<p>使用初始化方法的话，我们就不需要面临自动释放的问题了，每次在超过作用域后，自动内存管理都将为我们处理好内存相关的事情。</p>
 
                     </main>
 
