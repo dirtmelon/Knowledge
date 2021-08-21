@@ -13,3 +13,4 @@
     - [dealloc](./programming-languages/Objective-C/dealloc.md)
     - [Tagged Pointer](./programming-languages/Objective-C/Tagged-Pointer.md)
     - [weak](./programming-languages/Objective-C/weak.md)
+    - [Object](./programming-languages/Objective-C/Object.md)
