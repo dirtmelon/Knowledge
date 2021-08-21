@@ -7,6 +7,7 @@ title = "Knowledge"
 
 [output.html]
 default-theme = "light"
-preferred-dark-theme = "navy"
+preferred-dark-theme = "Ayu"
 git-repository-url = "https://github.com/dirtmelon/Knowledge"
 git-repository-icon = "fa-github"
+no-section-label = false
