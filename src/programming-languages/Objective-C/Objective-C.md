@@ -15,3 +15,12 @@
 - [Tagged Pointer](./Tagged-Pointer.md)
 - [weak](./weak.md)
 - [Object](./Object.md)
+
+## Tips
+- [如何获取某个类的全部子类](./getting-subclasses-of-objective-c-class.md)
+- [Objective-C 类属性](./objective-c-class-properties.md)
+
+## Books
+- [禅与 Objective-C 编程艺术](https://github.com/oa414/objc-zen-book-cn)
+- [Effective Objective-C 2.0](https://book.douban.com/subject/25829244/)
+- [Objective-C高级编程](https://book.douban.com/subject/24720270/)

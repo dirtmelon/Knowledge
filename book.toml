@@ -1,7 +1,6 @@
 [book]
 authors = ["dirtmelon"]
 language = "zh-CN"
-multilingual = false
 src = "src"
 title = "Knowledge"
 
@@ -10,4 +9,8 @@ default-theme = "light"
 preferred-dark-theme = "Ayu"
 git-repository-url = "https://github.com/dirtmelon/Knowledge"
 git-repository-icon = "fa-github"
-no-section-label = false
+no-section-label = true
+
+[output.html.fold]
+enable = true
+level = 0
