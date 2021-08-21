@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tips - Knowledge</title>
+        <title>Objective-C 类属性 - Knowledge</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html">编程语言</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../programming-languages/Swift/Swift.html">Swift</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html" class="active">Objective-C</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../programming-languages/Objective-C/Objective-C.html" class="active">Runtime</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../programming-languages/Objective-C/associated-objects.html">Associated Objects</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/initialize.html">initialize</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/load.html">load</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Block.html">Block</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Category.html">Category</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html">Message Sending And Forwarding</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/KVO.html">KVO</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/KVC.html">KVC</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/AutoreleasePool.html">AutoreleasePool</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/dealloc.html">dealloc</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Tagged-Pointer.html">Tagged Pointer</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/weak.html">weak</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Object.html">Object</a></li></ol></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html" class="active">Tips</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../programming-languages/Objective-C/getting-subclasses-of-objective-c-class.html">如何获取某个类的全部子类</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/objective-c-class-properties.html">Objective-C 类属性</a></li></ol></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html">编程语言</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../programming-languages/Swift/Swift.html">Swift</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Objective-C</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../programming-languages/Objective-C/Objective-C.html">Runtime</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../programming-languages/Objective-C/associated-objects.html">Associated Objects</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/initialize.html">initialize</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/load.html">load</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Block.html">Block</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Category.html">Category</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html">Message Sending And Forwarding</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/KVO.html">KVO</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/KVC.html">KVC</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/AutoreleasePool.html">AutoreleasePool</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/dealloc.html">dealloc</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Tagged-Pointer.html">Tagged Pointer</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/weak.html">weak</a></li><li class="chapter-item "><a href="../../programming-languages/Objective-C/Object.html">Object</a></li></ol></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Tips</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../programming-languages/Objective-C/getting-subclasses-of-objective-c-class.html">如何获取某个类的全部子类</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/objective-c-class-properties.html" class="active">Objective-C 类属性</a></li></ol></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -137,45 +137,87 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="objective-c"><a class="header" href="#objective-c">Objective-C</a></h1>
-<h2 id="runtime"><a class="header" href="#runtime">Runtime</a></h2>
-<p><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008048-CH1-SW1">Runtime 官方文档</a></p>
-<ul>
-<li><a href="./associated-objects.html">Associated Objects</a></li>
-<li><a href="./initialize.html">initialize</a></li>
-<li><a href="./load.html">load</a></li>
-<li><a href="./Block.html">Block</a></li>
-<li><a href="./Category.html">Category</a></li>
-<li><a href="./Message-Sending-And-Forwarding.html">Message Sending And Forwarding</a></li>
-<li><a href="./KVO.html">KVO</a></li>
-<li><a href="./KVC.html">KVC</a></li>
-<li><a href="./AutoreleasePool.html">AutoreleasePool</a></li>
-<li><a href="./dealloc.html">dealloc</a></li>
-<li><a href="./Tagged-Pointer.html">Tagged Pointer</a></li>
-<li><a href="./weak.html">weak</a></li>
-<li><a href="./Object.html">Object</a></li>
-</ul>
-<h2 id="tips"><a class="header" href="#tips">Tips</a></h2>
-<ul>
-<li><a href="./getting-subclasses-of-objective-c-class.html">如何获取某个类的全部子类</a></li>
-<li><a href="./objective-c-class-properties.html">Objective-C 类属性</a></li>
-</ul>
-<h2 id="books"><a class="header" href="#books">Books</a></h2>
-<ul>
-<li><a href="https://github.com/oa414/objc-zen-book-cn">禅与 Objective-C 编程艺术</a></li>
-<li><a href="https://book.douban.com/subject/25829244/">Effective Objective-C 2.0</a></li>
-<li><a href="https://book.douban.com/subject/24720270/">Objective-C高级编程</a></li>
-</ul>
+                        <h1 id="objective-c-类属性"><a class="header" href="#objective-c-类属性">Objective-C 类属性</a></h1>
+<p><a href="https://useyourloaf.com/blog/objective-c-class-properties/">Objective-C Class Properties</a></p>
+<p>虽然说 Swift 出来后 Objective-C 改进都比较少了，基本上都是为了更好地和 Swift 进行交互，但是对于需要编写 Objective-C 的程序员来说依旧是喜闻乐见的。</p>
+<p>Xcode 8 release notes ：</p>
+<blockquote>
+<p>Objective-C now supports class properties, which interoperate with Swift type properties. They are declared as: @property (class) NSString *someStringProperty;. They are never synthesized. (23891898)</p>
+</blockquote>
+<p>通过 <code>class</code> 声明属性：</p>
+<pre><code class="language-objectivec">@interface User : NSObject
+@property (class, nonatomic, assign, readonly) NSInteger userCount;
+@property (class, nonatomic, copy) NSUUID *identifier;
++ (void)resetIdentifier;
+@end
+</code></pre>
+<p>上述代码声明了两个类属性，可读的 <code>userCount</code> 和可写的 <code>identifier</code> 。由于 Objective-C 不像 Swift 那样支持 <code>class</code> 层级的变量存储，所以需要声明对应的静态变量：</p>
+<pre><code class="language-objectivec">@implementation User
+static NSUUID *_identifier = nil;
+static NSInteger _userCount = 0;
+</code></pre>
+<p>对应 Objective-C 的 <code>class</code> 属性，Xcode 不会自动生成 <code>setter</code> 和 <code>getter</code> 方法，所以需要手动编译对应的方法。由于 <code>userCount</code> 只是可读的，所以只需要 <code>getter</code> 方法：</p>
+<pre><code class="language-objectivec">+ (NSInteger)userCount {
+  return _userCount;
+}
+</code></pre>
+<p>而对于 <code>identifier</code> 则需要补充 <code>setter</code> 和 <code>getter</code> 方法，同时需要支持 <code>copy</code> 语义：</p>
+<pre><code class="language-objectivec">+ (NSUUID *)identifier {
+  if (_identifier == nil) {
+    _identifier = [[NSUUID alloc] init];
+  }
+  return _identifier;
+}
+
++ (void)setIdentifier:(NSUUID *)newIdentifier {
+  if (newIdentifier != _identifier) {
+    _identifier = [newIdentifier copy];
+  }
+}
+</code></pre>
+<p>也可以通过初始化方法来更新 <code>userCount</code> 属性：</p>
+<pre><code class="language-objectivec">- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    _userCount += 1;
+  }
+  return self;
+}
+</code></pre>
+<p><code>resetIdentifier</code> 可用于创建一个新的 <code>identifier</code> ：</p>
+<pre><code class="language-objectivec">+ (void)resetIdentifier {
+  _identifier = [[NSUUID alloc] init];
+}
+
+@end
+</code></pre>
+<p>可以直接通过类名进行访问：</p>
+<pre><code class="language-objectivec">User.userCount;
+User.identifier;
+for (int i = 0; i &lt; 3; i++) {
+    self.user = [[User alloc] init];
+    NSLog(@&quot;User count: %ld&quot;,(long)User.userCount);
+    NSLog(@&quot;Identifier = %@&quot;,User.identifier);
+}
+
+[User resetIdentifier];    
+NSLog(@&quot;Identifier = %@&quot;,User.identifier);
+</code></pre>
+<p>生成对应的 Swift 代码如下：</p>
+<pre><code class="language-swift">public class User : NSObject { 
+  public class var userCount: Int { get }
+  public class var identifier: UUID!   
+  public class func resetIdentifier()
+}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../programming-languages/Swift/Swift.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../programming-languages/Objective-C/getting-subclasses-of-objective-c-class.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a rel="next" href="../../programming-languages/Objective-C/Objective-C.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -183,11 +225,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../programming-languages/Swift/Swift.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../programming-languages/Objective-C/getting-subclasses-of-objective-c-class.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="../../programming-languages/Objective-C/Objective-C.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
