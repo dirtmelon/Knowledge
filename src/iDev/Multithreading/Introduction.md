@@ -90,7 +90,7 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 
 ## 相关分类
 
-[NSOperation](https://www.notion.so/NSOperation-a297a3f0bfef484a8ee387589b040211) 
+[NSOperation](./NSOperation.md) 
 
 [Grand Central Dispatch](https://www.notion.so/Grand-Central-Dispatch-a0f552b226b44f3fb8f6cdbc7a8d73fe) 
 
@@ -110,7 +110,7 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 
 [ObjC 中国 - 测试并发程序](https://objccn.io/issue-2-5/)
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4d6f5294-ed75-496b-a2c1-98979d749294/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4d6f5294-ed75-496b-a2c1-98979d749294/Untitled.png)
+![](media/16296020555796.jpg)
 
 ### Sindrilin 关于多线程的文章
 
