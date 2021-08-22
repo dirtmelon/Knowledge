@@ -2644,7 +2644,7 @@ NSLog(@&quot;Identifier = %@&quot;,User.identifier);
 <li>尽量使用系统框架。实现功能时优先考虑现有的系统 API 是否可以满足需求。</li>
 </ul>
 <h2 id="相关分类"><a class="header" href="#相关分类">相关分类</a></h2>
-<p><a href="https://www.notion.so/NSOperation-a297a3f0bfef484a8ee387589b040211">NSOperation</a> </p>
+<p><a href="iDev/Multithreading/./NSOperation.html">NSOperation</a> </p>
 <p><a href="https://www.notion.so/Grand-Central-Dispatch-a0f552b226b44f3fb8f6cdbc7a8d73fe">Grand Central Dispatch</a> </p>
 <p><a href="https://www.notion.so/pthread-NSThread-c2839897019440aba14acdae51166ce5">pthread 和 NSThread</a> </p>
 <p><a href="https://www.notion.so/Lock-794065e788bb4741a870c4434323de5b">Lock</a> </p>
@@ -2654,7 +2654,7 @@ NSLog(@&quot;Identifier = %@&quot;,User.identifier);
 <p><a href="https://objccn.io/issue-2-3/">ObjC 中国 - 底层并发 API</a></p>
 <p><a href="https://objccn.io/issue-2-4/">ObjC 中国 - 线程安全类的设计</a></p>
 <p><a href="https://objccn.io/issue-2-5/">ObjC 中国 - 测试并发程序</a></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4d6f5294-ed75-496b-a2c1-98979d749294/Untitled.png" alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4d6f5294-ed75-496b-a2c1-98979d749294/Untitled.png" /></p>
+<p><img src="iDev/Multithreading/media/16296020555796.jpg" alt="" /></p>
 <h3 id="sindrilin-关于多线程的文章"><a class="header" href="#sindrilin-关于多线程的文章">Sindrilin 关于多线程的文章</a></h3>
 <p><a href="http://sindrilin.com/2017/09/09/thread_safe.html"></a></p>
 <p>如何保证线程安全，从原子性到线程锁（互斥，自旋，信号量），也说到了 <code>barrier</code> 操作。</p>
@@ -2722,7 +2722,7 @@ dispatchPrecondition(condition: .onQueue(queue))
 <p><a href="https://developer.apple.com/documentation/foundation/blockoperation">BlockOperation</a></p>
 <p>官方文档写的非常详细， <code>Operation</code> 和 <code>OperationQueue</code> 都写到，强烈推荐。</p>
 <ul>
-<li><code>Operation</code> 支持异步和同步，可以通过 <code>isAsynchronous</code> 来判断是否异步，如果添加到 <code>OperationQueue</code> 中， <code>OperationQueue</code> 会忽略掉这个属性，且默认为异步，可以通过设置 <code>OperationQueue</code> 的 <code>maxConcurrentOperationCount</code> 为 1 来强制异步。</li>
+<li><code>Operation</code> 支持异步和同步，可以通过 <code>isAsynchronous</code> 来判断是否异步，如果添加到 <code>OperationQueue</code> 中， <code>OperationQueue</code> 会忽略掉这个属性，且默认为异步，可以通过设置 <code>OperationQueue</code> 的 <code>maxConcurrentOperationCount</code> 为 1 来强制串行。</li>
 <li>自定义 <code>Operation</code> 时记得设置相关状态和 <code>KVO</code> 配置，如果 A 操作依赖 B 操作，即使 B 操作取消了， A 操作也会执行，A 操作是否 Ready 是通过 B 操作的 <code>isFinished</code> 来判断的，所以可能需要加入额外的判断，判断 B 操作是否成功执行。</li>
 <li><code>Operation</code> 的 <code>start()</code> 和 <code>main()</code> 的区别。</li>
 <li>优先级配置： <code>Operation.QueuePriority</code> ， <code>Operation</code> 不是严格按照优先级高低来执行，如果高优先级的 <code>Operation</code> 还没准备好， <code>OperationQueue</code> 就会选择去执行低优先级的 <code>Opeartion</code> 。如果对顺序有严格要求的话还是要通过依赖来进行配置。</li>
@@ -2742,11 +2742,22 @@ dispatchPrecondition(condition: .onQueue(queue))
 <ol>
 <li>使用子类 <code>NSInvocationOperation</code> ；</li>
 <li>使用子类 <code>NSBlockOperation</code> ；</li>
-<li></li>
+<li>使用自定义子类。</li>
 </ol>
-<pre><code></code></pre>
-<p><code>NSHipster</code> 出品的简短介绍。</p>
+<p><code>NSOperationQueue</code> 支持以下两种队列：</p>
+<ol>
+<li>主队列， <code>NSOperationQueue *queue = [NSOperationQueue mainQueue]</code> ；</li>
+<li>自定义队列，<code>NSOperationQueue *queue = [[NSOperationQueue alloc] init]</code> 。</li>
+</ol>
+<p>进阶：</p>
+<ol>
+<li>通过 <code>maxConcurrentOperationCount</code> 可以在串行和并发间切换；</li>
+<li>通过 <code>-addDependency:</code> 和 <code>- removeDependency:</code> 可以进行依赖关系管理；</li>
+<li>通过 <code>queuePriority</code> 进行优先级设置，默认为 <code>NSOperationQueuePriorityNormal</code> ，优先级不能取代依赖关系，执行任务的顺序以依赖关系为优先。</li>
+</ol>
+<h2 id="nsoperation-1"><a class="header" href="#nsoperation-1">NSOperation</a></h2>
 <p><a href="https://nshipster.com/nsoperation/">NSOperation</a></p>
+<p>NSHipster 出品的简短介绍。</p>
 
                     </main>
 
