@@ -24,6 +24,7 @@
 - [iDev](./iDev/iDev.md)
   - [多线程](./iDev/Multithreading/Introduction.md)
     - [NSOperation](./iDev/Multithreading/NSOperation.md)
+    - [Grand Central Dispatch](./iDev/Multithreading/Grand-Central-Dispatch.md)
 
 - [阅读](./books/books.md)
   - [未来简史](./books/Homo-Deus-A-Brief-History-of-Tomorrow.md)

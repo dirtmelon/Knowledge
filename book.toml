@@ -12,5 +12,4 @@ git-repository-icon = "fa-github"
 no-section-label = true
 
 [output.html.fold]
-enable = true
 level = 0

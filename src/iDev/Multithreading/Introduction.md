@@ -92,7 +92,7 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 
 [NSOperation](./NSOperation.md) 
 
-[Grand Central Dispatch](https://www.notion.so/Grand-Central-Dispatch-a0f552b226b44f3fb8f6cdbc7a8d73fe) 
+[Grand Central Dispatch](./Grand-Central-Dispatch.md) 
 
 [pthread 和 NSThread](https://www.notion.so/pthread-NSThread-c2839897019440aba14acdae51166ce5) 
 
@@ -114,11 +114,11 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 
 ### Sindrilin 关于多线程的文章
 
-[](http://sindrilin.com/2017/09/09/thread_safe.html)
+[thread_safe](http://sindrilin.com/2017/09/09/thread_safe.html)
 
 如何保证线程安全，从原子性到线程锁（互斥，自旋，信号量），也说到了 `barrier` 操作。
 
-[](http://sindrilin.com/2017/09/27/producers_consumers.html)
+[producers_consumers](http://sindrilin.com/2017/09/27/producers_consumers.html)
 
 ### Swift 专题
 
