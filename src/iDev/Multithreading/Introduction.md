@@ -120,6 +120,36 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 
 [producers_consumers](http://sindrilin.com/2017/09/27/producers_consumers.html)
 
+### NetNewsWire 如何处理多线程
+
+[How NetNewsWire Handles Threading](https://inessential.com/2021/03/20/how_netnewswire_handles_threading)
+
+- 大部分代码都在主线程运行；
+- 通知和 `callback` 也都是在主线程处理；
+- 对于耗时操作，使用纯函数和串行队列，通过 `callback` 返回处理结果；
+- 数据库的存取也使用串行队列，外部无法获取内部实现，可获取到的数据都是通过 `callback` 和异步派发到主线程进行；
+- 多使用 `assert(Thread.isMainThread)` 和 `precondition(Thread.isMainThread)` 来判断是否为主线程。
+
+NetNewsWire 在响应和运行上都非常快速，同时也非常稳定。上述策略的好处是开发者通过查看代码就可以了解当前代码是在哪个线程上运行的，几乎全部代码都是在主线程运行。如果你在处理 RSS 解析，数据库或者其它类似的耗时操作，那么就是在串行队列中进行。即使是接入 Combine ， SwiftUI 和 Concurrency ，也可以继续使用这套策略。虽然线程机制的内部有调整，但是对外提供的逻辑是一致的。
+
+作者认为高级开发者应该尽可能地减少多线程的部分，保持应用简单。因为多线程的代码很难去维护和阅读，虽然你可能创造出一套机制来正确使用多线程，但是团队互相理解代码也是有成本的，即使是独立开发者，你和六个月之后的你也是一个团队。虽然有可能阻塞主线程，但是解决一个主线程阻塞的 BUG 比解决一个奇怪的，不稳定复现的多线程的 BUG 或者崩溃要好多了。
+
+对于主线程的阻塞，可以使用 Time Profiler 来排查，一般有以下三种解决方案：
+
+1. 通过数据结构和算法来进行优化；
+2. 或许是一些不必要的操作；
+3. 最后的解决方案：迁移到后台串行队列中进行。
+
+最后的实操建议：
+
+- 明确标注哪些应该在主线中运行，在代码中通过 `assert(Thread.isMainThread)` 进行判断；
+- 开启 Xcode 的 Main Thread Checker ；
+- 确保你 App 上所有的 `Notification` 都是在主线程进行，在回调中添加 `assert(Thread.isMainThread)` 。
+
+更激进点可以使用 `precondition(Thread.isMainThread)` 代替 `assert(Thread.isMainThread)` ，前者在生产环境下也会崩溃，确保你的线程模型正常运行。
+
+对于 GCD 或者 `NSOperation` 的 API 的错误调用，改动成本不大，而对于整个 App 的线程模型来说，在工程创建之初就会确定下来，或者怎么高兴怎么来，又或者根据不同的业务分配不同的队列，在发展到一定阶段后再来修改避免不了会有一定的成本。我的观点和作者一致：尽量避免多线程。
+
 ### Swift 专题
 
 [Swift 中的并发编程(第一部分：现状）](https://swift.gg/2017/09/04/all-about-concurrency-in-swift-1-the-present/)
