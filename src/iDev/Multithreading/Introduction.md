@@ -94,7 +94,7 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 
 [Grand Central Dispatch](./Grand-Central-Dispatch.md) 
 
-[pthread 和 NSThread](https://www.notion.so/pthread-NSThread-c2839897019440aba14acdae51166ce5) 
+[pthread 和 NSThread](./thread.md) 
 
 [Lock](https://www.notion.so/Lock-794065e788bb4741a870c4434323de5b) 
 
