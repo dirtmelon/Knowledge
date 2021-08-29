@@ -1,0 +1,551 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Locks - Knowledge</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../About.html">关于</a></li><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html">编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Swift/Swift.html">Swift</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Runtime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html">Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html">initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html">load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html">Block</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Category.html">Category</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html">Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVO.html">KVO</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVC.html">KVC</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/AutoreleasePool.html">AutoreleasePool</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/dealloc.html">dealloc</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Tagged-Pointer.html">Tagged Pointer</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/weak.html">weak</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Object.html">Object</a></li></ol></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Tips</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/getting-subclasses-of-objective-c-class.html">如何获取某个类的全部子类</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/objective-c-class-properties.html">Objective-C 类属性</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../iDev/iDev.html">iDev</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/Multithreading/Introduction.html">多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/Multithreading/NSOperation.html">NSOperation</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/Grand-Central-Dispatch.html">Grand Central Dispatch</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/thread.html">pthread 和 NSThread</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/locks.html" class="active">Locks</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../books/books.html">阅读</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../books/Homo-Deus-A-Brief-History-of-Tomorrow.html">未来简史</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Knowledge</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="锁"><a class="header" href="#锁">锁</a></h1>
+<h2 id="自旋锁"><a class="header" href="#自旋锁">自旋锁</a></h2>
+<p>当线程等待自旋锁时不会进入睡眠，自旋锁由于在获取锁时，线程会一直处于忙等状态，有可能会造成任务的优先级反转。</p>
+<h3 id="osspinlock"><a class="header" href="#osspinlock">OSSpinLock</a></h3>
+<blockquote>
+<p>新版 iOS 中，系统维护了 5 个不同的线程优先级/QoS: background，utility，default，user-initiated，user-interactive。高优先级线程始终会在低优先级线程前执行，一个线程不会受到比它更低优先级线程的干扰。这种线程调度算法会产生潜在的优先级反转问题，从而破坏了 spin lock。</p>
+</blockquote>
+<blockquote>
+<p>具体来说，如果一个低优先级的线程获得锁并访问共享资源，这时一个高优先级的线程也尝试获得这个锁，它会处于 spin lock 的忙等状态从而占用大量 CPU。此时低优先级线程无法与高优先级线程争夺 CPU 时间，从而导致任务迟迟完不成、无法释放 lock。这并不只是理论上的问题，libobjc 已经遇到了很多次这个问题了，于是苹果的工程师停用了 OSSpinLock。</p>
+</blockquote>
+<p><a href="https://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/">不再安全的 OSSpinLock</a></p>
+<h2 id="互斥锁"><a class="header" href="#互斥锁">互斥锁</a></h2>
+<p>当等待互斥锁时，线程会进入睡眠，锁释放时就会唤醒线程。互斥锁又分为递归锁和非递归锁：</p>
+<ul>
+<li>递归锁：可重入，同一个线程在锁释放前可再次获取锁，可以递归调用；</li>
+<li>非递归锁：不可重入，必须等锁释放后才能再次获取。</li>
+</ul>
+<h3 id="pthread_mutex"><a class="header" href="#pthread_mutex">pthread_mutex</a></h3>
+<p><code>pthread_mutex</code> 是互斥锁，对性能要求比较高的场景可以使用， API 比较简单：</p>
+<pre><code class="language-objectivec">// 导入头文件
+#import &lt;pthread.h&gt;
+// 全局声明互斥锁
+pthread_mutex_t _lock;
+// 初始化互斥锁
+pthread_mutex_init(&amp;_lock, NULL);
+// 加锁
+pthread_mutex_lock(&amp;_lock);
+// 这里做需要线程安全操作
+
+// 解锁
+pthread_mutex_unlock(&amp;_lock);
+// 释放锁
+pthread_mutex_destroy(&amp;_lock);
+
+</code></pre>
+<h3 id="synchronized"><a class="header" href="#synchronized">@synchronized</a></h3>
+<p><a href="https://www.mikeash.com/pyblog/friday-qa-2015-02-20-lets-build-synchronized.html">mikeash.com: Friday Q&amp;A 2015-02-20: Let's Build @synchronized</a></p>
+<p><a href="http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/">关于 @synchronized，这儿比你想知道的还要多</a></p>
+<p>性能比较低，因为有容错处理，和使用全局表。</p>
+<ol>
+<li>不能使用<code>非OC对象</code>作为加锁条件——<code>id2data</code>中接收参数为id类型</li>
+<li>多次锁同一个对象会有什么后果吗——会从高速缓存中拿到data，所以只会锁一次对象</li>
+<li>都说@synchronized性能低——是因为在底层<code>增删改查</code>消耗了大量性能</li>
+<li>加锁对象不能为nil，否则加锁无效，不能保证线程安全</li>
+</ol>
+<h3 id="nslock"><a class="header" href="#nslock">NSLock</a></h3>
+<p><code>NSLock</code> 对 <code>pthread_mutex</code> 进行了一层封装，提供了 <code>Objective-C</code> 层级的 API ：</p>
+<pre><code class="language-objectivec">NSLock *lock = [[NSLock alloc] init]
+[lock lock];
+[lock unlock];
+</code></pre>
+<p>从 Swift 开源版的 Foundation 中可以看到 NSLock 是基于 <code>pthread_mutex</code> 的封装：</p>
+<p><a href="https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSLock.swift">NSLock.swift</a></p>
+<p>删除其它平台的代码后大概实现如下：</p>
+<pre><code class="language-swift">open class NSLock: NSObject, NSLocking {
+		public override init() {
+        pthread_mutex_init(mutex, nil)
+        pthread_cond_init(timeoutCond, nil)
+        pthread_mutex_init(timeoutMutex, nil)
+    }
+
+		open func lock() {
+        pthread_mutex_lock(mutex)
+    }
+
+    open func unlock() {
+        pthread_mutex_unlock(mutex)
+        // Wakeup any threads waiting in lock(before:)
+        pthread_mutex_lock(timeoutMutex)
+        pthread_cond_broadcast(timeoutCond)
+        pthread_mutex_unlock(timeoutMutex)
+    }
+}
+extension NSLock {
+    // 同步执行 closure 操作
+    internal func synchronized&lt;T&gt;(_ closure: () -&gt; T) -&gt; T {
+        self.lock()
+        defer { self.unlock() }
+        return closure()
+    }
+}
+
+</code></pre>
+<p>而 <code>NSLock</code> 非递归锁，在递归调用时会堵塞。如果需要递归调用可以通过 <code>NSRecursiveLock</code> 加锁， <code>NSRecursiveLock</code> 实现与 <code>NSLock</code> 类似，只是在初始化时设置 <code>mutex</code> 为 <code>RECURSIVE</code> 类型：</p>
+<pre><code class="language-swift">open class NSRecursiveLock: NSObject, NSLocking {
+    internal var mutex = _RecursiveMutexPointer.allocate(capacity: 1)
+    private var timeoutCond = _ConditionVariablePointer.allocate(capacity: 1)
+    private var timeoutMutex = _MutexPointer.allocate(capacity: 1)
+
+    public override init() {
+        super.init()
+        var attrib = pthread_mutexattr_t()
+        withUnsafeMutablePointer(to: &amp;attrib) { attrs in
+            pthread_mutexattr_init(attrs)
+						// 设置为 RECURSIVE
+            pthread_mutexattr_settype(attrs, Int32(PTHREAD_MUTEX_RECURSIVE))
+            pthread_mutex_init(mutex, attrs)
+        }
+        pthread_cond_init(timeoutCond, nil)
+        pthread_mutex_init(timeoutMutex, nil)
+    }
+
+    open func lock() {
+        pthread_mutex_lock(mutex)
+    }
+
+    open func unlock() {
+        pthread_mutex_unlock(mutex)
+        // Wakeup any threads waiting in lock(before:)
+        pthread_mutex_lock(timeoutMutex)
+        pthread_cond_broadcast(timeoutCond)
+        pthread_mutex_unlock(timeoutMutex)
+    }
+}
+
+</code></pre>
+<p>而递归锁同时对同一个对象使用锁时也会产生死锁：</p>
+<h3 id="nscondition"><a class="header" href="#nscondition">NSCondition</a></h3>
+<p><a href="https://developer.apple.com/documentation/foundation/nscondition">NSCondition</a></p>
+<p><code>NSCondition</code> 对象在给定线程中充当锁和检查点 （ checkpoint ）。锁在检测条件和执行由条件触发的任务时保护你的代码。检查点则要求线程在执行其任务之前条件为 <code>true</code> 。当条件为 <code>false</code> 时，线程会阻塞，直到另一个线程向条件对象发出信号。伪代码：</p>
+<pre><code>lock the condition
+while (!(boolean_predicate)) {
+    wait on condition
+}
+do protected work
+(optionally, signal or broadcast the condition again or change a predicate value)
+unlock the condition
+
+</code></pre>
+<p>与信号量类似， Swift 源码中也有 <code>NSCondition</code> 的实现：</p>
+<pre><code class="language-swift">open class NSCondition: NSObject, NSLocking {
+    internal var mutex = _MutexPointer.allocate(capacity: 1)
+    internal var cond = _ConditionVariablePointer.allocate(capacity: 1)
+
+    public override init() {
+        pthread_mutex_init(mutex, nil)
+        pthread_cond_init(cond, nil)
+    }
+
+    deinit {
+        pthread_mutex_destroy(mutex)
+        pthread_cond_destroy(cond)
+        mutex.deinitialize(count: 1)
+        cond.deinitialize(count: 1)
+        mutex.deallocate()
+        cond.deallocate()
+    }
+
+    open func lock() {
+        pthread_mutex_lock(mutex)
+    }
+
+    open func unlock() {
+        pthread_mutex_unlock(mutex)
+    }
+
+    open func wait() {
+        pthread_cond_wait(cond, mutex)
+    }
+
+    open func wait(until limit: Date) -&gt; Bool {
+        guard var timeout = timeSpecFrom(date: limit) else {
+            return false
+        }
+        return pthread_cond_timedwait(cond, mutex, &amp;timeout) == 0
+    }
+
+    open func signal() {
+        pthread_cond_signal(cond)
+    }
+
+    open func broadcast() {
+        pthread_cond_broadcast(cond)
+    }
+
+    open var name: String?
+}
+
+</code></pre>
+<p>用法如下：</p>
+<pre><code class="language-swift">let cond = NSCondition()
+var available = false
+var SharedString = &quot;&quot;
+
+class WriterThread : Thread {
+
+    override func main(){
+        for _ in 0..&lt;5 {
+            cond.lock()
+            SharedString = &quot;😅&quot;
+            available = true
+            cond.signal() // 通知并且唤醒等待的线程
+            cond.unlock()
+        }
+    }
+}
+
+class PrinterThread : Thread {
+
+    override func main(){
+        for _ in 0..&lt;5 { // 循环 5 次
+            cond.lock()
+            while(!available){   // 通过伪信号进行保护
+                cond.wait()
+            }
+            print(SharedString)
+            SharedString = &quot;&quot;
+            available = false
+            cond.unlock()
+        }
+    }
+}
+
+let writet = WriterThread()
+let printt = PrinterThread()
+printt.start()
+writet.start()
+
+</code></pre>
+<h3 id="nsconditionlock"><a class="header" href="#nsconditionlock">NSConditionLock</a></h3>
+<p><a href="https://developer.apple.com/documentation/foundation/nsconditionlock">NSConditionLock</a></p>
+<p><code>NSConditionLock</code> 与 <code>NSCondition</code> 不同，自带支持复杂的条件锁，比如说：消费者-提供者场景。 <code>lock(whenCondition:)</code> 在条件成立时可以获取到锁，或者等待另外一个线程调用 <code>unlock(withCondition:)</code> 释放锁和设置对应的值。</p>
+<pre><code class="language-swift">let NO_DATA = 1
+let GOT_DATA = 2
+let clock = NSConditionLock(condition: NO_DATA)
+var SharedInt = 0
+
+class ProducerThread : Thread {
+
+    override func main(){
+        for i in 0..&lt;5 {
+            clock.lock(whenCondition: NO_DATA) //当条件为 NO_DATA 获取该锁
+              // 如果不想等待消费者，直接调用 clock.lock() 即可
+            SharedInt = i
+            clock.unlock(withCondition: GOT_DATA) //解锁并设置条件为 GOT_DATA
+        }
+    }
+}
+
+class ConsumerThread : Thread {
+
+    override func main(){
+        for i in 0..&lt;5 {
+            clock.lock(whenCondition: GOT_DATA) // 当条件为 GOT_DATA 获取该锁
+            print(i)
+            clock.unlock(withCondition: NO_DATA) //解锁并设置条件为 NO_DATA
+        }
+    }
+}
+
+let pt = ProducerThread()
+let ct = ConsumerThread()
+ct.start()
+pt.start()
+
+</code></pre>
+<h3 id="dispatch_semaphore"><a class="header" href="#dispatch_semaphore">dispatch_semaphore</a></h3>
+<p><a href="https://developer.apple.com/documentation/dispatch/dispatchsemaphore">dispatch_semaphore</a></p>
+<p><code>distpatch_semaphore</code> 在 Swift 上已替换为 <code>DispatchSemaphore</code> ，相应的 API 也有所改变。</p>
+<p>信号量，可以作为同步锁使用，也可以控制 GCD 的最大并发数：</p>
+<pre><code>let semaphore = DispatchSemaphore(value: 0)
+semaphore.signal()
+semaphore.wait()
+
+</code></pre>
+<h3 id="os_unfair_lock"><a class="header" href="#os_unfair_lock">os_unfair_lock</a></h3>
+<p><code>os_unfair_lock</code> 是苹果在 iOS 10/macOS 10.12 上提供的，用于替换 <code>OSSpinLock</code> 。</p>
+<p><a href="https://developer.apple.com/documentation/os/1646466-os_unfair_lock_lock">os_unfair_lock_lock</a></p>
+<h2 id="各个锁在-swift-上的性能测试"><a class="header" href="#各个锁在-swift-上的性能测试">各个锁在 Swift 上的性能测试</a></h2>
+<p><a href="https://gist.github.com/steipete/36350a8a60693d440954b95ea6cbbafc">Updated for Xcode 8, Swift 3; added os_unfair_lock</a></p>
+<p>这里有个锁的性能测试，如果只需要支持到 iOS10 ，那么使用 <code>os_unfair_lock_s</code> 是最好的选择， <code>OSSpinLock</code> 性能最好，但是有优先级反转的问题：</p>
+<p>如果需要支持 iOS10 以下那么信号量或者 <code>pthread_mutex</code> 在性能上表现最好。如果需要支持 <code>Linux</code> 平台可以选择 <code>pthread_mutex</code> 。</p>
+<p>其余的 <code>NSLock</code> ， <code>DispatchQueue</code> 和 <code>@Syncronized</code> 性能都较差，因为苹果在里面做了不少容错处理和进行一些全局记录（ <code>@Syncronized</code> ）</p>
+<h2 id="locks-thread-safety-and-swift"><a class="header" href="#locks-thread-safety-and-swift">Locks, Thread Safety, and Swift</a></h2>
+<p><a href="https://www.mikeash.com/pyblog/friday-qa-2017-10-27-locks-thread-safety-and-swift-2017-edition.html">mikeash.com: Friday Q&amp;A 2017-10-27: Locks, Thread Safety, and Swift: 2017 Edition</a></p>
+<p>锁是一个确保在同一时机内只能有一个线程访问特定区间内代码的机制，确保了多线程访问可变数据时的一致性。锁有以下三种类型：</p>
+<ol>
+<li>线程等待锁时会进入休眠状态，获取到锁后再唤醒；</li>
+<li>线程等待锁时会一直忙等，直到获取锁，在等待时间较短时会更有效率，但是会浪费 CPU 时间；</li>
+<li>读写锁，支持多个读线程同时进入同一区间，但是只能支持一个写线程进行写数据；</li>
+<li>递归锁，支持同一个线程多次获取同一锁。</li>
+</ol>
+<p>相关 API ：</p>
+<ol>
+<li><code>pthread_mutex_t</code> 互斥锁，支持配置为递归锁；</li>
+<li><code>pthread_rwlock_t</code> 互斥的读写锁；</li>
+<li><code>DispatchQueue</code> 可以派发阻塞的 <code>block</code> ，结合并发队列和 <code>barrier blocks</code> 实现读写锁，也支持异步派发；</li>
+<li><code>OperationQueue</code> 支持的功能和 <code>DispatchQueue</code> 类似；</li>
+<li><code>NSLock</code> 是 Objective-C 层级的锁， <code>NSRecursiveLock</code> 为支持递归的锁；</li>
+<li><code>os_unfair_lock</code> 是更底层的锁；</li>
+<li><code>@synchronized</code> 为 Objective-C 提供的语言特性。</li>
+</ol>
+<p><code>pthread</code> 在初始化时需要多注意下，需要通过 <code>pthread</code> 提供的方法 <code>pthread_mutex_init</code> 或者 <code>pthread_rwlock_init</code> 进行初始化：</p>
+<pre><code class="language-c">var mutex = pthread_mutex_t()
+pthread_mutex_init(&amp;mutex, nil)
+</code></pre>
+<h3 id="值类型"><a class="header" href="#值类型">值类型</a></h3>
+<p><code>phtread_mutex_t</code> ， <code>pthread_rwlock_t</code> 和 <code>os_unfair_lock</code> 都是值类型。如果使用 <code>=</code> 进行赋值，那么就会进行值拷贝，但是这些锁类型并不支持拷贝。如果对 <code>pthread</code> 类型进行拷贝，拷贝得到的值是不可用的，会在使用时触发崩溃。 <code>pthread</code> 函数会假设 <code>pthread</code> 类型在初始化时是同一个内存地址，所以拷贝到别的内存地址并不是个好主意。 <code>os_unfair_lock</code> 不会崩溃，但是会得到另外一个锁。</p>
+<h3 id="如何选择对应的-lock-api"><a class="header" href="#如何选择对应的-lock-api">如何选择对应的 Lock API</a></h3>
+<p><code>DispatchQueue</code> 是比较好的选择，有着友好的，更加 Swift 的 API ，同时也支持各种各样的特性。但是 <code>DispatchQueue</code> 也不是完美的，在内存中，队列会作为一个对象来使用，所以会有一些性能上的开销。同时也不支持条件变量或者递归。</p>
+<p><code>os_unfair_lock</code> 在对性能有较高追求和不需要一些高级特性时是个不错的选择。它的实现相当于一个 32-bit 的整数，所以性能开销极小。但是正如它名字所说的那样，这是一个不公平的锁，它不会确保每个线程都有机会来获取锁，所以有可能某个线程会迅速地释放和获取锁，而其它线程则一直在等待。</p>
+<p><code>pthread_mutex</code> 则位于两者中间，它比 <code>os_unfair_lock</code> 考虑得更多，占用内存为 64 bytes ，在苹果的实现上，它是一个公平的锁。</p>
+<p><code>pthread_rwlock</code> 提供了一个读写锁，使用了 200 bytes ，但是没有提供更多的特性。</p>
+<p><code>NSLock</code> 基于 <code>pthread_mutex</code> 进行封装，如果说你不想手动管理 <code>phread_mutex</code> 的初始化和销毁，那么可以使用 <code>NSLock</code> 。</p>
+<p><code>OperationQueue</code> 提供了依赖管理。</p>
+<p>优先考虑使用 <code>DispatchQueue</code> ，对性能有追求时可以使用 <code>os_unfair_lock</code> ，只有少数情况才需要考虑其它锁。</p>
+<p>Swift 没有用于线程同步的语言工具，但是锁的 API 弥补了这一点。 GCD 依然是 Apple 皇冠上的明珠之一。虽然说我们没有 <code>@synchronized</code> 或者原子属性，但是我们有更好的选择。</p>
+<h2 id="ios-locks"><a class="header" href="#ios-locks">iOS Locks</a></h2>
+<p><a href="https://github.com/bestswifter/blog/blob/master/articles/ios-lock.md">blog/ios-lock.md at master · bestswifter/blog</a></p>
+<p>自旋锁伪代码：</p>
+<pre><code class="language-cpp">bool lock = false; // 一开始没有锁上，任何线程都可以申请锁
+do {
+    while(lock); // 如果 lock 为 true 就一直死循环，相当于申请锁
+    lock = true; // 挂上锁，这样别的线程就无法获得锁
+        Critical section  // 临界区
+    lock = false; // 相当于释放锁，这样别的线程可以进入临界区
+        Reminder section // 不需要锁保护的代码        
+}
+</code></pre>
+<p>原子操作需要由硬件支持，在执行时会把总线锁住，使得其它 CPU 不能执行相同的操作：</p>
+<pre><code class="language-cpp">bool test_and_set (bool *target) {
+    bool rv = *target; 
+    *target = TRUE; 
+    return rv;
+}
+</code></pre>
+<p>也介绍了其它锁的相关原理。</p>
+<h2 id="ios-中的那些锁"><a class="header" href="#ios-中的那些锁">iOS 中的那些锁</a></h2>
+<p><a href="https://juejin.cn/post/6844904167010467854">iOS探索 细数iOS中的那些锁</a></p>
+<h3 id="atomic-的原理"><a class="header" href="#atomic-的原理"><code>atomic</code> 的原理：</a></h3>
+<pre><code class="language-cpp">static inline void reallySetProperty(id self, SEL _cmd, id newValue, ptrdiff_t offset, bool atomic, bool copy, bool mutableCopy)
+{
+    if (offset == 0) {
+        object_setClass(self, newValue);
+        return;
+    }
+
+    id oldValue;
+    id *slot = (id*) ((char*)self + offset);
+
+    if (copy) {
+        newValue = [newValue copyWithZone:nil];
+    } else if (mutableCopy) {
+        newValue = [newValue mutableCopyWithZone:nil];
+    } else {
+        if (*slot == newValue) return;
+        newValue = objc_retain(newValue);
+    }
+
+    if (!atomic) {
+        oldValue = *slot;
+        *slot = newValue;
+    } else {
+        spinlock_t&amp; slotlock = PropertyLocks[slot];
+        slotlock.lock();
+        oldValue = *slot;
+        *slot = newValue;        
+        slotlock.unlock();
+    }
+
+    objc_release(oldValue);
+}
+</code></pre>
+<p>如果使用了 <code>atomic</code> 进行声明，那么就会改用 <code>spinlock_t</code> 来进行加锁，而 <code>spinlock_t</code> 则是使用 <code>os_unfair_lock</code> 实现：</p>
+<pre><code class="language-cpp">using spinlock_t = mutex_tt&lt;LOCKDEBUG&gt;;
+
+class mutex_tt : nocopy_t {
+    os_unfair_lock mLock;
+    ...
+}
+</code></pre>
+<p>且由于 <code>atomic</code> 的性能问题，在 iOS 上基本上都是使用 <code>nonatomic</code> 来进行声明。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../iDev/Multithreading/thread.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../books/books.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../iDev/Multithreading/thread.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../books/books.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
