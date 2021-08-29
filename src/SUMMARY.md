@@ -26,6 +26,7 @@
     - [NSOperation](./iDev/Multithreading/NSOperation.md)
     - [Grand Central Dispatch](./iDev/Multithreading/Grand-Central-Dispatch.md)
     - [pthread 和 NSThread](./iDev/Multithreading/thread.md)
-
+    - [Locks](./iDev/Multithreading/locks.md)
+    
 - [阅读](./books/books.md)
   - [未来简史](./books/Homo-Deus-A-Brief-History-of-Tomorrow.md)
