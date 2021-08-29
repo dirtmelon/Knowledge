@@ -1,0 +1,475 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RunLoop - Knowledge</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../About.html">关于</a></li><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html">编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Swift/Swift.html">Swift</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Runtime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html">Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html">initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html">load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html">Block</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Category.html">Category</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html">Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVO.html">KVO</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVC.html">KVC</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/AutoreleasePool.html">AutoreleasePool</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/dealloc.html">dealloc</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Tagged-Pointer.html">Tagged Pointer</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/weak.html">weak</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Object.html">Object</a></li></ol></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Tips</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/getting-subclasses-of-objective-c-class.html">如何获取某个类的全部子类</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/objective-c-class-properties.html">Objective-C 类属性</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../iDev/iDev.html">iDev</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/Multithreading/Introduction.html">多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/Multithreading/NSOperation.html">NSOperation</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/Grand-Central-Dispatch.html">Grand Central Dispatch</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/thread.html">pthread 和 NSThread</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/locks.html">Locks</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/RunLoop.html" class="active">RunLoop</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../books/books.html">阅读</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../books/Homo-Deus-A-Brief-History-of-Tomorrow.html">未来简史</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Knowledge</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="官方文档"><a class="header" href="#官方文档">官方文档</a></h2>
+<p><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html">Run Loops</a></p>
+<h2 id="深入理解-runloop"><a class="header" href="#深入理解-runloop">深入理解 RunLoop</a></h2>
+<p><a href="https://blog.ibireme.com/2015/05/18/runloop/">深入理解RunLoop</a></p>
+<p>这篇文章写得非常好，推荐反复阅读。</p>
+<p>RunLoop 相关类和关系图：</p>
+<p><img src="media/16302061705901.jpg" alt="" /></p>
+<p>一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source/Timer/Observer 。每次调用 RunLoop 的主函数时，只能指定其中一个 Mode，这个Mode被称作 CurrentMode 。如果需要切换 Mode ，只能退出 Loop，再重新指定一个 Mode 进入。这样做主要是为了分隔开不同组的 Source/Timer/Observer ，让其互不影响。</p>
+<p>RunLoop 通知 Observers 的流程：</p>
+<p><img src="media/16302061864944.jpg" alt="" /></p>
+<p>RunLoop 的应用：</p>
+<ol>
+<li>AutoreleasePool ，苹果在主线程的 RunLoop 里注册了两个 Observer ，其回调都是 <code>_wrapRunLoopWithAutoreleasePoolHandler()</code> 。第一个 Observer 监听 Entry ，调用 <code>_objc_autoreleasePoolPush()</code> 创建 AutoreleasePool ， order 是 -2147483647 ，优先级最高，这样可以在其它回调之前就进行创建 AutoreleasePool 。第二个 Observer 监听了 BeforeWaiting 和 Exit ， BeforeWaiting 时调用 <code>_objc_autoreleasePoolPop()</code> 来退出旧的 AutoreleasePool ，然后调用 <code>_objc_autoreleasePoolPush()</code> 来创建新的 AutoreleasePool ，给下一轮使用。而在 Exit 时也会调用 <code>_objc_autoreleasePoolPop()</code> 来退出 AutoreleasePool ， Observer 的优先级是 2147483647 ，优先级最低，确保在最后进行处理；</li>
+<li>事件响应，注册了一个基于 mach port 的 Source1 来接收系统事件，流程：IOKit.framework 生成 IOHIDEvent 事件 → SpringBoard 接收 → mach port 转发给 App → 触发 Source1 回调 → <code>_UIApplicationHandleEventQueue()</code> 进行分发。包括点击事件/屏幕旋转等；</li>
+<li>界面更新，在操作 UI 时，比如更新 <code>frame</code> ，对 <code>UIView/CALayer</code> 视图相关的属性进行操作，或者手动调用 <code>setNeedsLayout/setNeedsDisplay</code> 方法后，系统会将记录这个 <code>UIView/CALayer</code> ，然后通过监听 BeforeWaiting 和 Exit 事件，执行 <code>_ZN2CA11Transaction17observer_callbackEP19__CFRunLoopObservermPv()</code> ，在这里面对所有待处理的 <code>UIView/CALayer</code> 进行绘制，更新界面；</li>
+<li><code>NSTimer</code> 回调， <code>NSTimer</code> 其实是 <code>CFRunLoopTimerRef</code> 的桥接， <code>NSTimer</code> 注册到 RunLoop 后， RunLoop 会持有这个 <code>NSTimer</code> ，直到 <code>invalidate</code> 或者方法执行完毕。所以如果 <code>NSTimer</code> 的 <code>repeat</code> 为 <code>YES</code> 及和强引用 <code>target</code> 时，会导致 <code>NSTimer</code> 和 <code>target</code>  无法释放。且如果 RunLoop 切换了 mode ，而对应的 <code>NSTimer</code> 没有添加到 commonMode ，那么 <code>NSTimer</code> 就不会执行；</li>
+<li><code>NSObject</code> 调用 <code>performSelector:afterDelay:</code> 后，内部会创建一个 <code>Timer</code> 添加到当前线程的 RunLoop 中，如果说当前线程没有 RunLoop ，那么这个方法就会失效。 <code>performSelector:onThread:</code> 则可以指定对应的线程；</li>
+<li>通过 GCD 的 <code>dispatch_async(dispatch_get_main_queue(), block)</code> 切换到主队列执行 <code>block</code> 时， libDispatch 会向主线程 RunLoop 发送消息，唤醒 RunLoop ，然后从消息中获取和执行 <code>block</code> 。</li>
+</ol>
+<p>关于线程保活：</p>
+<p>线程在执行完任务后就会退出和销毁，通过创建 RunLoop 和添加 Timer/Observer/Source 到 RunLoop 中，使得线程不退出，这样可以在该线程中接收和处理消息。比较经典的是 AFNetworking 2.0 中的做法：</p>
+<pre><code class="language-cpp">+ (NSThread *)networkRequestThread {
+    static NSThread *_networkRequestThread = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&amp;oncePredicate, ^{
+        _networkRequestThread = [[NSThread alloc] initWithTarget:self selector:@selector(networkRequestThreadEntryPoint:) object:nil];
+        [_networkRequestThread start];
+    });
+    return _networkRequestThread;
+}
+
++ (void)networkRequestThreadEntryPoint:(id)__unused object {
+    @autoreleasepool {
+        [[NSThread currentThread] setName:@&quot;AFNetworking&quot;];
+        // 在当前线程创建 RunLoop
+        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+        // 添加一个 NSMachPort ，防止 RunLoop 退出
+        [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+        // 启动 RunLoop
+				[runLoop run];
+    }
+}
+</code></pre>
+<p>Texture 也依赖 RunLoop 的机制，将耗时的不需要在主线程进行的操作放到后台线程中进行，然后添加一个 Observer 到 RunLoop 中，监听了 <code>kCFRunLoopBeforeWaiting</code> 和 <code>kCFRunLoopExit</code> 事件，在 RunLoop 休眠前在主线程提交相关事务，对 UI 进行修改。相关实现：</p>
+<p><a href="https://github.com/TextureGroup/Texture/blob/master/Source/Details/Transactions/_ASAsyncTransactionGroup.mm">Texture/_ASAsyncTransactionGroup.mm at master · TextureGroup/Texture</a></p>
+<p>流程代码：</p>
+<pre><code class="language-objectivec">{
+    /// 1. 通知Observers，即将进入RunLoop
+    /// 此处有Observer会创建AutoreleasePool: _objc_autoreleasePoolPush();
+    __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopEntry);
+    do {
+ 
+        /// 2. 通知 Observers: 即将触发 Timer 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeTimers);
+        /// 3. 通知 Observers: 即将触发 Source (非基于port的,Source0) 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeSources);
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);
+ 
+        /// 4. 触发 Source0 (非基于port的) 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__(source0);
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);
+ 
+        /// 6. 通知Observers，即将进入休眠
+        /// 此处有Observer释放并新建AutoreleasePool: _objc_autoreleasePoolPop(); _objc_autoreleasePoolPush();
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeWaiting);
+ 
+        /// 7. sleep to wait msg.
+        mach_msg() -&gt; mach_msg_trap();
+        
+ 
+        /// 8. 通知Observers，线程被唤醒
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopAfterWaiting);
+ 
+        /// 9. 如果是被Timer唤醒的，回调Timer
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__(timer);
+ 
+        /// 9. 如果是被dispatch唤醒的，执行所有调用 dispatch_async 等方法放入main queue 的 block
+        __CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(dispatched_block);
+ 
+        /// 9. 如果如果Runloop是被 Source1 (基于port的) 的事件唤醒了，处理这个事件
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__(source1);
+ 
+ 
+    } while (...);
+ 
+    /// 10. 通知Observers，即将退出RunLoop
+    /// 此处有Observer释放AutoreleasePool: _objc_autoreleasePoolPop();
+    __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopExit);
+}
+</code></pre>
+<p>详细的代码：</p>
+<pre><code class="language-objectivec">/// 用DefaultMode启动
+void CFRunLoopRun(void) {
+    CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10, false);
+}
+ 
+/// 用指定的Mode启动，允许设置RunLoop超时时间
+int CFRunLoopRunInMode(CFStringRef modeName, CFTimeInterval seconds, Boolean stopAfterHandle) {
+    return CFRunLoopRunSpecific(CFRunLoopGetCurrent(), modeName, seconds, returnAfterSourceHandled);
+}
+ 
+/// RunLoop的实现
+int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
+    
+    /// 首先根据modeName找到对应mode
+    CFRunLoopModeRef currentMode = __CFRunLoopFindMode(runloop, modeName, false);
+    /// 如果mode里没有source/timer/observer, 直接返回。
+    if (__CFRunLoopModeIsEmpty(currentMode)) return;
+    
+    /// 1. 通知 Observers: RunLoop 即将进入 loop。
+    __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopEntry);
+    
+    /// 内部函数，进入loop
+    __CFRunLoopRun(runloop, currentMode, seconds, returnAfterSourceHandled) {
+        
+        Boolean sourceHandledThisLoop = NO;
+        int retVal = 0;
+        do {
+ 
+            /// 2. 通知 Observers: RunLoop 即将触发 Timer 回调。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeTimers);
+            /// 3. 通知 Observers: RunLoop 即将触发 Source0 (非port) 回调。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeSources);
+            /// 执行被加入的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+            
+            /// 4. RunLoop 触发 Source0 (非port) 回调。
+            sourceHandledThisLoop = __CFRunLoopDoSources0(runloop, currentMode, stopAfterHandle);
+            /// 执行被加入的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+ 
+            /// 5. 如果有 Source1 (基于port) 处于 ready 状态，直接处理这个 Source1 然后跳转去处理消息。
+            if (__Source0DidDispatchPortLastTime) {
+                Boolean hasMsg = __CFRunLoopServiceMachPort(dispatchPort, &amp;msg)
+                if (hasMsg) goto handle_msg;
+            }
+            
+            /// 通知 Observers: RunLoop 的线程即将进入休眠(sleep)。
+            if (!sourceHandledThisLoop) {
+                __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeWaiting);
+            }
+            
+            /// 7. 调用 mach_msg 等待接受 mach_port 的消息。线程将进入休眠, 直到被下面某一个事件唤醒。
+            /// • 一个基于 port 的Source 的事件。
+            /// • 一个 Timer 到时间了
+            /// • RunLoop 自身的超时时间到了
+            /// • 被其他什么调用者手动唤醒
+            __CFRunLoopServiceMachPort(waitSet, &amp;msg, sizeof(msg_buffer), &amp;livePort) {
+                mach_msg(msg, MACH_RCV_MSG, port); // thread wait for receive msg
+            }
+ 
+            /// 8. 通知 Observers: RunLoop 的线程刚刚被唤醒了。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopAfterWaiting);
+            
+            /// 收到消息，处理消息。
+            handle_msg:
+ 
+            /// 9.1 如果一个 Timer 到时间了，触发这个Timer的回调。
+            if (msg_is_timer) {
+                __CFRunLoopDoTimers(runloop, currentMode, mach_absolute_time())
+            } 
+ 
+            /// 9.2 如果有dispatch到main_queue的block，执行block。
+            else if (msg_is_dispatch) {
+                __CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(msg);
+            } 
+ 
+            /// 9.3 如果一个 Source1 (基于port) 发出事件了，处理这个事件
+            else {
+                CFRunLoopSourceRef source1 = __CFRunLoopModeFindSourceForMachPort(runloop, currentMode, livePort);
+                sourceHandledThisLoop = __CFRunLoopDoSource1(runloop, currentMode, source1, msg);
+                if (sourceHandledThisLoop) {
+                    mach_msg(reply, MACH_SEND_MSG, reply);
+                }
+            }
+            
+            /// 执行加入到Loop的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+            
+ 
+            if (sourceHandledThisLoop &amp;&amp; stopAfterHandle) {
+                /// 进入loop时参数说处理完事件就返回。
+                retVal = kCFRunLoopRunHandledSource;
+            } else if (timeout) {
+                /// 超出传入参数标记的超时时间了
+                retVal = kCFRunLoopRunTimedOut;
+            } else if (__CFRunLoopIsStopped(runloop)) {
+                /// 被外部调用者强制停止了
+                retVal = kCFRunLoopRunStopped;
+            } else if (__CFRunLoopModeIsEmpty(runloop, currentMode)) {
+                /// source/timer/observer一个都没有了
+                retVal = kCFRunLoopRunFinished;
+            }
+            
+            /// 如果没超时，mode里没空，loop也没被停止，那继续loop。
+        } while (retVal == 0);
+    }
+    
+    /// 10. 通知 Observers: RunLoop 即将退出。
+    __CFRunLoopDoObservers(rl, currentMode, kCFRunLoopExit);
+}
+</code></pre>
+<h2 id="nsrunloop-internals"><a class="header" href="#nsrunloop-internals"><code>NSRunLoop</code> Internals</a></h2>
+<p><a href="https://www.mikeash.com/pyblog/friday-qa-2010-01-01-nsrunloop-internals.html">mikeash.com: Friday Q&amp;A 2010-01-01: NSRunLoop Internals</a></p>
+<p><code>NSRunLoop</code> 伪代码。</p>
+<p><code>run</code> 方法的实现非常简单，先判断是否有 Source 或者 Timer ，如果没有，就直接退出：</p>
+<pre><code class="language-objectivec">- (void)run
+{
+    while([self hasSourcesOrTimers])
+        [self runMode: NSDefaultRunLoopMode beforeDate: [NSDate distantFuture]];
+}
+
+- (void)runUntilDate: (NSDate *)limitDate
+{
+    while([self hasSourcesOrTimers])
+    {
+        [self runMode: NSDefaultRunLoopMode beforeDate: limitDate];
+            
+        // check limitDate at the end of the loop to ensure that
+        // the runloop always runs at least once
+        if([limitDate timeIntervalSinceNow] &lt; 0)
+            break;
+    }
+}
+</code></pre>
+<p><code>NSRunLoop</code> 提供了添加 Source 的方法：</p>
+<pre><code class="language-objectivec">- (void)addPort: (NSPort *)aPort forMode: (NSString *)mode
+{
+    NSMutableSet *sourcesSet = [_inputSources objectForKey: mode];
+    if(!sourcesSet)
+    {
+        // 如果当前 mode 还没有创建关于 source 的 NSMutableSet ，就动态创建一个
+        sourcesSet = [NSMutableSet set];
+        [_inputSources setObject: sourcesSet forKey: mode];
+    }
+    [sourcesSet addObject: aPort];
+}
+</code></pre>
+<p>同时也有对应的移除 Source 方法：</p>
+<pre><code class="language-objectivec">- (void)removePort: (NSPort *)aPort forMode: (NSString *)mode
+{
+    NSMutableSet *sourcesSet = [_inputSources objectForKey: mode];
+    [sourcesSet removeObject: aPort];
+        
+    // 如果 source 的 NSMutableSet 为空，则移除
+    if(![sourcesSet count])
+        [_inputSources removeObjectForKey: mode];
+}
+</code></pre>
+<pre><code class="language-objectivec">- (BOOL)runMode: (NSString *)mode beforeDate: (NSDate *)limitDate
+{
+    // 如果没有 Source 或者 Timer ，就直接退出
+    if(![self hasSourcesOrTimersForMode: mode])
+        return NO;
+        
+    // with timer support, this code has to loop until an input
+    // source fires
+    // 
+    BOOL didFireInputSource = NO;
+    while(!didFireInputSource)
+    {
+        fd_set fdset;
+        FD_ZERO(&amp;fdset);
+            
+        for(inputSource in [_inputSources objectForKey: mode])
+            FD_SET([inputSource fileDescriptor], &amp;fdset);
+        // 根据 limitDate 获取 timeout
+        NSTimeInterval timeout = [limitDate timeIntervalSinceNow];
+            
+        // 选择 timeout 和 timerSources 中最小值
+        for(timer in [_timerSources objectForKey: mode])
+            timeout = MIN(timeout, [[timer fireDate] timeIntervalSinceNow]);
+
+        select(fdset, timeout);
+            
+        // 处理 Source
+        for(inputSource in [[[_inputSources objectForKey: mode] copy] autorelease])
+            if(FD_ISSET([inputSource fileDescrptor], &amp;fdset))
+            {
+                didFireInputSource = YES;
+                [inputSource fileDescriptorIsReady];
+            }
+
+        // 处理 Timer ，根据 fireDate 判断是否要调用 Timer 的 fire 方法，执行对应的事件
+        // 根据 repeat 是否为 YES 判断要不要移除 Timer
+        for(timer in [[[_timerSources objectForKey: mode] copy] autorelease])
+            if([[timer fireDate] timeIntervalSinceNow] &lt;= 0)
+                [timer fire];
+
+        // 如果已经超出了 limitDate 的时间戳，就立即返回
+        if([limitDate timeIntervalSinceNow] &lt; 0)
+            break;
+    }
+    return YES;
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../iDev/Multithreading/locks.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../books/books.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../iDev/Multithreading/locks.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../books/books.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
