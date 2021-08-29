@@ -96,7 +96,9 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 
 [pthread 和 NSThread](./thread.md) 
 
-[Lock](https://www.notion.so/Lock-794065e788bb4741a870c4434323de5b) 
+[Locks](./locks.md)
+
+[RunLoop](./RunLoop.md) 
 
 ## 相关文章
 
