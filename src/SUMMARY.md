@@ -28,6 +28,7 @@
     - [pthread 和 NSThread](./iDev/Multithreading/thread.md)
     - [Locks](./iDev/Multithreading/locks.md)
     - [RunLoop](./iDev/Multithreading/RunLoop.md)
-    
+  - [UIKit](./iDev/UIKit/UIKit.md) 
+    - [点击，按压与手势](./iDev/UIKit/touches_presses_and_gestures.md)
 - [阅读](./books/books.md)
   - [未来简史](./books/Homo-Deus-A-Brief-History-of-Tomorrow.md)
