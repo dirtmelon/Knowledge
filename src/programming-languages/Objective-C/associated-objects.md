@@ -43,6 +43,45 @@ objc_getAssociatedObject(self, &kAssociatedObjectKey);
 
 ![](media/16295230050442.jpg)
 
+### Weak Associated Object
+
+[Weak Associated Object | 张不坏的博客](https://zhangbuhuai.com/post/weak-associated-object.html)
+
+起一个中间层，叫 container 或者 wrapper 都可以：
+
+```objectivec
+@interface WeakAssociatedObjectWrapper : NSObject
+
+@property (nonatomic, weak) id object;
+
+@end
+
+@implementation WeakAssociatedObjectWrapper
+
+@end
+
+@interface UIView (ViewController)
+
+@property (nonatomic, weak) UIViewController *vc;
+
+@end
+
+@implementation UIView (ViewController)
+
+- (void)setVc:(UIViewController *)vc {
+    WeakAssociatedObjectWrapper *wrapper = [WeakAssociatedObjectWrapper new];
+    wrapper.object = vc;
+    objc_setAssociatedObject(self, @selector(vc), wrapper, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIViewController *)vc {
+    WeakAssociatedObjectWrapper *wrapper = objc_getAssociatedObject(self, _cmd);
+    return wrapper.object;
+}
+
+@end
+```
+
 ## 应用
 
 [ChenYilong/CYLDeallocBlockExecutor](https://github.com/ChenYilong/CYLDeallocBlockExecutor)
