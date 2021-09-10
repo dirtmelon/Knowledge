@@ -1,0 +1,450 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Reference Counting - Knowledge</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../About.html">关于</a></li><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html">编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Swift/Swift.html">Swift</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Runtime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html">Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html">initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html">load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html">Block</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Category.html">Category</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html">Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVO.html">KVO</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVC.html">KVC</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/AutoreleasePool.html">AutoreleasePool</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/dealloc.html">dealloc</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Tagged-Pointer.html">Tagged Pointer</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/weak.html">weak</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Object.html">Object</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/reference-counting.html" class="active">Reference Counting</a></li></ol></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Tips</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/getting-subclasses-of-objective-c-class.html">如何获取某个类的全部子类</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/objective-c-class-properties.html">Objective-C 类属性</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../iDev/iDev.html">iDev</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/Multithreading/Introduction.html">多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/Multithreading/NSOperation.html">NSOperation</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/Grand-Central-Dispatch.html">Grand Central Dispatch</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/thread.html">pthread 和 NSThread</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/locks.html">Locks</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/RunLoop.html">RunLoop</a></li></ol></li><li class="chapter-item expanded "><a href="../../iDev/UIKit/UIKit.html">UIKit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/UIKit/touches_presses_and_gestures.html">点击，按压与手势</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../books/books.html">阅读</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../books/Homo-Deus-A-Brief-History-of-Tomorrow.html">未来简史</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Knowledge</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="reference-counting"><a class="header" href="#reference-counting">Reference Counting</a></h1>
+<h2 id="说明"><a class="header" href="#说明">说明</a></h2>
+<p><a href="https://clang.llvm.org/docs/AutomaticReferenceCounting.html">Clang 13 documentation</a></p>
+<p>LLVM 的关于 ARC 的说明，非常长。</p>
+<h2 id="引用计数原理"><a class="header" href="#引用计数原理">引用计数原理</a></h2>
+<p><a href="http://yulingtianxia.com/blog/2015/12/06/The-Principle-of-Refenrence-Counting/">Objective-C 引用计数原理</a></p>
+<p>引用计数如何存储：</p>
+<ol>
+<li>如果是 Tagged Pointer ，会直接使用其指针值作为引用计数返回；</li>
+<li>如果是 64位和 Objective-C 2.0 ，就会使用 <code>isa</code> 的部分空间来存储引用计数；</li>
+<li>如果 <code>isa</code> 部分空间不够存储引用计数，或者不是 64位和 Objective-C 2.0 ，就会使用散列表和 <code>SideTable</code> 来存储。</li>
+</ol>
+<p><a href="https://www.notion.so/b27762eae5664cc0ad46b6db96bed8b8">isa 指针中变量对应的含义</a></p>
+<p>获取引用计数：</p>
+<pre><code class="language-objectivec">inline uintptr_t 
+objc_object::rootRetainCount()
+{
+    assert(!UseGC);
+		// 1. 如果是 Tagged Pointer ，则直接返回指针地址
+    if (isTaggedPointer()) return (uintptr_t)this;
+
+    sidetable_lock();
+    isa_t bits = LoadExclusive(&amp;isa.bits);
+    if (bits.indexed) {
+        // 2. 如果有经过优化，则 1 + bits.extra_rc ；
+        uintptr_t rc = 1 + bits.extra_rc;
+        // 3. 如果有使用 SideTable ，则加上 SideTable 的计数；
+        if (bits.has_sidetable_rc) {
+            rc += sidetable_getExtraRC_nolock();
+        }
+        sidetable_unlock();
+        return rc;
+    }
+
+    sidetable_unlock();
+    return sidetable_retainCount();
+}
+</code></pre>
+<p>而 <code>sidetable_retainCount()</code> 则负责从 <code>SideTable</code> 中获取引用计数：</p>
+<pre><code class="language-objectivec">uintptr_t
+objc_object::sidetable_retainCount()
+{
+    // 1. 根据指针地址获取对应的 SideTable
+    SideTable *table = SideTable::tableForPointer(this);
+
+    size_t refcnt_result = 1;
+    
+    spinlock_lock(&amp;table-&gt;slock);
+    // 2. 获取对象对应的 RefcountMap ；
+    RefcountMap::iterator it = table-&gt;refcnts.find(this);
+    if (it != table-&gt;refcnts.end()) {
+        // 右移二位， SIDE_TABLE_RC_PINNED 可用于判断是否溢出。
+        refcnt_result += it-&gt;second &gt;&gt; SIDE_TABLE_RC_SHIFT;
+    }
+    spinlock_unlock(&amp;table-&gt;slock);
+    return refcnt_result;
+}
+</code></pre>
+<p>如官方文档所说的，不要使用 <code>retainCount</code> 方法，它不能真实表达对象所对应的引用计数，以及 Clang 一些优化也会对其造成影响。</p>
+<p><a href="https://developer.apple.com/documentation/objectivec/1418956-nsobject/1571952-retaincount">Apple Developer Documentation</a></p>
+<p>修改引用计数：</p>
+<ol>
+<li><code>retain</code> 和 <code>release</code> ；</li>
+<li><code>alloc</code> ， <code>new</code> ， <code>copy</code> 和 <code>mutableCopy</code> ；</li>
+<li><code>autorelease</code> 。</li>
+</ol>
+<h2 id="黑箱中的-retain-和-release"><a class="header" href="#黑箱中的-retain-和-release">黑箱中的 <code>retain</code> 和 <code>release</code></a></h2>
+<p><a href="https://github.com/draveness/analyze/blob/master/contents/objc/%E9%BB%91%E7%AE%B1%E4%B8%AD%E7%9A%84%20retain%20%E5%92%8C%20release.md">黑箱中的 retain 和 release</a></p>
+<h3 id="retain"><a class="header" href="#retain"><code>retain</code></a></h3>
+<p>原文把 <code>rootRetain</code> 方法拆散了，方便解析，下面是 <code>rootRetain</code> 的全部实现，易于查看整个流程：</p>
+<pre><code class="language-cpp">id 
+objc_object::rootRetain(bool tryRetain, bool handleOverflow)
+{
+    if (isTaggedPointer()) return (id)this;
+
+    bool sideTableLocked = false;
+    bool transcribeToSideTable = false;
+
+    isa_t oldisa;
+    isa_t newisa;
+
+    do {
+        transcribeToSideTable = false;
+        // 加载 isa 的值
+        oldisa = LoadExclusive(&amp;isa.bits);
+        newisa = oldisa;
+        // 如果不支持 nonpointer ，即不用 isa 本身来存储引用计数，则直接走 SideTable 流程
+        if (slowpath(!newisa.nonpointer)) {
+            ClearExclusive(&amp;isa.bits);
+            if (!tryRetain &amp;&amp; sideTableLocked) sidetable_unlock();
+            if (tryRetain) return sidetable_tryRetain() ? (id)this : nil;
+            else return sidetable_retain();
+        }
+        // 如果 isa 在 dealloc 流程中，则直接返回 nil
+        if (slowpath(tryRetain &amp;&amp; newisa.deallocating)) {
+            ClearExclusive(&amp;isa.bits);
+            if (!tryRetain &amp;&amp; sideTableLocked) sidetable_unlock();
+            return nil;
+        }
+				// 
+        uintptr_t carry;
+        // 将 isa 的值加 1
+        newisa.bits = addc(newisa.bits, RC_ONE, 0, &amp;carry);  
+        // 引用计数超出 extra_rc 限制，改用 SideTable
+        if (slowpath(carry)) {
+            // handleOverflow 为 false 
+            if (!handleOverflow) {
+                ClearExclusive(&amp;isa.bits);
+                // handleOverflow 改为 true ，从走 retain
+                return rootRetain_overflow(tryRetain);
+            }
+            // 把 isa 的 extra_rc 恢复为一半，和做好准备把另外一半拷贝到 SideTable
+            if (!tryRetain &amp;&amp; !sideTableLocked) sidetable_lock();
+            sideTableLocked = true;
+            transcribeToSideTable = true;
+            // 把 extra_rc 恢复为一半
+            newisa.extra_rc = RC_HALF;
+            newisa.has_sidetable_rc = true;
+        }
+    // StoreExclusive 更新 isa 的值
+    } while (slowpath(!StoreExclusive(&amp;isa.bits, oldisa.bits, newisa.bits)));
+    // 如果说 isa 有溢出， 把一半的引用计数拷贝到 SideTable
+    if (slowpath(transcribeToSideTable)) {
+        sidetable_addExtraRC_nolock(RC_HALF);
+    }
+
+    if (slowpath(!tryRetain &amp;&amp; sideTableLocked)) sidetable_unlock();
+    return (id)this;
+}
+</code></pre>
+<pre><code class="language-cpp">bool objc_object::sidetable_addExtraRC_nolock(size_t delta_rc) {
+    SideTable&amp; table = SideTables()[this];
+
+    size_t&amp; refcntStorage = table.refcnts[this];
+    size_t oldRefcnt = refcntStorage;
+    // 溢出，直接返回 true
+    if (oldRefcnt &amp; SIDE_TABLE_RC_PINNED) return true;
+
+    uintptr_t carry;
+    size_t newRefcnt = 
+        addc(oldRefcnt, delta_rc &lt;&lt; SIDE_TABLE_RC_SHIFT, 0, &amp;carry);
+    if (carry) {
+        // 如果有溢出，则将 refcntStorage 设为 SIDE_TABLE_RC_PINNED
+        refcntStorage = SIDE_TABLE_RC_PINNED | (oldRefcnt &amp; SIDE_TABLE_FLAG_MASK);
+        return true;
+    } else {
+        // 没有溢出，新值赋给 refcntStorage
+        refcntStorage = newRefcnt;
+        return false;
+    }
+}
+</code></pre>
+<p>可以看到 <code>retain</code> 时会动态结合 <code>isa</code> 的 <code>extra_rc</code> 和 <code>SideTable</code> 来存储引用计数：</p>
+<ol>
+<li><code>extra_rc</code> 不需要查找，速度会更快，所以优先使用 <code>extra_rc</code> 管理引用计数；</li>
+<li>如果 <code>extra_rc</code> 溢出，则把 <code>extra_rc</code> 的一半拷贝到 <code>SideTable</code> 中， <code>SideTable</code> 并没有直接参与引用计数管理；</li>
+<li>如果引用计数为 1 ， <code>extra_rc</code> 为 0 ，保存的是额外的引用计数。</li>
+</ol>
+<h2 id="release"><a class="header" href="#release"><code>release</code></a></h2>
+<pre><code class="language-cpp">bool 
+objc_object::rootRelease(bool performDealloc, bool handleUnderflow)
+{
+    if (isTaggedPointer()) return false;
+
+    bool sideTableLocked = false;
+
+    isa_t oldisa;
+    isa_t newisa;
+
+ retry:
+    do {
+        oldisa = LoadExclusive(&amp;isa.bits);
+        newisa = oldisa;
+        // 如果不支持 nonpointer ，即不用 isa 本身来存储引用计数，则直接走 SideTable 流程
+        if (slowpath(!newisa.nonpointer)) {
+            ClearExclusive(&amp;isa.bits);
+            if (sideTableLocked) sidetable_unlock();
+            return sidetable_release(performDealloc);
+        }
+        uintptr_t carry;
+	      // extra_rc 减 1
+        newisa.bits = subc(newisa.bits, RC_ONE, 0, &amp;carry);
+        // 如果不够，则走 SideTable 流程
+        if (slowpath(carry)) {
+            goto underflow;
+        }
+        // 调用 StoreReleaseExclusive 方法保存新的引用计数
+    } while (slowpath(!StoreReleaseExclusive(&amp;isa.bits, 
+                                             oldisa.bits, newisa.bits)));
+
+    if (slowpath(sideTableLocked)) sidetable_unlock();
+    return false;
+
+ underflow:
+    newisa = oldisa;
+    // 判断是否有使用 SideTable
+    if (slowpath(newisa.has_sidetable_rc)) {
+        // 将 handleUnderflow 设为 true ，递归调用
+        if (!handleUnderflow) {
+            ClearExclusive(&amp;isa.bits);
+            return rootRelease_underflow(performDealloc);
+        }
+        if (!sideTableLocked) {
+            ClearExclusive(&amp;isa.bits);
+            sidetable_lock();
+            sideTableLocked = true;
+            goto retry;
+        }
+        // 从 SideTable 中获取 extra_rc 最大值的一半，即 RC_HALF
+        size_t borrowed = sidetable_subExtraRC_nolock(RC_HALF);
+        if (borrowed &gt; 0) {
+            // 将一半引用计数放到 extra_rc 中
+            newisa.extra_rc = borrowed - 1;  
+            bool stored = StoreReleaseExclusive(&amp;isa.bits, 
+                                                oldisa.bits, newisa.bits);
+            if (!stored) {
+                // 如果存放到 extra_rc 中失败，重新加载 isa 和尝试存放
+                isa_t oldisa2 = LoadExclusive(&amp;isa.bits);
+                isa_t newisa2 = oldisa2;
+                if (newisa2.nonpointer) {
+                    uintptr_t overflow;
+                    newisa2.bits = 
+                        addc(newisa2.bits, RC_ONE * (borrowed-1), 0, &amp;overflow);
+                    if (!overflow) {
+                        stored = StoreReleaseExclusive(&amp;isa.bits, oldisa2.bits, 
+                                                       newisa2.bits);
+                    }
+                }
+            }
+            // 如果还是失败，则把引用计数放回 SideTable
+            if (!stored) {
+                sidetable_addExtraRC_nolock(borrowed);
+                goto retry;
+            }
+            sidetable_unlock();
+            return false;
+        }
+        else {
+			  // SideTable 为空，执行 dealloc ，不需要执行任何处理
+        }
+    }
+    if (slowpath(newisa.deallocating)) {
+		    // 对象正在释放
+        ClearExclusive(&amp;isa.bits);
+        if (sideTableLocked) sidetable_unlock();
+        return overrelease_error();
+    }
+    // 设置 deallocating 标志位
+    newisa.deallocating = true;
+    if (!StoreExclusive(&amp;isa.bits, oldisa.bits, newisa.bits)) goto retry;
+
+    if (slowpath(sideTableLocked)) sidetable_unlock();
+    __sync_synchronize();
+    if (performDealloc) {
+        // 通过 objc_msgSend 直接执行 dealloc
+        ((void(*)(objc_object *, SEL))objc_msgSend)(this, SEL_dealloc);
+    }
+    return true;
+}
+</code></pre>
+<p><code>release</code> 的处理流程和 <code>retain</code> 类似，多了一个 <code>dealloc</code> 的执行流程。</p>
+<h2 id="引用计数与-weak"><a class="header" href="#引用计数与-weak">引用计数与 <code>weak</code></a></h2>
+<p><a href="https://wenghengcong.com/posts/7162dd05/">内存管理（四）引用计数与weak</a></p>
+<p>源码解析在上面已经有提及，所以这里贴上这篇的文章里的图就好了。</p>
+<p><img src="media/16312400607405.jpg" alt="" />
+<img src="media/16312401885967.jpg" alt="" />
+<img src="media/16312402028925.jpg" alt="" />
+<img src="media/16312402241320.jpg" alt="" />
+<img src="media/16312402401032.jpg" alt="" />
+<img src="media/16312402565861.jpg" alt="" />
+<img src="media/16312402651997.jpg" alt="" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../programming-languages/Objective-C/Object.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../programming-languages/Objective-C/Objective-C.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../programming-languages/Objective-C/Object.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../programming-languages/Objective-C/Objective-C.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
