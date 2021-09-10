@@ -17,6 +17,7 @@
       - [Tagged Pointer](./programming-languages/Objective-C/Tagged-Pointer.md)
       - [weak](./programming-languages/Objective-C/weak.md)
       - [Object](./programming-languages/Objective-C/Object.md)
+      - [Reference Counting](./programming-languages/Objective-C/reference-counting.md)
     - [Tips](./programming-languages/Objective-C/Objective-C.md)
       - [如何获取某个类的全部子类](./programming-languages/Objective-C/getting-subclasses-of-objective-c-class.md)
       - [Objective-C 类属性](./programming-languages/Objective-C/objective-c-class-properties.md)
