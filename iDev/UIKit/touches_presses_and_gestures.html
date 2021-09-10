@@ -1,0 +1,526 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>点击，按压与手势 - Knowledge</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../About.html">关于</a></li><li class="chapter-item expanded "><a href="../../programming-languages/programming-languages.html">编程语言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Swift/Swift.html">Swift</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Objective-C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Runtime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/associated-objects.html">Associated Objects</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/initialize.html">initialize</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/load.html">load</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Block.html">Block</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Category.html">Category</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Message-Sending-And-Forwarding.html">Message Sending And Forwarding</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVO.html">KVO</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/KVC.html">KVC</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/AutoreleasePool.html">AutoreleasePool</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/dealloc.html">dealloc</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Tagged-Pointer.html">Tagged Pointer</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/weak.html">weak</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Object.html">Object</a></li></ol></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/Objective-C.html">Tips</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/getting-subclasses-of-objective-c-class.html">如何获取某个类的全部子类</a></li><li class="chapter-item expanded "><a href="../../programming-languages/Objective-C/objective-c-class-properties.html">Objective-C 类属性</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../iDev/iDev.html">iDev</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/Multithreading/Introduction.html">多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/Multithreading/NSOperation.html">NSOperation</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/Grand-Central-Dispatch.html">Grand Central Dispatch</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/thread.html">pthread 和 NSThread</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/locks.html">Locks</a></li><li class="chapter-item expanded "><a href="../../iDev/Multithreading/RunLoop.html">RunLoop</a></li></ol></li><li class="chapter-item expanded "><a href="../../iDev/UIKit/UIKit.html">UIKit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iDev/UIKit/touches_presses_and_gestures.html" class="active">点击，按压与手势</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../books/books.html">阅读</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../books/Homo-Deus-A-Brief-History-of-Tomorrow.html">未来简史</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Knowledge</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dirtmelon/Knowledge" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="官方文档"><a class="header" href="#官方文档">官方文档</a></h2>
+<p><a href="https://developer.apple.com/documentation/uikit/touches_presses_and_gestures">Apple Developer Documentation</a></p>
+<h3 id="处理-uikit-手势"><a class="header" href="#处理-uikit-手势">处理 UIKit 手势</a></h3>
+<p><a href="https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/handling_uikit_gestures">Apple Developer Documentation</a></p>
+<p>使用手势可以使得点击处理更加简单和创建统一的用户体验。</p>
+<p>手势识别器（ Gesture Recognizers ）是在自定义控件上处理点击和按压事件最简单的方法。可以在任何控件上添加一到多个手势。手势识别器封装了所有需要处理和解释对应传入事件的逻辑，并将它们和已知的模式进行匹配。当检测到对应的模式时，手势识别器会通知对应的目标对象，可以是一个 <code>ViewController</code> ，也可以是控件（ <code>View</code> ）自己，或者 App 中的任何一个对象。</p>
+<p>手势识别器通过 Target-Action 的方式来发送通知：</p>
+<p><img src="media/16312376320646.jpg" alt="" /></p>
+<p>手势识别器分为两种类型：离散的和连续的。离散的手势识别器只会手势被识别后调用一次 Action 方法。而连续的手势则不同，当检测到满足初始化的标准时，它会多次调用 Action 方法，借此通知你手势信息的变化，比如说 <code>UIPanGestureRecognizer</code> 。
+可以通过 <code>UIGestureRecognizer</code> 的 <code>state</code> 进行不同的处理。</p>
+<h3 id="uitapgesturerecognizer"><a class="header" href="#uitapgesturerecognizer"><code>UITapGestureRecognizer</code></a></h3>
+<p><a href="https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/handling_uikit_gestures/handling_tap_gestures">Apple Developer Documentation</a></p>
+<p><code>UITapGestureRecognizer</code> 可以处理屏幕上短时间内的一次或多次点击。触发手势的手指不能从最初的接触点进行明显的移动，且支持配置点击的次数。可以通过配置点击次数来检测单次，双次或者三次点击。</p>
+<p>如果 <code>UITapGestureRecognizer</code> 没有调用对应的 Target-Action ，可以检查下面的属性是否有正确设置：</p>
+<ul>
+<li><code>isUserInteractionEnabled</code> 是否有设置为 <code>true</code> ， <code>UILabel</code> 和 <code>UIImageView</code> 默认设置为 <code>false</code> ；</li>
+<li>点击的次数是否和 <code>numberOfTapsRequired</code> 一致；</li>
+<li>点击的手指是否和 <code>numberOfTouchesRequired</code> 一致。</li>
+</ul>
+<h3 id="uilongpressgesturerecognizer"><a class="header" href="#uilongpressgesturerecognizer"><code>UILongPressGestureRecognizer</code></a></h3>
+<p><a href="https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/handling_uikit_gestures/handling_long-press_gestures">Apple Developer Documentation</a></p>
+<p><code>UILongPressGestureRecognizer</code> 可以检测到一个或者多个手指（或者触摸笔）在屏幕上的长时间点击。支持配置持续时间和手指个数。</p>
+<p>长按手势是持续类型的手势，这意味着当 <code>state</code> 改变时会调用多次 Target-Action 。当用户手指停留在屏幕上的时间满足长按手势的要求时，就会进入 <code>UIGestureRecognizerStateBegan</code> 状态。当手指开始移动或者点击事件有其它变化时进入 <code>UIGestureRecognizerStateChanged</code> 状态。即使手指移出最开始接收到事件的视图时， <code>state</code> 也会保持在 <code>UIGestureRecognizerStateChanged</code> 状态。直到手指离开屏幕，进入 <code>UIGestureRecognizerStateEnded</code> 状态。</p>
+<p>通过长按手势可以实现 <code>context menu</code> ：</p>
+<pre><code class="language-swift">@IBAction func showResetMenu(_ gestureRecognizer: UILongPressGestureRecognizer) {
+   if gestureRecognizer.state == .began {
+      self.becomeFirstResponder()
+      self.viewForReset = gestureRecognizer.view
+
+      // Configure the menu item to display
+      let menuItemTitle = NSLocalizedString(&quot;Reset&quot;, comment: &quot;Reset menu item title&quot;)
+      let action = #selector(ViewController.resetPiece(controller:))
+      let resetMenuItem = UIMenuItem(title: menuItemTitle, action: action)
+
+      // Configure the shared menu controller
+      let menuController = UIMenuController.shared
+      menuController.menuItems = [resetMenuItem]
+
+      // Set the location of the menu in the view.
+      let location = gestureRecognizer.location(in: gestureRecognizer.view)
+      let menuLocation = CGRect(x: location.x, y: location.y, width: 0, height: 0)
+      menuController.setTargetRect(menuLocation, in: gestureRecognizer.view!)
+
+      // Show the menu.
+      menuController.setMenuVisible(true, animated: true)
+   }
+}
+</code></pre>
+<p>如果长按手势的方法没有调用，可以检查下面的属性是否有正确设置：</p>
+<ul>
+<li><code>isUserInteractionEnabled</code> 是否有设置为 <code>true</code> ， <code>UILabel</code> 和 <code>UIImageView</code> 默认设置为 <code>false</code> ；</li>
+<li>点击持续时间是否大于 <code>minimumPressDuration</code> ；</li>
+<li>点击的次数是否等于 <code>numberOfTapsRequired</code> ；</li>
+<li>点击的手指是否等于 <code>numberOfTouchesRequired</code> 。</li>
+</ul>
+<h3 id="uipangesturerecognizer"><a class="header" href="#uipangesturerecognizer"><code>UIPanGestureRecognizer</code></a></h3>
+<p><a href="https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/handling_uikit_gestures/handling_pan_gestures?language=objc">Apple Developer Documentation</a></p>
+<p>手指在屏幕上移动时可以由 <code>UIPanGestureRecognizer</code> 进行处理，针对屏幕边缘的移动手势，可以交给 <code>UIPanGestureRecognizer</code> 的子类 <code>UIScreenEdgePanGestureRecognizer</code> 来处理。</p>
+<ol>
+<li>当手指的移动距离满足要求时， <code>UIPanGestureRecognizer</code> 就会进入 <code>UIGestureRecognizerStateBegan</code> 状态；</li>
+<li>当初始化完成后，随之而来的改变会使得 <code>UIPanGestureRecognizer</code> 进入 <code>UIGestureRecognizerStateChanged</code> 状态；</li>
+<li>当手指离开屏幕后，就会变为 <code>UIGestureRecognizerStateEnded</code> 状态。</li>
+</ol>
+<p>为了简化追踪处理， <code>UIPanGestureRecognizer</code> 提供了 <code>translationInView:</code> 方法来获取用户手指距离原始位置的距离。苹果提供的示例：</p>
+<pre><code class="language-swift">var initialCenter = CGPoint()  // The initial center point of the view.
+@IBAction func panPiece(_ gestureRecognizer : UIPanGestureRecognizer) {   
+   guard gestureRecognizer.view != nil else {return}
+   let piece = gestureRecognizer.view!
+   // Get the changes in the X and Y directions relative to
+   // the superview's coordinate space.
+   let translation = gestureRecognizer.translation(in: piece.superview)
+   if gestureRecognizer.state == .began {
+      // Save the view's original position. 
+      self.initialCenter = piece.center
+   }
+      // Update the position for the .began, .changed, and .ended states
+   if gestureRecognizer.state != .cancelled {
+      // Add the X and Y translation to the view's original position.
+      let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
+      piece.center = newCenter
+   }
+   else {
+      // On cancellation, return the piece to its original location.
+      piece.center = initialCenter
+   }
+}
+</code></pre>
+<h2 id="使用响应链来处理事件"><a class="header" href="#使用响应链来处理事件">使用响应链来处理事件</a></h2>
+<p><a href="https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/using_responders_and_the_responder_chain_to_handle_events">Apple Developer Documentation</a></p>
+<p>Apps 使用 <code>UIResponder</code> 来接收和处理事件。 <code>UIResponder</code> 子类包括 <code>UIView</code> ， <code>UIViewController</code> 和 <code>UIApplication</code> 。 <code>UIResponder</code> 接收到原始事件数据后，需要对事件进行处理或者将其转发给另一个响应者。当你的 App 接收到事件时， UIKit 会自动找到最合适的 <code>UIResponder</code> 对象作为第一响应者。</p>
+<p>未处理的事件会在响应链上进行传递，找到合适的响应者：</p>
+<p><img src="media/16312377669372.jpg" alt="" /></p>
+<p><code>UIControl</code> 会直接和它们的目标对象进行关联。当用户和 <code>UIControl</code> 进行交互时， <code>UIControl</code> 会直接发送 <code>Action</code> 消息给目标对象， <code>Action</code> 消息不是事件，但是仍可以享受响应链的好处。当目标对象为空时， UIKit 会在响应链上进行遍历，直到找到有实现对应 <code>Action</code> 方法的响应者。</p>
+<p>UIKit 基于 <code>UIView</code> 的 <code>hit-testing</code> 来判断事件发生在哪。会通过 <code>UIView</code> 的 <code>hitTest:withEvent:</code> 方法来找到 <code>bounds</code> 包含该点击的最上层的子视图，将其作为第一响应者来处理。</p>
+<p>如果点击的位置超出了 <code>UIView</code> 的 <code>bounds</code> ，那么 <code>hitTest:withEvent:</code> 方法就会忽略这个 <code>UIView</code> 以及所有它的 <code>subviews</code> 。</p>
+<p>很多 <code>UIKit</code> 的类都重写了 <code>UIResponder</code> 的 <code>next</code> 属性来为我们返回下一个 <code>Responder</code> 对象：</p>
+<ul>
+<li><code>UIView</code> ，如果它是 <code>viewController</code> 的 <code>root view</code> ，那么 <code>next</code> 就会返回这个 <code>viewController</code> ，否则就会返回 <code>superview</code> ；</li>
+<li><code>UIViewController</code>
+<ul>
+<li>如果 <code>viewController</code> 的 <code>view</code> 是 <code>window</code> 的 <code>root view</code>  ，那么 <code>next</code> 就返回 <code>window</code>  ；</li>
+<li>如果 <code>viewController</code> 由其它 <code>viewController</code> 弹出，那么 <code>next</code> 就返回其它 <code>viewController</code> ；</li>
+</ul>
+</li>
+<li><code>UIWindow</code> ， <code>next</code> 返回 <code>UIApplication</code> ；</li>
+<li><code>UIApplication</code> ， <code>next</code> 返回 <code>app delegate</code> , 但是只有在 <code>app delegate</code> 是 <code>UIResponder</code> 时才会这样，它不能是 <code>view</code> 或者 <code>viewController</code> 。</li>
+</ul>
+<h2 id="ios-响应链"><a class="header" href="#ios-响应链">iOS 响应链</a></h2>
+<p><a href="https://juejin.cn/post/6894518925514997767">iOS | 事件传递及响应链</a></p>
+<p><img src="media/16312377877705.jpg" alt="" /></p>
+<p>iOS 中处理响应事件的是 <code>UIResponder</code> ，只要是 <code>UIResponder</code> 的子类都可以进行处理。在触摸事件发生后， <code>UIApplication</code> 会调用 <code>sendEvennt(_ event: UIEvent)</code> 方法来将 <code>UIEvent</code> 传递给 <code>UIWindow</code> ，而 <code>UIWindow</code> 则会通过 <code>hitTest</code> 和 <code>point(inside point: CGPoint, with event: UIEvent?) -&gt; Bool</code> 方法来查找第一响应者。</p>
+<p><img src="media/16312378060280.jpg" alt="" /></p>
+<ul>
+<li>检查自身是否可接收事件：
+<ul>
+<li><code>view.isUserInteractionEnabled</code> 为 <code>true</code> ；</li>
+<li><code>view.alpha &gt; 0.01</code> ；</li>
+<li><code>view.isHidden = false</code> 。</li>
+</ul>
+</li>
+<li>判断左边是否在自身内部，通过 <code>point(inside point: CGPoint, with event: UIEvent?) -&gt; Bool</code> ，可以通过重写这个方法来扩大点击范围。</li>
+</ul>
+<p>类似的代码实现：</p>
+<pre><code class="language-swift">class HitTestExampleView: UIView {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -&gt; UIView? {
+        if !isUserInteractionEnabled || isHidden || alpha &lt;= 0.01 {
+            return nil // 此处指视图无法接受事件
+        }
+        if self.point(inside: point, with: event) { // 判断触摸点是否在自身内部
+            for subview in subviews.reversed() { // 按 FILO 遍历子视图
+                let convertedPoint = subview.convert(point, from: self)
+                let resultView = subview.hitTest(convertedPoint, with: event) 
+                // ⬆️这句是判断触摸点是否在子视图内部，在就返回视图，不在就返回nil
+                if resultView != nil { return resultView }
+            }
+            return self // 此处指该视图的所有子视图都不符合要求，而触摸点又在该视图自身内部
+        }
+        return nil // 此处指触摸点是否不在该视图内部
+    }
+}
+</code></pre>
+<p>当找到对应的第一响应者，响应链也随之确认了：</p>
+<p><img src="media/16312378237447.jpg" alt="" /></p>
+<p>当确认响应链后，就会调用 <code>UIResponder</code> 中对应的方法：</p>
+<pre><code class="language-swift">class TouchesExampleView: UIView {
+    override func touchesBegan(_ touches: Set&lt;UITouch&gt;, with event: UIEvent?) {
+        print(&quot;Touches Began on &quot; + colorBlock)
+        super.touchesBegan(touches, with: event)
+    }
+    
+    override func touchesMoved(_ touches: Set&lt;UITouch&gt;, with event: UIEvent?) {
+        print(&quot;Touches Moved on &quot; + colorBlock)
+        super.touchesMoved(touches, with: event)
+    }
+  
+    override func touchesEnded(_ touches: Set&lt;UITouch&gt;, with event: UIEvent?) {
+        print(&quot;Touches Ended on &quot; + colorBlock)
+        super.touchesEnded(touches, with: event)
+    }
+}
+</code></pre>
+<p>如果是 <code>UIControl</code> 或者其子类，则会拦截掉其响应链的事件传递，不会向下调用 <code>UIResponder</code> 的相关方法。 <code>UIScrollView</code> 也是相同的工作机制。</p>
+<p><a href="https://juejin.cn/post/6905914367171100680">iOS | 响应链及手势识别</a></p>
+<p><img src="media/16312378600837.jpg" alt="" /></p>
+<ol>
+<li>在 <code>UIResponder</code> 的 <code>touches</code> 系列方法中的 <code>UITouch</code> 包含了收集到 的 <code>UIGestureRecognizers</code> 。在触发 <code>touches</code> 方法的过程中，也会判断 <code>UITouch</code> 是否符号收集到的手势；</li>
+<li>当成功识别手势时，第一响应者会收到 <code>touchesCancelled</code> 方法，且不会再收到来自该 <code>UITouch</code> 的 <code>touches</code> 事件，同时该 <code>UITouch</code> 关联的其它手势也会收到 <code>touchesCancelled</code> 。使得可以独占该 <code>UITouch</code> ；</li>
+<li>手势未识别成功时， <code>UIGestureRecognizer</code> 的 <code>state</code> 为 <code>.possible</code> ，表示可能有机会识别成功。</li>
+</ol>
+<p><img src="media/16312378736155.jpg" alt="" /></p>
+<h3 id="相关的属性配置"><a class="header" href="#相关的属性配置">相关的属性配置</a></h3>
+<ul>
+<li><code>cancelsTouchesInView</code> ，默认为 <code>true</code> ，如果设置为 <code>false</code> ，那么当手势识别成功时，不会发送 <code>touchesCancelled</code> 给目标视图，目标视图还可以继续处理其它方法，比如说 <code>UIControl</code> 的 <code>.touchUpInside</code> 对应的方法等；</li>
+<li><code>delaysTouchesBegan</code> ，默认为 <code>false</code> 。当设置为 <code>true</code> 时， <code>touches</code> 的系列方法会延迟到手势识别成功或者失败之后才开始；</li>
+<li><code>delaysTouchesEnded</code> ，默认为 <code>true</code> ， <code>touchesEnded</code> 则会延迟大约 0.15s 触发，如果设置为 <code>false</code> ，那么 <code>touchesEnded</code> 则不会延迟，双击手势也会被识别为两次单击。</li>
+</ul>
+<h3 id="uicontrol-与手势识别"><a class="header" href="#uicontrol-与手势识别">UIControl 与手势识别</a></h3>
+<p><code>UIControl</code> 接收 Target-Action 方法的方式是在其 <code>touches</code> 方法中识别、接收、处理，而手势的 <code>touches</code> 方法一定比其所在视图的 <code>touches</code> 方法早触发。对于自定义的 <code>UIControl</code> 来说，手势识别的优先级比 <code>UIControl</code> 自身处理事件的优先级高。</p>
+<ul>
+<li>如果同时给 <code>UIControl</code> 添加了 <code>.touchUpInside</code> 方法和 <code>UITapGestureRecognizer</code> ，只会处理 <code>UITapGestureRecognizer</code> ；</li>
+<li>如果给已经添加了 <code>UITapGestureRecognizer</code> 的视图添加一个 <code>UIControl</code> 作为子视图，同时给这个 <code>UIControl</code> 添加 <code>.touchUpInside</code> 方法，最终也只会处理该视图的 <code>UITapGestureRecognize</code> ，不会处理 <code>.touchUpInside</code> 方法，如果是 <code>UIButton</code> ，则会优先处理 <code>UIButton</code> 的方法；</li>
+<li>如果想要两种都生效，可以设置 <code>cancelsTouchesInView</code> 为 false 。</li>
+</ul>
+<p>手势识别器在大多数情况下，识别屏幕触摸事件的优先级，比控件本身的方法的优先级高。</p>
+<h2 id="ios-事件机制"><a class="header" href="#ios-事件机制">iOS 事件机制</a></h2>
+<p><a href="https://juejin.im/post/5d396ef7518825453b605afa#heading-23">深入理解 iOS 事件机制</a></p>
+<p><a href="https://juejin.im/entry/6844903493640290311">iOS触摸事件全家桶</a></p>
+<p>事件生命周期：</p>
+<p><img src="media/16312379048435.jpg" alt="" /></p>
+<ol>
+<li>系统通过 <code>hitTest:withEvent:</code> 方法沿视图层级树从底向上（从根视图开始）从后向前（从逻辑上更靠近屏幕的视图开始）进行遍历，最终返回一个适合响应触摸事件的 View ；</li>
+<li>原生触摸事件从 Hit-Testing 返回的 View 开始，沿着响应链从上向下进行传递；</li>
+<li>系统在探测阶段结束后创建了 <code>UITouch</code> ，并封装了 <code>UIEvent</code> 将其传递；</li>
+<li>手势上下文 <code>UIGestureEnvironment</code> 最先收到 <code>UIEvent</code> ，并负责通知给相关的 <code>UIGestureRecognizer</code> ；</li>
+<li><code>UIGestureEnvironment</code> 根据 <code>UIGestureRecognizer</code> 的 <code>delegate</code> 方法来判断其是否能够对触摸事件进行响应；</li>
+<li><code>UIGestureRecognizer</code> 仍然会先于 <code>UIControl</code> 接收到触摸事件；</li>
+<li><code>UIButton</code> 等部分 <code>UIControl</code> 会拦截其父 <code>View</code> 上的 <code>UIGestureRecognizer</code> ，但不会拦截自己和子 <code>View</code> 上的 <code>UIGestureRecognizer</code> ；</li>
+<li><code>UIButton</code> 会截断响应链的事件传递，也可以利用响应链来寻找 Action Method 。</li>
+</ol>
+<h2 id="应用"><a class="header" href="#应用">应用</a></h2>
+<h3 id="扩大子视图的点击范围"><a class="header" href="#扩大子视图的点击范围">扩大子视图的点击范围</a></h3>
+<p><a href="https://juejin.im/post/5b83dcf9518825278e2729c5">谈谈响应链</a></p>
+<p>本文先是介绍了响应链的基本原理，然后讲述了如何响应在父视图外的子视图点击事件。</p>
+<h3 id="全局监听用户的点击事件"><a class="header" href="#全局监听用户的点击事件">全局监听用户的点击事件</a></h3>
+<p>之前做过一个需求是用户在一定时间内没有点击屏幕就进行一些处理，我们可以对响应事件的顶层 <code>UIApplication</code> 进行操作，<code>hook</code> 它的 <code>sendEvent:</code> 事件，在用户停止点击时开始计时，记录用户没有点击的时间，进行一些操作。有几个需要注意的地方：</p>
+<ol>
+<li><code>sendEvent</code> 不仅仅是处理点击事件，所以需要判断下  <code>allTouches.count</code> 是否为 0 ，如果为 0 则表示不是点击事件；</li>
+<li>如果 <code>touch.phase == UITouchPhaseBegan</code> 表示用户点击屏幕，停止计时；</li>
+<li>如果 <code>phase == UITouchPhaseEnded</code> ，则表示有手指离开屏幕，因为有可能是多指同时点击，所以这里记录下 <code>countOfEnded</code> ，如果 <code>touches.count == countOfEnded</code> ，表示所有手指都离开屏幕，可以开始计时；</li>
+</ol>
+<pre><code class="language-objectivec">- (void)dt_sendEvent:(UIEvent *)event
+{
+    [self dt_sendEvent:event];
+
+    if (event.allTouches.count == 0) {
+        return;
+    }
+    NSArray &lt;UITouch *&gt; *touches = [event.allTouches allObjects];
+    NSUInteger countOfEnded = 0;
+    for (UITouch *touch in touches) {
+        UITouchPhase phase = touch.phase;
+        if (phase == UITouchPhaseBegan) {
+            // 开始点击，停止计时
+            // stopTimer 
+						return;
+        } else if (phase == UITouchPhaseEnded) {
+            countOfEnded += 1;
+        }
+    }
+    // 所有点击事件都结束，开始计时
+    if (touches.count == countOfEnded) {
+        // startTimer
+    }
+}
+</code></pre>
+<h3 id="巧用-uiapplication-的-sendaction"><a class="header" href="#巧用-uiapplication-的-sendaction">巧用 <code>UIApplication</code> 的 <code>sendAction</code></a></h3>
+<p><a href="https://swiftrocks.com/understanding-the-ios-responder-chain.html">iOS Responder Chain: UIResponder, UIEvent, UIControl and uses</a></p>
+<p>这篇文章虽然也是讲了下 <code>UIResponder</code> ， <code>UIEvent</code> 和 <code>UIControl</code> ，但是后面有几个非常有趣的用法。</p>
+<pre><code class="language-swift">final class BlinkableView: UIView {
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    func select() {
+        becomeFirstResponder()
+    }
+
+    @objc func performBlinkAction() {
+        //Blinking animation
+    }
+}
+
+UIApplication.shared.sendAction(#selector(BlinkableView.performBlinkAction), to: nil, from: nil, for: nil)
+//Will precisely blink the last BlinkableView that had select() called.
+</code></pre>
+<p><code>BlinkableView</code> 的 <code>canBecomeFirstResponder</code> 返回 <code>true</code> ，调用 <code>select</code> 时 <code>becomeFirstResponder()</code> 。然后说下具体用法，比如说现在我们想让当前的 <code>BlinkableView</code> 执行 <code>performBlinkAction()</code> 方法，其它的 <code>BlinkableView</code> 都不执行，可以通过 <code>UIApplication.shared.sendAction(#selector(BlinkableView.performBlinkAction), to: nil, from: nil, for: nil)</code> 方法来达到目的，当响应链找到第一个 <code>BlinkableView</code> (firstResponder) 时就会停止。</p>
+<pre><code class="language-swift">final class PushScreenEvent: UIEvent {
+
+    let viewController: CoordenableViewController
+
+    override var type: UIEvent.EventType {
+        return .touches
+    }
+
+    init(viewController: CoordenableViewController) {
+        self.viewController = viewController
+    }
+}
+
+final class Coordinator: UIResponder {
+
+    weak var viewController: CoordenableViewController?
+
+    override var next: UIResponder? {
+        return viewController?.originalNextResponder
+    }
+
+    @objc func pushNewScreen(sender: Any?, event: PushScreenEvent) {
+        let new = event.viewController
+        viewController?.navigationController?.pushViewController(new, animated: true)
+    }
+}
+
+class CoordenableViewController: UIViewController {
+
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    private(set) var coordinator: Coordinator?
+    private(set) var originalNextResponder: UIResponder?
+
+    override var next: UIResponder? {
+        return coordinator ?? super.next
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        //Fill info at viewDidAppear to make sure UIKit
+        //has configured this view's next responder.
+        super.viewDidAppear(animated)
+        guard coordinator == nil else {
+            return
+        }
+        originalNextResponder = next
+        coordinator = Coordinator()
+        coordinator?.viewController = self
+    }
+}
+
+final class MyViewController: CoordenableViewController {
+    //...
+}
+
+//From anywhere in the app:
+
+let newVC = NewViewController()
+UIApplication.shared.push(vc: newVC)
+
+// 源代码漏了这段，给补上
+extension UIApplication {
+    func push(vc: CoordenableViewController) {
+	      UIApplication.shared.sendAction(#selector(Coordinator.pushNewScreen(sender:event:)), 
+																			  to: nil, 
+																			  from: nil, 
+																			  for: PushScreenEvent(viewController: CoordenableViewController))
+	  }
+}
+</code></pre>
+<p>调整后的响应链如下：</p>
+<pre><code class="language-swift">// MyView -&gt; MyViewController -&gt; Coordinator -&gt; UIWindow -&gt; UIApplication -&gt; AppDelegate
+</code></pre>
+<p>当通过 <code>UIApplication</code> 发送 <code>action</code> 时，通过响应链查找可以找到 <code>Coordinator</code> ， <code>Coordinator</code> 通过 <code>PushScreenEvent</code> 进行 <code>push</code> 。</p>
+<p>上面两个例子只是理论上可以这么做，原作者并没有在实际项目中尝试，这里是为了说明通过响应链做一些有趣的事情。</p>
+<h3 id="查找某个-uiview-所在-viewcontroller"><a class="header" href="#查找某个-uiview-所在-viewcontroller">查找某个 <code>UIView</code> 所在 <code>viewController</code></a></h3>
+<p>当我们需要获取某个 <code>UIView</code> 所在的 <code>viewController</code> 时，也可以通过响应链来进行处理：</p>
+<pre><code class="language-swift">extension UIView {
+  var closestViewController: UIViewController? {
+    if let nextResponder = self.next as? UIViewController {
+      return nextResponder
+    } else if let nextResponder = self.next as? UIView {
+      return nextResponder.closestViewController
+    } else {
+      return nil
+    }
+  }
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../iDev/UIKit/UIKit.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../books/books.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../iDev/UIKit/UIKit.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../books/books.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
