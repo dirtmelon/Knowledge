@@ -36,5 +36,6 @@
       - [MVVM](./iDev/Architectures/MVVM.md)
   - [性能优化](./iDev/Performance/Performance.md)
       - [FPS](./iDev/Performance/FPS.md)
+      - [包大小](./iDev/Performance/Size.md)
 - [阅读](./books/books.md)
   - [未来简史](./books/Homo-Deus-A-Brief-History-of-Tomorrow.md)
